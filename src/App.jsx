@@ -54,10 +54,11 @@ function App() {
         <Route path='WhatsAppGroup' element={<WhatsAppGroup></WhatsAppGroup>}></Route>
         <Route path='SignUpForTheWhatsAppGroup/:id' element={<SignUpForTheWhatsAppGroup></SignUpForTheWhatsAppGroup>}></Route>
         <Route path='JoiningMeetup' element={<JoiningMeetup></JoiningMeetup>}></Route>
+        <Route path='JoiningMeetup/:id' element={<JoiningMeetup></JoiningMeetup>}></Route>
         <Route path='MeetupRegistrationRequests' element={<MeetupRegistrationRequests></MeetupRegistrationRequests>}></Route>
         <Route path='GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route>
         <Route path='FileMeetupDetail/:id' element={<FileMeetupDetail></FileMeetupDetail>}></Route>
-        <Route path="GalleryCategoryList/FileMeetupDetail/:id/:galleryCategoryid" element={<FileMeetupDetail></FileMeetupDetail>}></Route>
+        <Route path="GalleryCategoryList/FileMeetupDetail/:id" element={<FileMeetupDetail></FileMeetupDetail>}></Route>
 
         {/* <Route path='/GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route> */}
         {/*⬇⬇Manager⬇⬇----*/}
@@ -65,6 +66,8 @@ function App() {
         {/*⬇⬇Manager⬇⬇---*/}
         <Route path='AddFileMeetup' element={<AddFileMeetup></AddFileMeetup>}></Route>
         <Route path='AddFileMeetup/:galleryCategoryid' element={<AddFileMeetup></AddFileMeetup>}></Route>
+
+       
 
       </Routes>
       <Footer />

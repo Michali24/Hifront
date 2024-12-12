@@ -35,11 +35,11 @@ export const postGalleryCategoryp = async (newGalleryCategory) => {
 };
 
 //add GalleryCategory-with img!!!!!!!!
-export const postFileGalleryCategoryp = async (newFileGalleryCategory,img_meetup) => {
+export const postFileGalleryCategoryp = async (newFileGalleryCategory) => {
     try {
         console.log('-000-before--',newFileGalleryCategory);
-        console.log('0-0detail',img_meetup);
-        const response = await axios.post('http://localhost:8080/api/GalleryCategory/addGalleryCategoryFile', newFileGalleryCategory,img_meetup);
+        // console.log('0-0detail',img_meetup);
+        const response = await axios.post('http://localhost:8080/api/GalleryCategory/addGalleryCategoryFile', newFileGalleryCategory);
         console.log('sucsess to add GalleryCategory');
         return response.data;
     } catch (error) {

@@ -502,10 +502,6 @@ export default function GalleryCategoryList() {
             <ul>
                 {GalleryCategoryList.map((galleryCategory) => (
                     <li key={galleryCategory.id}>
-                        <p>-------------------------------------</p>
-                        <p>{galleryCategory.gallery_category_id}</p>
-                        <p>-----------------------------------</p>
-                        <p>{galleryCategory.id}</p>
                         <p><strong>nameMeetup:</strong> {galleryCategory.nameMeetup}</p>
                         <p><strong>descriptionMeetup:</strong> {galleryCategory.descriptionMeetup}</p>
                         <p><strong>companyName:</strong> {galleryCategory.companyName}</p>
@@ -524,7 +520,7 @@ export default function GalleryCategoryList() {
                             <p>לא נמצא תמונה</p>
                         )}
 
-                        <button onClick={() => navigate(`/GalleryCategoryList/FileMeetupDetail/${galleryCategory.id}/${galleryCategory?.gallery_category_id}`)}>
+                        <button onClick={() => navigate(`/GalleryCategoryList/FileMeetupDetail/${galleryCategory.id}`)}>
                             File Meetup Details
                         </button>
                     </li>

@@ -1,0 +1,132 @@
+/* .ImageMeetup{ */
+/* background-image: url(/L.jpg); */
+/* background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: calc((100vh - 64px - 72px) / 2);
+    position: absolute;
+    top: 64px;
+    left: 0;
+    z-index: -1;
+} */
+
+/* .MainImage {
+    background-image: url(/public/M1.jpg);
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: calc((100vh - 64px - 72px) / 2);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: calc(((100vh - 64px - 72px) / 2) + 64px);
+    left: 0;
+} */
+
+/* רכיב רקע נוסף */
+/* .SecondaryBackground {
+    background-image: url(/W3.jpg);
+    background-size: cover;
+    background-position: center; */
+/* jkeh */
+/* position: absolute; */
+/* width: 100%;
+    min-height: 70vh;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+} */
+
+/* מיכל לתוכן הדף */
+/* .ContentContainer {
+    z-index: 1;
+    position: relative;
+    padding: 20px;
+    min-height: 100vh;
+} */
+
+/* 12-12-24 */
+/* רקע כללי */
+/* .background-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: calc((100vh - 64px - 72px) / 2);
+} */
+.background-container {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    /* מאפשר פריסה לרוחב מלא */
+    height: 50vh;
+    /* גובה יחסי למסך */
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+/* כרטיסיית התוכן */
+/* .card-container {
+    width: 100%;
+    margin-top: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+} */
+.card-container {
+    width: 90%;
+    /* שולט על רוחב הכרטיסייה */
+    max-width: 1400px;
+    /* מגביל את הרוחב המקסימלי */
+    margin: 20px auto;
+    /* ממקם במרכז */
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+
+/* פרטי המיטאפ */
+.meetup-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+/* כפתור הרשמה */
+.join-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* כפתור הרשמה - אפקט מעבר */
+.join-button:hover {
+    background-color: #0056b3;
+}
+
+/* מפה */
+.map-container {
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}

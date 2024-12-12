@@ -23,7 +23,7 @@ export const getJoiningMeetupByMeetupScheduleId = async (id) => {
 
 export const postJoiningMeetup = async (newJoiningMeetup) => {
     try {
-        const response = await axios.post('http://localhost:8080/api/JoiningMeetup/addJoiningMeetup',newJoiningMeetup);
+        const response = await axios.post('http://localhost:8080/api/JoiningMeetup/addJoiningMeetup', newJoiningMeetup);
         return response.data;
     } catch (error) {
         console.error("Error fetching category articles:", error);
@@ -32,7 +32,14 @@ export const postJoiningMeetup = async (newJoiningMeetup) => {
 }
 
 
-
-
+export const getJoiningMeetupById = async (id) => {
+    try {
+        const response = await axios.get(`http://localhost:8080/api/MeetapimSchedule/getMeetapimScheduleById/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching getJoiningMeetupById:", error);
+        throw error;
+    }
+}
 
 

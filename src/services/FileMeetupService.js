@@ -35,3 +35,14 @@ export const postFileMeeetup = async (newFileMeetup) => {
 };
 
 
+export const getFileMeeetupByGallerCategoryId = async (id) => {
+    try {
+        const response = await axios.get(`http://localhost:8080/api/FileMeetup/getFileMeetupsByGalleryCategoryId/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching get  fileMeetup by gallery category id:", error);
+        throw error;
+    }
+};
+
+

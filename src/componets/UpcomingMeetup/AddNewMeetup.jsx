@@ -123,7 +123,7 @@ export default function AddNewMeetup() {
   const [nameOfTheHostCompany, setnameOfTheHostCompany] = useState('');
   const [addressHostCompany, setaddressHostCompany] = useState('');
   const [timeOfTheMeetup, settimeOfTheMeetup] = useState('');
-  const [WhoIsthemeetupfor, setWhoIsthemeetupfor] = useState('');
+  const [whoIsthemeetupfor, setWhoIsthemeetupfor] = useState('');
   // const [poster_img_meetup, setposter_img_meetup] = useState('');
 
   const dispatch = useDispatch();
@@ -138,7 +138,7 @@ export default function AddNewMeetup() {
       nameOfTheHostCompany,
       addressHostCompany,
       timeOfTheMeetup,
-      WhoIsthemeetupfor,
+      whoIsthemeetupfor,
       poster_img_meetup: null,
       url_wase: null,
     };
@@ -205,7 +205,7 @@ export default function AddNewMeetup() {
           type="text"
           name="WhoIsthemeetupfor"
           placeholder="Enter your WhoIsthemeetupfor"
-          value={WhoIsthemeetupfor}
+          value={whoIsthemeetupfor}
           onChange={(e) => setWhoIsthemeetupfor(e.target.value)}
           required
         />

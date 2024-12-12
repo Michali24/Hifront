@@ -13,6 +13,7 @@
     "@emotion/react": "^11.13.5",
     "@emotion/styled": "^11.13.5",
     "@fontsource/dancing-script": "^5.1.0",
+    "@hookform/resolvers": "^3.9.1",
     "@mui/icons-material": "^6.1.10",
     "@mui/material": "^6.1.10",
     "@mui/system": "^6.1.10",
@@ -21,12 +22,17 @@
     "@reduxjs/toolkit": "^2.4.0",
     "axios": "^1.7.7",
     "framer-motion": "^11.13.1",
+    "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "react-redux": "^9.1.2",
     "react-router": "^6.28.0",
     "react-router-dom": "^6.28.0",
-    "routes": "^2.1.0"
+    "routes": "^2.1.0",
+    "sweetalert2": "^11.14.5",
+    "swiper": "^6.8.4",
+    "yup": "^1.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

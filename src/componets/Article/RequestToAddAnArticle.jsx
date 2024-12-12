@@ -12,7 +12,7 @@ export default function RequestToAddAnArticle() {
     const [content, setContent] = useState('');
     const [idCategory, setIdCategory] = useState(null); // ניהול מקומי ל-id
 
-    const userName=useSelector((state)=>state.user.currentUser);
+    const lodinUser=useSelector((state)=>state.user.currentUser);
 
     const dispatch = useDispatch();
     
@@ -27,7 +27,7 @@ export default function RequestToAddAnArticle() {
         e.preventDefault();
         const ArticleDetailToAdd = {
             title,
-            author: userName.name,
+            author: lodinUser.name,
             content,
             description,
             status:false,

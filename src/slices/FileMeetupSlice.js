@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllFileMeeetup, postFileMeeetup, getByIdFileMeeetup } from '../services/FileMeetupService';
+import { getAllFileMeeetup, postFileMeeetup, getByIdFileMeeetup, getFileMeeetupByGallerCategoryId } from '../services/FileMeetupService';
 //צרפתי פה גם את GalleryCategory
 import { getAllGalleryCategory, postGalleryCategoryp, postFileGalleryCategoryp, getAllGalleryCategoryWithFile } from '../services/GalleryCategoryService';
 
@@ -13,6 +13,12 @@ export const getAllFileMeeetupList = createAsyncThunk("fileMeetupList/getAllFile
 //gey by id
 export const getFileMeeetupById = createAsyncThunk("fileMeetup/getFileMeeetupById", async (id) => {
     const fileMeeetupDataList = await getByIdFileMeeetup(id);
+    return fileMeeetupDataList;
+});
+
+//get fileMeeetup By GallerCategory Id
+export const getfileMeeetupByGallerCategoryId = createAsyncThunk("fileMeetupList/getfileMeeetupByGallerCategoryId", async (GalleryCategoryId) => {
+    const fileMeeetupDataList = await getFileMeeetupByGallerCategoryId(GalleryCategoryId);
     return fileMeeetupDataList;
 });
 
@@ -38,8 +44,8 @@ export const getAllGalleryCategoryWithFileList = createAsyncThunk("galleryCatego
 
 
 //add GalleryCategory with img
-export const addGalleryCategoryWithImg = createAsyncThunk("galleryCategoty/addGalleryCategoryWithImg", async (newGalleryCategory,img_meetup) => {
-    const GalleryCategoryData = await postFileGalleryCategoryp(newGalleryCategory,img_meetup);
+export const addGalleryCategoryWithImg = createAsyncThunk("galleryCategoty/addGalleryCategoryWithImg", async (newGalleryCategory) => {
+    const GalleryCategoryData = await postFileGalleryCategoryp(newGalleryCategory);
     return GalleryCategoryData;
 });
 
@@ -103,6 +109,27 @@ export const FileMeetupSlice = createSlice({
 
             // טיפול במצב בו הפעולה נכשלה
             .addCase(getFileMeeetupById.rejected, (state, action) => {
+                // שינוי מצב הטעינה ל-false כדי להפסיק להציג מסך טעינה
+                state.loading = false;
+                // שמירת הודעת השגיאה במאפיין error כדי להציג למשתמש
+                state.error = action.error.message;
+            })
+
+            // get getfileMeeetupByGallerCategoryId___________________________________________________________________
+            .addCase(getfileMeeetupByGallerCategoryId.fulfilled, (state, action) => {
+                state.fileMeetupList = action.payload;
+            })
+
+            // טיפול במצב בו הפעולה התחילה אבל טרם הסתיימה
+            .addCase(getfileMeeetupByGallerCategoryId.pending, (state) => {
+                // הגדרת מצב הטעינה כ-true כדי להציג אינדיקציית טעינה למשתמש
+                state.loading = true;
+                // איפוס הודעת השגיאה למקרה בו הייתה שגיאה קודם
+                state.error = null;
+            })
+
+            // טיפול במצב בו הפעולה נכשלה
+            .addCase(getfileMeeetupByGallerCategoryId.rejected, (state, action) => {
                 // שינוי מצב הטעינה ל-false כדי להפסיק להציג מסך טעינה
                 state.loading = false;
                 // שמירת הודעת השגיאה במאפיין error כדי להציג למשתמש

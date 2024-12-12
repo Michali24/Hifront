@@ -83,7 +83,9 @@ function NavBar() {
             <Toolbar>
                 <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
                     <Typography variant="h6" component="div" sx={{ fontFamily: '"Great Vibes", cursive', display: 'flex', alignItems: 'center' }}>
-                        Hitechistim
+                        {/* Hitechistim */}
+                        <img src="/icon1.jpeg" alt="Hitechistim" style={{ height: '40px', marginLeft: '1px'}} />
+
                     </Typography>
                 </div>
                 <Link to="/Home" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -125,7 +127,7 @@ function NavBar() {
                 <Link to="/SignUp" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Button color="inherit">
                         <AccountCircleIcon />
-                        <span>Join Now</span>
+                        <span>Join</span>
                     </Button>
                 </Link>
             </Toolbar>

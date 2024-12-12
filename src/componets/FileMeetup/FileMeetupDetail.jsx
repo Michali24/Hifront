@@ -129,47 +129,114 @@
 
 //שיםור הקוד שהכפתור להוספה יוצג רק אם אתה מנהל
 //11-12-24
+// import React, { useEffect } from 'react';
+// import { useNavigate, useParams } from 'react-router';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getFileMeeetupById } from '../../slices/FileMeetupSlice';
+
+// export default function FileMeetupDetail() {
+//     const { id, galleryCategoryid } = useParams();
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const fileMeetup = useSelector((state) => state.fileMeetup.fileMeetup);
+
+//     // נוודא שנטען המידע לגבי ה-FileMeetup לפי ה-ID
+//     useEffect(() => {
+//         dispatch(getFileMeeetupById(id));
+//     }, [dispatch, id]);
+
+//     // בדוק אם המשתמש הוא מנהל
+//     const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
+//     // אם הנתונים לא הושגו, הצג הודעת טעינה
+//     if (!fileMeetup) {
+//         return <div>טוען נתונים...</div>;
+//     }
+
+//     return (
+//         <>
+//             <div>FileMeetupDetail</div>
+//             <p>שם: {fileMeetup.name}</p>
+//             <p>סוג קובץ: {fileMeetup.typeFile}</p>
+//             <p>URL קובץ: {fileMeetup.url_file}</p>
+
+//             {/* הצגת כפתור הוספת קובץ רק אם המשתמש הוא מנהל */}
+//             {isAdmin && (
+//                 <button onClick={() => navigate(`/AddFileMeetup/${galleryCategoryid}`)}>
+//                     הוסף קובץ נוסף
+//                 </button>
+//             )}
+
+//             <button onClick={() => navigate('/GalleryCategoryList')}>
+//                 חזור לרשימת קטגוריות גלריה
+//             </button>
+//         </>
+//     );
+// }
+
+//11-12-24
+//at night...
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFileMeeetupById } from '../../slices/FileMeetupSlice';
+import { getfileMeeetupByGallerCategoryId } from '../../slices/FileMeetupSlice';
 
 export default function FileMeetupDetail() {
-    const { id, galleryCategoryid } = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const fileMeetup = useSelector((state) => state.fileMeetup.fileMeetup);
+
+    const fileMeetupList = useSelector((state) => state.fileMeetup.fileMeetupList);
 
     // נוודא שנטען המידע לגבי ה-FileMeetup לפי ה-ID
     useEffect(() => {
-        dispatch(getFileMeeetupById(id));
-    }, [dispatch, id]);
+        dispatch(getfileMeeetupByGallerCategoryId(id));
+    }, [dispatch]);
 
     // בדוק אם המשתמש הוא מנהל
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
     // אם הנתונים לא הושגו, הצג הודעת טעינה
-    if (!fileMeetup) {
+    if (!fileMeetupList) {
         return <div>טוען נתונים...</div>;
     }
 
     return (
         <>
             <div>FileMeetupDetail</div>
-            <p>שם: {fileMeetup.name}</p>
-            <p>סוג קובץ: {fileMeetup.typeFile}</p>
-            <p>URL קובץ: {fileMeetup.url_file}</p>
-
-            {/* הצגת כפתור הוספת קובץ רק אם המשתמש הוא מנהל */}
-            {isAdmin && (
-                <button onClick={() => navigate(`/AddFileMeetup/${galleryCategoryid}`)}>
-                    הוסף קובץ נוסף
-                </button>
-            )}
-
             <button onClick={() => navigate('/GalleryCategoryList')}>
                 חזור לרשימת קטגוריות גלריה
             </button>
+
+            <ul>
+                {fileMeetupList.map((fileMeetup) => (
+                    <li key={fileMeetup.id}>
+                        <p>שם: {fileMeetup.name}</p>
+                        <p>סוג קובץ: {fileMeetup.typeFile}</p>
+
+                        {fileMeetup.url_file ? (
+                            <p>
+                                <strong>Image:</strong>
+                                <img
+                                    src={`data:image/jpeg;base64,${fileMeetup.url_file}`}
+                                    alt="FileMeetup Detail"
+                                    style={{ width: '200px', height: 'auto', marginTop: '10px' }}
+                                />
+                            </p>
+                        ) : (
+                            <p>לא נמצא תמונה</p>
+                        )}
+
+                        {/* הצגת כפתור הוספת קובץ רק אם המשתמש הוא מנהל */}
+                        {isAdmin && (
+                            <button onClick={() => navigate(`/AddFileMeetup/${fileMeetup.id}`)}>
+                                הוסף קובץ נוסף
+                            </button>
+                        )}
+
+                    </li>
+                ))}
+            </ul>
         </>
     );
 }

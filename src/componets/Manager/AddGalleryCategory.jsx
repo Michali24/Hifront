@@ -144,100 +144,189 @@
 //----------------------------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //נסיונות נוספים:
 //לא מצליח לשלוח את הנתונים של האובייקט.. לפונ של גאווה
+// import { useDispatch } from 'react-redux';
+// import { useState } from 'react';
+// import { addGalleryCategoryWithImg } from '../../slices/FileMeetupSlice';
+
+// export default function AddGalleryCategory() {
+//     const dispatch = useDispatch();
+//     const [nameMeetup, setNameMeetup] = useState('');
+//     const [descriptionMeetup, setDescriptionMeetup] = useState('');
+//     const [companyName, setCompanyName] = useState('');
+//     const [img_meetup, setImg_meetup] = useState(null);
+
+//     // טיפול בהגשת הטופס
+//     function handleForm(e) {
+//         e.preventDefault();
+
+//         // יצירת FormData
+//         const formData = new FormData();
+
+//         // הוספת כל הנתונים ל-FormData
+//         formData.append('fileGalleryCategory', JSON.stringify({
+//             id: 0,
+//             nameMeetup,
+//             descriptionMeetup,
+//             companyName
+//         }));
+
+//         // הוספת התמונה ל-FormData
+//         if (img_meetup) {
+//             formData.append('file', img_meetup.name);
+//         }
+//         console.log('formData:',formData);
+
+
+//         console.log(' before --Gallery Category Data:', {
+//             nameMeetup,
+//             descriptionMeetup,
+//             companyName,
+//             img_meetup: img_meetup.name
+//         });
+
+//       const a={
+//         id:0,
+//         nameMeetup,
+//         descriptionMeetup,
+//         companyName,
+//         img_meetup: null
+//       }
+//       console.log('a',a,img_meetup.name);
+
+
+//         // שליחת הנתונים לשרת
+//         dispatch(addGalleryCategoryWithImg(a,img_meetup.name));
+
+//         console.log('after--Gallery Category Data:', {
+//             nameMeetup,
+//             descriptionMeetup,
+//             companyName,
+//             img_meetup: img_meetup.name
+//         });
+//     }
+
+//     return (
+//         <>
+//             <div>Add Gallery Category</div>
+//             <form onSubmit={handleForm}>
+//                 <input
+//                     type="text"
+//                     name="nameMeetup"
+//                     placeholder="Enter the name Meetup"
+//                     value={nameMeetup}
+//                     onChange={(e) => setNameMeetup(e.target.value)}
+//                     required
+//                 />
+//                 <input
+//                     type="text"
+//                     name="descriptionMeetup"
+//                     placeholder="Enter the description Meetup"
+//                     value={descriptionMeetup}
+//                     onChange={(e) => setDescriptionMeetup(e.target.value)}
+//                     required
+//                 />
+//                 <input
+//                     type="text"
+//                     name="companyName"
+//                     placeholder="Enter the company name"
+//                     value={companyName}
+//                     onChange={(e) => setCompanyName(e.target.value)}
+//                     required
+//                 />
+//                 <input
+//                     type="file"
+//                     name="img_meetup"
+//                     onChange={(e) => setImg_meetup(e.target.files[0])}
+//                     required
+//                 />
+//                 <button type="submit">Submit a new Gallery Category</button>
+//             </form>
+//         </>
+//     );
+// }
+
+
+//11-12-24
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addGalleryCategoryWithImg } from '../../slices/FileMeetupSlice';
 
 export default function AddGalleryCategory() {
     const dispatch = useDispatch();
-    const [nameMeetup, setNameMeetup] = useState('');
-    const [descriptionMeetup, setDescriptionMeetup] = useState('');
-    const [companyName, setCompanyName] = useState('');
+
     const [img_meetup, setImg_meetup] = useState(null);
 
-    // טיפול בהגשת הטופס
-    function handleForm(e) {
-        e.preventDefault();
+    const [fileMeetup, setFileMeetup] = useState({
+        id: 0,
+        nameMeetup: '',
+        descriptionMeetup: '',
+        companyName: '',
+        img_meetup:'',
+    })
 
+    const handelFileChange = (e) => {
+        const file = e.target.files[0];
+        setImg_meetup(file);
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFileMeetup((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }))
+    }
+
+    // טיפול בהגשת הטופס
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('Uploading..',img_meetup);
+        
         // יצירת FormData
         const formData = new FormData();
-
         // הוספת כל הנתונים ל-FormData
-        formData.append('fileGalleryCategory', JSON.stringify({
-            id: 0,
-            nameMeetup,
-            descriptionMeetup,
-            companyName
-        }));
+        formData.append('fileGalleryCategory', new Blob([JSON.stringify(fileMeetup)], { type: 'application/json' }));
+        formData.append('file', img_meetup);
 
-        // הוספת התמונה ל-FormData
-        if (img_meetup) {
-            formData.append('file', img_meetup.name);
-        }
-        console.log('formData:',formData);
-        
-
-        console.log(' before --Gallery Category Data:', {
-            nameMeetup,
-            descriptionMeetup,
-            companyName,
-            img_meetup: img_meetup.name
-        });
-
-      const a={
-        id:0,
-        nameMeetup,
-        descriptionMeetup,
-        companyName,
-        img_meetup: null
-      }
-      console.log('a',a,img_meetup.name);
-      
+        console.log(formData);
 
         // שליחת הנתונים לשרת
-        dispatch(addGalleryCategoryWithImg(a,img_meetup.name));
+        dispatch(addGalleryCategoryWithImg(formData));
 
-        console.log('after--Gallery Category Data:', {
-            nameMeetup,
-            descriptionMeetup,
-            companyName,
-            img_meetup: img_meetup.name
-        });
+        console.log('formData', formData);
+
     }
 
     return (
         <>
             <div>Add Gallery Category</div>
-            <form onSubmit={handleForm}>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="nameMeetup"
                     placeholder="Enter the name Meetup"
-                    value={nameMeetup}
-                    onChange={(e) => setNameMeetup(e.target.value)}
+                    value={fileMeetup.nameMeetup}
+                    onChange={handleChange}
                     required
                 />
                 <input
                     type="text"
                     name="descriptionMeetup"
                     placeholder="Enter the description Meetup"
-                    value={descriptionMeetup}
-                    onChange={(e) => setDescriptionMeetup(e.target.value)}
-                    required
+                    value={fileMeetup.descriptionMeetup}
+                    onChange={handleChange} required
                 />
                 <input
                     type="text"
                     name="companyName"
                     placeholder="Enter the company name"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    required
+                    value={fileMeetup.companyName}
+                    onChange={handleChange} required
                 />
                 <input
-                    type="file"
-                    name="img_meetup"
-                    onChange={(e) => setImg_meetup(e.target.files[0])}
-                    required
+                    dir='rtl'
+                    type='file'
+                    onChange={handelFileChange}
                 />
                 <button type="submit">Submit a new Gallery Category</button>
             </form>
