@@ -39,7 +39,7 @@ export const getByIdMeetup = async (id) => {
 export const postMeetup = async (newMeetup) => {
     console.log('try');
     try {
-        const response = await axios.post('http://localhost:8080/api/MeetapimSchedule/addMeetupSchedule',newMeetup);
+        const response = await axios.post('http://localhost:8080/api/MeetapimSchedule/addMeetapimScheduleFile',newMeetup);
         //console.log('response:',response);
         return response.data;
     } catch (error) {

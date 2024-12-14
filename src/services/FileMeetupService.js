@@ -26,7 +26,7 @@ export const getByIdFileMeeetup = async (id) => {
 //add FileMeetup
 export const postFileMeeetup = async (newFileMeetup) => {
     try {
-        const response = await axios.post('http://localhost:8080/api/FileMeetup/addMeetupFile',newFileMeetup,newFileMeetup.url_file);
+        const response = await axios.post('http://localhost:8080/api/FileMeetup/addMeetupFile2', newFileMeetup);
         return response.data;
     } catch (error) {
         console.error("Error fetching add fileMeetup:", error);

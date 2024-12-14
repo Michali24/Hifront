@@ -1,7 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllArticle, getArticleByID,getArticlesByCategoryId ,addArticle,deleteArticleByID,updateArticleByID,getrticleByID} from "../services/ArticleService";
-import { getAllCategoryArticle ,getCategoryArticleId} from "../services/CategoryArticleService";
+import { getArticleWithStatusFalse, getAllArticle, getArticleByID, getArticlesByCategoryId, addArticle, deleteArticleByID, updateArticleByID } from "../services/ArticleService";
+import { getAllCategoryArticle, getCategoryArticleId } from "../services/CategoryArticleService";
 
+
+
+
+//AllArticleList
+export const getarticleWithStatusFalse = createAsyncThunk("ArticleList/getArticleWithStatusFalse", async () => {
+    const ArticlesWithStatusFalseData = await getArticleWithStatusFalse();
+    return ArticlesWithStatusFalseData;
+});
 
 //AllArticleList
 export const getAllArticleList = createAsyncThunk("ArticleList/getAllArticleList", async () => {
@@ -16,8 +24,8 @@ export const getArticleListByCategoryId = createAsyncThunk("ArticleList/getArtic
 });
 
 //ArticleById
-export const getArticleById=createAsyncThunk("Article/getArticleById",async(articleId)=>{
-    const ArticleData=await getArticleByID(articleId)
+export const getArticleById = createAsyncThunk("Article/getArticleById", async (articleId) => {
+    const ArticleData = await getArticleByID(articleId)
     return ArticleData;
 })
 
@@ -29,51 +37,46 @@ export const getAllCategoryList = createAsyncThunk("CategoryList/getAllCategoryL
 
 //post
 export const postArticle = createAsyncThunk("Article/postArticle", async (newArticle) => {
-    const CategoryArticleData = await addArticle (newArticle);
+    const CategoryArticleData = await addArticle(newArticle);
     return CategoryArticleData;
 })
 
 ///getIdOfAricle
 export const getIdOfAricle = createAsyncThunk("id/getIdOfAricle", async (name) => {
-    const ArticleId = await getCategoryArticleId (name);
+    const ArticleId = await getCategoryArticleId(name);
     return ArticleId;
 })
 
 //delete
 export const deleteAricle = createAsyncThunk("statuse/deleteAricle", async (id) => {
-    const ArticleId = await deleteArticleByID (id);
+    const ArticleId = await deleteArticleByID(id);
     return ArticleId;
 })
 
 //update
 export const putAricle = createAsyncThunk("Article/putAricle", async (newAricle) => {
-    const ArticlePut = await updateArticleByID (newAricle.id,newAricle);
+    const ArticlePut = await updateArticleByID(newAricle.id, newAricle);
     return ArticlePut;
 })
 
-//getDTO
-export const getDTOAricle = createAsyncThunk("ArticleList/getDTOAricle", async () => {
-    const ArticleDTO = await getrticleByID ();
-    return ArticleDTO;
-})
 
 
 export const ArticleSlice = createSlice({
     name: 'article',
     initialState: {
-        id:'',
+        id: '',
         ArticleList: [],
         Article: {},
         CategoryList: [],
         loading: false,
         error: null,
-        statuse:''
+        statuse: ''
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
 
-        //all article_____________________________________________________________________
+            //all article_____________________________________________________________________
             .addCase(getAllArticleList.fulfilled, (state, action) => {
                 state.ArticleList = action.payload;
             })
@@ -93,7 +96,29 @@ export const ArticleSlice = createSlice({
                 // שמירת הודעת השגיאה במאפיין error כדי להציג למשתמש
                 state.error = action.error.message;
             })
-            
+
+            //all article_____________________________________________________________________
+            .addCase(getarticleWithStatusFalse.fulfilled, (state, action) => {
+                state.ArticleList = action.payload;
+            })
+
+            // טיפול במצב בו הפעולה התחילה אבל טרם הסתיימה
+            .addCase(getarticleWithStatusFalse.pending, (state) => {
+                // הגדרת מצב הטעינה כ-true כדי להציג אינדיקציית טעינה למשתמש
+                state.loading = true;
+                // איפוס הודעת השגיאה למקרה בו הייתה שגיאה קודם
+                state.error = null;
+            })
+
+            // טיפול במצב בו הפעולה נכשלה
+            .addCase(getarticleWithStatusFalse.rejected, (state, action) => {
+                // שינוי מצב הטעינה ל-false כדי להפסיק להציג מסך טעינה
+                state.loading = false;
+                // שמירת הודעת השגיאה במאפיין error כדי להציג למשתמש
+                state.error = action.error.message;
+            })
+
+
             ///by id category___________________________________________________________
             .addCase(getArticleListByCategoryId.fulfilled, (state, action) => {
                 state.ArticleList = action.payload;
@@ -234,25 +259,6 @@ export const ArticleSlice = createSlice({
                 state.error = action.error.message;
             })
 
-            //getDTO__________________________________________________________
-            .addCase(getDTOAricle.fulfilled, (state, action) => {
-                state.ArticleList = action.payload;
-            })
-            // טיפול במצב בו הפעולה התחילה אבל טרם הסתיימה
-            .addCase(getDTOAricle.pending, (state) => {
-                // הגדרת מצב הטעינה כ-true כדי להציג אינדיקציית טעינה למשתמש
-                state.loading = true;
-                // איפוס הודעת השגיאה למקרה בו הייתה שגיאה קודם
-                state.error = null;
-            })
-
-            // טיפול במצב בו הפעולה נכשלה
-            .addCase(getDTOAricle.rejected, (state, action) => {
-                // שינוי מצב הטעינה ל-false כדי להפסיק להציג מסך טעינה
-                state.loading = false;
-                // שמירת הודעת השגיאה במאפיין error כדי להציג למשתמש
-                state.error = action.error.message;
-            })
     }
 })
 

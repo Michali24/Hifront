@@ -1060,6 +1060,7 @@ export default function DetailArticle() {
                 <p>{article.author}</p>
                 <p>{article.content}</p>
                 <p>{article.description}</p>
+                <h1>לסדר את ההצגה של המאמר</h1>
                 <p>pdfarticleFile: {article.pdfarticleFile ? "נמצא" : "לא נמצא"}</p>
 
                 {article.pdfarticleFile ? (

@@ -1264,6 +1264,220 @@
 
 
 //נסיון לסדר את העיצוביים
+//עובד פגזזזז
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getMeetupLast } from '../../slices/UpcomingMeetupSlice';
+// import { useNavigate } from 'react-router';
+// import L from 'leaflet';
+// import 'leaflet/dist/leaflet.css';
+// import './MeetupMap.css';
+
+// const LocationMap = ({ address }) => {
+//     const [latLng, setLatLng] = useState([32.0853, 34.7818]);
+
+//     useEffect(() => {
+//         if (address) {
+//             const geocodeUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
+
+//             fetch(geocodeUrl)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     if (data && data[0]) {
+//                         const lat = data[0].lat;
+//                         const lon = data[0].lon;
+//                         setLatLng([lat, lon]);
+//                     }
+//                 })
+//                 .catch(error => {
+//                     console.error('Error geocoding address:', error);
+//                     setLatLng([32.0853, 34.7818]);
+//                 });
+//         }
+//     }, [address]);
+
+//     useEffect(() => {
+//         const map = L.map('map').setView(latLng, 12);
+
+//         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//         }).addTo(map);
+
+//         L.marker(latLng).addTo(map)
+//             .bindPopup('המיקום נמצא כאן!')
+//             .openPopup();
+
+//         return () => {
+//             map.remove();
+//         };
+//     }, [latLng]);
+
+//     return <div id="map" className="map-container"></div>;
+// };
+
+// function MeetupMap() {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const LastMeetup = useSelector((state) => state.meetup.lastMeetup);
+
+//     useEffect(() => {
+//         dispatch(getMeetupLast());
+//     }, [dispatch]);
+
+//     return (
+//         <div>
+//             {/* רקע התמונה */}
+//             <div
+//                 className="background-container"
+//                 style={{
+//                     backgroundImage: `url(data:image/jpeg;base64,${LastMeetup.poster_img_meetup})`,
+//                 }}
+//             ></div>
+
+//             {/* כרטיסיית התוכן */}
+//             <div className="card-container" style={{width:'90%',maxWidth:'2400px'}}>
+//                 <div className="meetup-details">
+//                     <h1>{LastMeetup.meetupNmae}</h1>
+//                     <p>נושא המיטאפ: {LastMeetup.meetupDescription}</p>
+//                     <p>מתי: {LastMeetup.localmeetupDate}</p>
+//                     <p>החברה המארחת: {LastMeetup.nameOfTheHostCompany}</p>
+//                     <p>כתובת החברה המארחת: {LastMeetup.addressHostCompany}</p>
+//                     <p>בשעה: {LastMeetup.timeOfTheMeetup}</p>
+//                     <p>למי המיטאפ מיועד: {LastMeetup.WhoIsthemeetupfor}</p>
+//                     <button
+//                         className="join-button"
+//                         // onClick={() => navigate('/JoiningMeetup')}
+//                         onClick={() => navigate(`/JoiningMeetup/${LastMeetup.id}`)}
+
+//                     >
+//                         הצטרפות למיטאפ
+//                     </button>
+//                 </div>
+
+//                 {/* מפה בתוך הכרטיסייה */}
+//                 <LocationMap address={LastMeetup.addressHostCompany} />
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default MeetupMap;
+
+//14-12-24
+//לא עובד לי הכפתתור שהוספתי בשביל לבדוק usADMIN
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getMeetupLast } from '../../slices/UpcomingMeetupSlice';
+// import { useNavigate } from 'react-router';
+// import L from 'leaflet';
+// import 'leaflet/dist/leaflet.css';
+// import './MeetupMap.css';
+
+// const LocationMap = ({ address }) => {
+//     const [latLng, setLatLng] = useState([32.0853, 34.7818]);
+//     const [isAdmin, setIsAdmin] = useState(false);  // משתנה לניהול אם המשתמש הוא מנהל
+
+
+//     useEffect(() => {
+
+//         const adminStatus = localStorage.getItem('isAdmin'); // קורא את ערך ה-`isAdmin` מ-localStorage
+//         if (adminStatus === 'true') {
+//             setIsAdmin(true);  // אם כן, עדכון המצב של isAdmin
+//         }
+
+//         if (address) {
+//             const geocodeUrl = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`;
+
+//             fetch(geocodeUrl)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     if (data && data[0]) {
+//                         const lat = data[0].lat;
+//                         const lon = data[0].lon;
+//                         setLatLng([lat, lon]);
+//                     }
+//                 })
+//                 .catch(error => {
+//                     console.error('Error geocoding address:', error);
+//                     setLatLng([32.0853, 34.7818]);
+//                 });
+//         }
+//     }, [address]);
+
+//     useEffect(() => {
+//         const map = L.map('map').setView(latLng, 12);
+
+//         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+//         }).addTo(map);
+
+//         L.marker(latLng).addTo(map)
+//             .bindPopup('המיקום נמצא כאן!')
+//             .openPopup();
+
+//         return () => {
+//             map.remove();
+//         };
+//     }, [latLng]);
+
+//     return <div id="map" className="map-container"></div>;
+// };
+
+// function MeetupMap() {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const LastMeetup = useSelector((state) => state.meetup.lastMeetup);
+
+//     useEffect(() => {
+//         dispatch(getMeetupLast());
+//     }, [dispatch]);
+
+//     return (
+//         <div>
+//             {isAdmin && (
+//                 <button onClick={() => navigate('/AddNewMeetup')}>➕Add NewMeetup</button>
+//             )}
+//             {/* רקע התמונה */}
+//             <div
+//                 className="background-container"
+//                 style={{
+//                     backgroundImage: `url(data:image/jpeg;base64,${LastMeetup.poster_img_meetup})`,
+//                 }}
+//             ></div>
+
+//             {/* כרטיסיית התוכן */}
+//             <div className="card-container" style={{ width: '90%', maxWidth: '2400px' }}>
+//                 <div className="meetup-details">
+//                     <h1>{LastMeetup.meetupNmae}</h1>
+//                     <p>נושא המיטאפ: {LastMeetup.meetupDescription}</p>
+//                     <p>מתי: {LastMeetup.localmeetupDate}</p>
+//                     <p>החברה המארחת: {LastMeetup.nameOfTheHostCompany}</p>
+//                     <p>כתובת החברה המארחת: {LastMeetup.addressHostCompany}</p>
+//                     <p>בשעה: {LastMeetup.timeOfTheMeetup}</p>
+//                     <p>למי המיטאפ מיועד: {LastMeetup.WhoIsthemeetupfor}</p>
+//                     <button
+//                         className="join-button"
+//                         // onClick={() => navigate('/JoiningMeetup')}
+//                         onClick={() => navigate(`/JoiningMeetup/${LastMeetup.id}`)}
+
+//                     >
+//                         הצטרפות למיטאפ
+//                     </button>
+//                 </div>
+
+//                 {/* מפה בתוך הכרטיסייה */}
+//                 <LocationMap address={LastMeetup.addressHostCompany} />
+//             </div>
+
+//         </div>
+//     );
+// }
+
+// export default MeetupMap;
+
+
+//נסיון נוסף לבדיקת מנהל
+//עובד!!!!!!!!!!!
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMeetupLast } from '../../slices/UpcomingMeetupSlice';
@@ -1283,8 +1497,8 @@ const LocationMap = ({ address }) => {
                 .then(response => response.json())
                 .then(data => {
                     if (data && data[0]) {
-                        const lat = data[0].lat;
-                        const lon = data[0].lon;
+                        const lat = parseFloat(data[0].lat); // המרה למספר
+                        const lon = parseFloat(data[0].lon); // המרה למספר
                         setLatLng([lat, lon]);
                     }
                 })
@@ -1318,167 +1532,60 @@ function MeetupMap() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const LastMeetup = useSelector((state) => state.meetup.lastMeetup);
+    const [isAdmin, setIsAdmin] = useState(false); // ברירת מחדל: לא מנהל
 
+    // בדיקה אם המשתמש הוא מנהל
+    useEffect(() => {
+        const adminStatus = localStorage.getItem('isAdmin');
+        if (adminStatus !== null) {
+            setIsAdmin(JSON.parse(adminStatus)); // המרה לערך בוליאני
+        }
+    }, []);
+
+    // שליפת הנתון האחרון
     useEffect(() => {
         dispatch(getMeetupLast());
     }, [dispatch]);
 
     return (
         <div>
+            <br></br>
+            {/* כפתור להוספת מיטאפ */}
+            {isAdmin && (
+                <button onClick={() => navigate('/AddNewMeetup')}>➕ Add New Meetup</button>
+            )}
+
             {/* רקע התמונה */}
             <div
                 className="background-container"
                 style={{
-                    backgroundImage: `url(data:image/jpeg;base64,${LastMeetup.poster_img_meetup})`,
+                    backgroundImage: `url(data:image/jpeg;base64,${LastMeetup?.poster_img_meetup || ''})`,
                 }}
             ></div>
 
             {/* כרטיסיית התוכן */}
-            <div className="card-container" style={{width:'90%',maxWidth:'2400px'}}>
+            <div className="card-container" style={{ width: '90%', maxWidth: '2400px' }}>
                 <div className="meetup-details">
-                    <h1>{LastMeetup.meetupNmae}</h1>
-                    <p>נושא המיטאפ: {LastMeetup.meetupDescription}</p>
-                    <p>מתי: {LastMeetup.localmeetupDate}</p>
-                    <p>החברה המארחת: {LastMeetup.nameOfTheHostCompany}</p>
-                    <p>כתובת החברה המארחת: {LastMeetup.addressHostCompany}</p>
-                    <p>בשעה: {LastMeetup.timeOfTheMeetup}</p>
-                    <p>למי המיטאפ מיועד: {LastMeetup.WhoIsthemeetupfor}</p>
+                    <h1>{LastMeetup?.meetupNmae || 'שם המיטאפ לא זמין'}</h1>
+                    <p>נושא המיטאפ: {LastMeetup?.meetupDescription || 'לא זמין'}</p>
+                    <p>מתי: {LastMeetup?.localmeetupDate || 'לא זמין'}</p>
+                    <p>החברה המארחת: {LastMeetup?.nameOfTheHostCompany || 'לא זמין'}</p>
+                    <p>כתובת החברה המארחת: {LastMeetup?.addressHostCompany || 'לא זמין'}</p>
+                    <p>בשעה: {LastMeetup?.timeOfTheMeetup || 'לא זמין'}</p>
+                    <p>למי המיטאפ מיועד: {LastMeetup?.WhoIsthemeetupfor || 'לא זמין'}</p>
                     <button
                         className="join-button"
-                        // onClick={() => navigate('/JoiningMeetup')}
-                        onClick={() => navigate(`/JoiningMeetup/${LastMeetup.id}`)}
-
+                        onClick={() => navigate(`/JoiningMeetup/${LastMeetup?.id}`)}
                     >
                         הצטרפות למיטאפ
                     </button>
                 </div>
 
                 {/* מפה בתוך הכרטיסייה */}
-                <LocationMap address={LastMeetup.addressHostCompany} />
+                <LocationMap address={LastMeetup?.addressHostCompany} />
             </div>
         </div>
     );
 }
 
 export default MeetupMap;
-
-
-
-
-
-//נסיון תיקו השגיאות שהופיעו בF12
-
-//GPT-נסיון נוסף של GGOGLE MAP
-// import React, { useEffect, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { getMeetupLast } from '../../slices/UpcomingMeetupSlice'; // שאילתת הנתונים מ-Redux
-// import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
-
-// const containerStyle = {
-//     width: '400px',
-//     height: '400px',
-// };
-
-// function MeetupMap() {
-//     const dispatch = useDispatch();
-//     const LastMeetup = useSelector((state) => state.meetup.lastMeetup);
-//     const [center, setCenter] = useState({ lat: 32.0853, lng: 34.7818 }); // מיקום ברירת מחדל (תל אביב)
-//     const [address, setAddress] = useState(''); // כתובת בשדה החיפוש
-//     const [geocoder, setGeocoder] = useState(null); // אובייקט הגיאוקודר של Google
-
-//     // טוענים את המיטאפ האחרון ב-useEffect
-//     useEffect(() => {
-//         dispatch(getMeetupLast());
-//     }, [dispatch]);
-
-//     // טוענים את ה-API של Google Maps
-//     const { isLoaded } = useJsApiLoader({
-//         id: 'google-map-script',
-//         googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY', // אל תשכח להחליף במפתח שלך!
-//     });
-
-//     // יצירת גיאוקודר ברגע שה-API נטען
-//     useEffect(() => {
-//         if (isLoaded) {
-//             setGeocoder(new window.google.maps.Geocoder());
-//         }
-//     }, [isLoaded]);
-
-//     // אם יש כתובת למיטאפ האחרון, נבצע עדכון למיקום ולכתובת
-//     useEffect(() => {
-//         if (LastMeetup.addressHostCompany) {
-//             setAddress(LastMeetup.addressHostCompany); // עדכון כתובת בשדה החיפוש
-//             // אם יש כתובת, נבצע גיאוקודינג לעדכון המיקום
-//             geocodeAddress(LastMeetup.addressHostCompany);
-//         }
-//     }, [LastMeetup]);
-
-//     // פונקציה שתמפה את הכתובת לקואורדינטות באמצעות Google Maps Geocoding API
-//     const geocodeAddress = (address) => {
-//         if (geocoder) {
-//             geocoder.geocode({ address }, (results, status) => {
-//                 if (status === 'OK' && results[0]) {
-//                     setCenter({
-//                         lat: results[0].geometry.location.lat(),
-//                         lng: results[0].geometry.location.lng(),
-//                     });
-//                 } else {
-//                     console.error('Geocode was not successful for the following reason: ' + status);
-//                 }
-//             });
-//         }
-//     };
-
-//     // עדכון שדה החיפוש כאשר המשתמש מקליד כתובת חדשה
-//     const handleAddressChange = (event) => {
-//         setAddress(event.target.value);
-//     };
-
-//     // עדכון המיקום על פי הכתובת שהוזנה
-//     const handleAddressSubmit = () => {
-//         geocodeAddress(address); // עדכון המיקום עם הכתובת החדשה
-//     };
-
-//     return (
-//         <div>
-//             {LastMeetup.meetupNmae}<br></br>
-//             meetupDescription:{LastMeetup.meetupDescription}<br></br>
-//             meetupDate:{LastMeetup.meetupDate}<br></br>
-//             nameOfTheHostCompany:{LastMeetup.nameOfTheHostCompany}<br></br>
-//             addressHostCompany:{LastMeetup.meetupNmae}<br></br>
-//             timeOfTheMeetup:{LastMeetup.meetupNmae}<br></br>
-//             WhoIsthemeetupfor:{LastMeetup.meetupNmae}<br></br>
-//             {/* poster_img_meetup:{LastMeetup.poster_img_meetup} */}
-//             url_wase:{LastMeetup.url_wase}<br></br>
-//             <p>Google Map</p>
-
-//             {/* שדה חיפוש שיכיל את הכתובת מתוך Redux */}
-//             <input
-//                 type="text"
-//                 value={address}
-//                 onChange={handleAddressChange} // עדכון הכתובת בזמן שהמשתמש מקליד
-//                 placeholder="הזן כתובת"
-//             />
-//             <button onClick={handleAddressSubmit}>חפש כתובת</button>
-
-//             {/* כאן אנחנו משתמשים בקומפוננטה של GoogleMap ומעבירים את המיקום */}
-//             {isLoaded ? (
-//                 <GoogleMap
-//                     mapContainerStyle={containerStyle}
-//                     center={center}
-//                     zoom={15}
-//                 >
-//                     {/* מוסיפים Marker על המפה */}
-//                     <Marker position={center} />
-//                 </GoogleMap>
-//             ) : (
-//                 <div>Loading...</div>
-//             )}
-
-
-//         </div>
-//     );
-// }
-
-// export default MeetupMap;
-

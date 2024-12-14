@@ -106,9 +106,6 @@ function NavBar() {
                 <Link to="/GalleryCategoryList" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Button color="inherit">Gallery</Button>
                 </Link>
-                <Link to="/AddGalleryCategory" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Button color="inherit">AddGalleryCategory</Button>
-                </Link>
                 <Link to="/WhatsAppGroup" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Button color="inherit">WhatsApp Group</Button>
                 </Link>

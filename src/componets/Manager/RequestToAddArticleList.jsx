@@ -1,7 +1,7 @@
 //GPT 25-11-24
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllArticleList, deleteAricle, getDTOAricle } from '../../slices/ArticleSlice';
+import { deleteAricle,getarticleWithStatusFalse,putAricle} from '../../slices/ArticleSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function RequestToAddArticleList() {
@@ -19,7 +19,7 @@ export default function RequestToAddArticleList() {
     // }, [dispatch]);
 
     useEffect(() => {
-        dispatch(getDTOAricle());
+        dispatch(getarticleWithStatusFalse());
     }, [dispatch]);
 
 
@@ -64,6 +64,8 @@ export default function RequestToAddArticleList() {
         </>
     );
 }
+
+
 
 //GPT-24-11-24
 // import React, { useEffect } from 'react';

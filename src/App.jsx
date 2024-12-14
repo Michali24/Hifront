@@ -65,7 +65,8 @@ function App() {
         <Route path='AddGalleryCategory' element={<AddGalleryCategory></AddGalleryCategory>}></Route>
         {/*⬇⬇Manager⬇⬇---*/}
         <Route path='AddFileMeetup' element={<AddFileMeetup></AddFileMeetup>}></Route>
-        <Route path='AddFileMeetup/:galleryCategoryid' element={<AddFileMeetup></AddFileMeetup>}></Route>
+        <Route path='AddFileMeetup/:id' element={<AddFileMeetup></AddFileMeetup>}></Route>
+        {/* <Route path="FileMeetupDetail/AddFileMeetup/:id" element={<AddFileMeetup></AddFileMeetup>}></Route> */}
 
        
 

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticleById, postArticle,putAricle } from '../../slices/ArticleSlice';
+import { getArticleById,putAricle } from '../../slices/ArticleSlice';
 
 export default function DetailRequsetArticle() {
     const { articleId, categoryId } = useParams(); // שליפת מזהה הכתבה מתוך ה-URL
@@ -43,6 +43,7 @@ export default function DetailRequsetArticle() {
             description: DetailArticleRequest.description,
             status:false,
             categoryId:categoryId,
+            pdfarticleFile:DetailArticleRequest.pdfarticleFile,
         };
 
         console.log(' new article :', newArticle);
@@ -64,6 +65,8 @@ export default function DetailRequsetArticle() {
                     <p>כותרת: {DetailArticleRequest.title}</p>
                     <p>תוכן: {DetailArticleRequest.content}</p>
                     <p>תיאור: {DetailArticleRequest.description}</p>
+                    <h1>לסרד את ההצגה של המאמר</h1>
+                    <p>the article:{DetailArticleRequest.pdfarticleFile}</p>
                     <button onClick={approval}>אשר מאמר</button>
                 </>
             ) : (

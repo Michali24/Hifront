@@ -20,7 +20,7 @@ export const getMeetupLast = createAsyncThunk("lastMeetup/getMeetupLast", async 
 });
 
 //post
-export const addMeetup = createAsyncThunk("meetupById/postMeetup", async (newMeetup) => {
+export const addMeetup = createAsyncThunk("lastMeetup/postMeetup", async (newMeetup) => {
     const MeetupDataAdd = await postMeetup(newMeetup);
     return MeetupDataAdd;
 });
@@ -78,7 +78,7 @@ export const UpcomingMeetupeSlice = createSlice({
 
             //getpostMeetup__________________________________________________________________
             .addCase(addMeetup.fulfilled, (state, action) => {
-                state.meetupById = action.payload;
+                state.lastMeetup = action.payload;
             })
             .addCase(addMeetup.pending, (state) => {
                 state.loading = true;
