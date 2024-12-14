@@ -903,11 +903,11 @@ export default function Home() {
                 <Card sx={{ maxWidth: 346 }}>
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                      <div>
-                        <strong style={{ color: '#007bff' }}>Course name:</strong>
+                    <span>
+                        <strong style={{ color: '#007bff' }}>Article name:</strong>
                         <strong style={{ color: '#007bff' }}> {article.title}</strong>
                         <strong style={{ color: '#007bff' }}>{article.author}</strong>
-                      </div>
+                      </span>
                       <div>Description of the course :{article.description}bjhbhjublnk jnk njnkknklnl lkm</div>
                     </Typography>
                   </CardContent>
@@ -923,6 +923,10 @@ export default function Home() {
     </>
   );
 }
+
+//עיוצב נוסף
+//12-12-24
+
 
 
 

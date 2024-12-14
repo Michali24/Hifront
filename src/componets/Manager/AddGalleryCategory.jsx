@@ -247,94 +247,330 @@
 
 
 //11-12-24
+//הקוד מוצג טוב!!!!!!!!!!-מעולה -13-12-24
+// import { useDispatch } from 'react-redux';
+// import { useState } from 'react';
+// import { addGalleryCategoryWithImg } from '../../slices/FileMeetupSlice';
+
+// export default function AddGalleryCategory() {
+//     const dispatch = useDispatch();
+
+//     const [img_meetup, setImg_meetup] = useState(null);
+
+//     const [fileMeetup, setFileMeetup] = useState({
+//         id: 0,
+//         nameMeetup: '',
+//         descriptionMeetup: '',
+//         companyName: '',
+//         img_meetup:'',
+//     })
+
+//     const handelFileChange = (e) => {
+//         const file = e.target.files[0];
+//         setImg_meetup(file);
+//     }
+
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setFileMeetup((prevData) => ({
+//             ...prevData,
+//             [name]: value,
+//         }))
+//     }
+
+//     // טיפול בהגשת הטופס
+//     function handleSubmit(e) {
+//         e.preventDefault();
+//         console.log('Uploading..',img_meetup);
+
+//         // יצירת FormData
+//         const formData = new FormData();
+//         // הוספת כל הנתונים ל-FormData
+//         formData.append('fileGalleryCategory', new Blob([JSON.stringify(fileMeetup)], { type: 'application/json' }));
+//         formData.append('file', img_meetup);
+
+//         console.log(formData);
+
+//         // שליחת הנתונים לשרת
+//         dispatch(addGalleryCategoryWithImg(formData));
+
+//         console.log('formData', formData);
+
+//     }
+
+//     return (
+//         <>
+//             <div>Add Gallery Category</div>
+//             <form onSubmit={handleSubmit}>
+//                 <input
+//                     type="text"
+//                     name="nameMeetup"
+//                     placeholder="Enter the name Meetup"
+//                     value={fileMeetup.nameMeetup}
+//                     onChange={handleChange}
+//                     required
+//                 />
+//                 <input
+//                     type="text"
+//                     name="descriptionMeetup"
+//                     placeholder="Enter the description Meetup"
+//                     value={fileMeetup.descriptionMeetup}
+//                     onChange={handleChange} required
+//                 />
+//                 <input
+//                     type="text"
+//                     name="companyName"
+//                     placeholder="Enter the company name"
+//                     value={fileMeetup.companyName}
+//                     onChange={handleChange} required
+//                 />
+//                 <input
+//                     dir='rtl'
+//                     type='file'
+//                     onChange={handelFileChange}
+//                 />
+//                 <button type="submit">Submit a new Gallery Category</button>
+//             </form>
+//         </>
+//     );
+// }
+
+
+//הקוד מעוצב על ידי MUI
+//13-12-24
+// import { useDispatch } from 'react-redux';
+// import { useState } from 'react';
+// import { addGalleryCategoryWithImg } from '../../slices/FileMeetupSlice';
+// import { TextField, Button, Typography, Box, Input } from '@mui/material';
+
+// export default function AddGalleryCategory() {
+//     const dispatch = useDispatch();
+
+//     const [img_meetup, setImg_meetup] = useState(null);
+
+//     const [fileMeetup, setFileMeetup] = useState({
+//         id: 0,
+//         nameMeetup: '',
+//         descriptionMeetup: '',
+//         companyName: '',
+//         img_meetup: '',
+//     });
+
+//     const handelFileChange = (e) => {
+//         const file = e.target.files[0];
+//         setImg_meetup(file);
+//     };
+
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setFileMeetup((prevData) => ({
+//             ...prevData,
+//             [name]: value,
+//         }));
+//     };
+
+//     // טיפול בהגשת הטופס
+//     function handleSubmit(e) {
+//         e.preventDefault();
+//         console.log('Uploading..', img_meetup);
+
+//         // יצירת FormData
+//         const formData = new FormData();
+//         // הוספת כל הנתונים ל-FormData
+//         formData.append('fileGalleryCategory', new Blob([JSON.stringify(fileMeetup)], { type: 'application/json' }));
+//         formData.append('file', img_meetup);
+
+//         console.log(formData);
+
+//         // שליחת הנתונים לשרת
+//         dispatch(addGalleryCategoryWithImg(formData));
+
+//         console.log('formData', formData);
+//     }
+
+//     return (
+//         <>
+//             <Box sx={{ maxWidth: 500, margin: '0 auto', padding: 3, bgcolor: '#f9f9f9', borderRadius: 2 }}>
+//                 <Typography variant="h5" gutterBottom>
+//                     Add Gallery Category
+//                 </Typography>
+//                 <form onSubmit={handleSubmit}>
+//                     <TextField
+//                         fullWidth
+//                         margin="normal"
+//                         label="Enter the name Meetup"
+//                         name="nameMeetup"
+//                         value={fileMeetup.nameMeetup}
+//                         onChange={handleChange}
+//                         required
+//                     />
+//                     <TextField
+//                         fullWidth
+//                         margin="normal"
+//                         label="Enter the description Meetup"
+//                         name="descriptionMeetup"
+//                         value={fileMeetup.descriptionMeetup}
+//                         onChange={handleChange}
+//                         required
+//                     />
+//                     <TextField
+//                         fullWidth
+//                         margin="normal"
+//                         label="Enter the company name"
+//                         name="companyName"
+//                         value={fileMeetup.companyName}
+//                         onChange={handleChange}
+//                         required
+//                     />
+//                     <Input
+//                         fullWidth
+//                         type="file"
+//                         dir="rtl"
+//                         onChange={handelFileChange}
+//                         sx={{ mb: 2 }}
+//                     />
+//                     <Button
+//                         variant="contained"
+//                         color="primary"
+//                         fullWidth
+//                         type="submit"
+//                     >
+//                         Submit a new Gallery Category
+//                     </Button>
+//                 </form>
+//             </Box>
+//         </>
+//     );
+// }
+
+//13-12-24
+//עיצוב נוסף של הקוד כך שבעת הצלחה זהיאמר ללקוח
+//ושהאינפוטים יתנקו
+//הקוד עושה הכל בצורה מעולה!!!
+//נשאר רק לעצה את הרקע של הדף
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addGalleryCategoryWithImg } from '../../slices/FileMeetupSlice';
+import { TextField, Button, Typography, Box, Input, Alert } from '@mui/material';
 
 export default function AddGalleryCategory() {
     const dispatch = useDispatch();
 
     const [img_meetup, setImg_meetup] = useState(null);
-
     const [fileMeetup, setFileMeetup] = useState({
         id: 0,
         nameMeetup: '',
         descriptionMeetup: '',
         companyName: '',
-        img_meetup:'',
-    })
+        img_meetup: '',
+    });
+
+    const [successMessage, setSuccessMessage] = useState(null); // עבור הודעת הצלחה
+    const [errorMessage, setErrorMessage] = useState(null); // עבור הודעת שגיאה
 
     const handelFileChange = (e) => {
         const file = e.target.files[0];
         setImg_meetup(file);
-    }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFileMeetup((prevData) => ({
             ...prevData,
             [name]: value,
-        }))
-    }
+        }));
+    };
 
     // טיפול בהגשת הטופס
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('Uploading..',img_meetup);
-        
+        console.log('Uploading..', img_meetup);
+
         // יצירת FormData
         const formData = new FormData();
-        // הוספת כל הנתונים ל-FormData
         formData.append('fileGalleryCategory', new Blob([JSON.stringify(fileMeetup)], { type: 'application/json' }));
         formData.append('file', img_meetup);
 
         console.log(formData);
 
         // שליחת הנתונים לשרת
-        dispatch(addGalleryCategoryWithImg(formData));
-
-        console.log('formData', formData);
-
+        dispatch(addGalleryCategoryWithImg(formData))
+            .then(response => {
+                // אם הצלחה
+                setSuccessMessage(`Category added: ${fileMeetup.nameMeetup} - ${fileMeetup.companyName}`);
+                // ננקה את השדות
+                setFileMeetup({
+                    id: 0,
+                    nameMeetup: '',
+                    descriptionMeetup: '',
+                    companyName: '',
+                    img_meetup: '',
+                });
+                setImg_meetup(null);
+            })
+            .catch(error => {
+                // אם יש שגיאה
+                setErrorMessage('An error occurred while adding the gallery category.');
+            });
     }
 
     return (
-        <>
-            <div>Add Gallery Category</div>
+        <Box sx={{ maxWidth: 500, margin: '0 auto', padding: 3, bgcolor: '#f9f9f9', borderRadius: 2 }}>
+            <Typography variant="h5" gutterBottom>
+                Add Gallery Category
+            </Typography>
+
+            {/* הצגת הודעת הצלחה או שגיאה */}
+            {successMessage && <Alert severity="success">{successMessage}</Alert>}
+            {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="Enter the name Meetup"
                     name="nameMeetup"
-                    placeholder="Enter the name Meetup"
                     value={fileMeetup.nameMeetup}
                     onChange={handleChange}
                     required
                 />
-                <input
-                    type="text"
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="Enter the description Meetup"
                     name="descriptionMeetup"
-                    placeholder="Enter the description Meetup"
                     value={fileMeetup.descriptionMeetup}
-                    onChange={handleChange} required
+                    onChange={handleChange}
+                    required
                 />
-                <input
-                    type="text"
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    label="Enter the company name"
                     name="companyName"
-                    placeholder="Enter the company name"
                     value={fileMeetup.companyName}
-                    onChange={handleChange} required
+                    onChange={handleChange}
+                    required
                 />
-                <input
-                    dir='rtl'
-                    type='file'
+                <Input
+                    fullWidth
+                    type="file"
+                    dir="rtl"
                     onChange={handelFileChange}
+                    sx={{ mb: 2 }}
                 />
-                <button type="submit">Submit a new Gallery Category</button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    type="submit"
+                >
+                    Submit a new Gallery Category
+                </Button>
             </form>
-        </>
+        </Box>
     );
 }
-
-
 
 
 

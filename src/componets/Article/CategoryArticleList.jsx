@@ -393,12 +393,213 @@
 //ברגע שהלקוח מתחבר, נבדוק אם קיים פרמטר fromAddArticle ב-
 //location.state.
 // אם כן, ננווט אותו לדף של הוספת מאמר. אם לא, ננווט לדף הבית
+//הקוד עובד ממש טוב ללא עיצוב
 //הקוד:
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getAllCategoryList } from '../../slices/ArticleSlice';
+// import { useNavigate } from 'react-router-dom';
+// import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
+
+// export default function CategoryArticle() {
+//     const listCategoryArticle = useSelector((state) => state.article.CategoryList); // רשימת הקטגוריות
+//     const isLoggedIn = useSelector((state) => state.user.auth.isLoggedIn); // נתון מתוך ה-Redux
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate(); // ניווט לדפים שונים
+
+//     const [openPopup, setOpenPopup] = useState(false); // מצב פתיחת הפופאפ
+//     const [redirectTo, setRedirectTo] = useState(''); // אם ההפנייה היא להרשמה או התחברות
+
+//     useEffect(() => {
+//         // טוען את רשימת הקטגוריות
+//         dispatch(getAllCategoryList());
+//     }, [dispatch]);
+
+//     // פונקציה להצגת המאמרים לפי קטגוריה
+//     function seeArticlesListByCategory(id) {
+//         navigate(`/Article/${id}`);
+//     }
+
+//     // פונקציה שבודקת אם המשתמש מחובר ומפנה לפופאפ אם לא
+//     function toAddArticle() {
+//         if (!isLoggedIn) {
+//             setOpenPopup(true); // אם לא מחובר, פתיחת הפופאפ
+//         } else {
+//             navigate('/RequestToAddAnArticle'); // אם מחובר, נווט לדף הוספת מאמר
+//         }
+//     }
+
+//     // סגירת הפופאפ
+//     function handleClosePopup() {
+//         setOpenPopup(false);
+//     }
+
+//     // ניווט לפי הכפתור בלחיצה
+//     function handleRedirect() {
+//         if (redirectTo === 'signup') {
+//             navigate('/signup'); // נווט להרשמה
+//         } else {
+//             navigate('/login', { state: { fromAddArticle: true } }); // הוסף state כדי לשלוח את המשתמש לדף הוספת מאמר לאחר ההתחברות
+//         }
+//         setOpenPopup(false); // סגור את הפופאפ לאחר לחיצה
+//     }
+
+//     return (
+//         <>
+//             <h2>CategoryArticle</h2>
+//             {/* כפתור הוספת מאמר */}
+//             <button onClick={() => toAddArticle()}>✨ הוסף מאמר - לחץ כאן ✨</button>
+            
+//             <ul>
+//                 {listCategoryArticle.map((category) => (
+//                     <li key={category.id}>
+//                         {category.categoryName}
+//                         <button onClick={() => seeArticlesListByCategory(category.id)}>לצפות במאמרים</button>
+//                     </li>
+//                 ))}
+//             </ul>
+
+//             {/* פופאפ לרשום/התחבר */}
+//             <Dialog open={openPopup} onClose={handleClosePopup}>
+//                 <DialogTitle>הצטרף לקהילת הייטקיסטים והוסף את המאמר שלך!</DialogTitle>
+//                 <DialogContent>
+//                     <Typography variant="body1">
+//                         על מנת להוסיף מאמר, עליך להירשם לאתר ולהיות חלק מהקהילה שלנו.
+//                         ההרשמה מאפשרת לך לא רק להוסיף מאמרים, אלא גם לגשת למיטאפים, לשתף רעיונות עם מקצוענים נוספים, ולהתעדכן בתכנים חשובים ביותר בעולם ההייטק!
+//                     </Typography>
+//                 </DialogContent>
+//                 <DialogActions>
+//                     <Button onClick={handleClosePopup} color="secondary">
+//                         לא עכשיו
+//                     </Button>
+//                     <Button
+//                         onClick={() => {
+//                             setRedirectTo('signup'); // הפנייה להרשמה
+//                             handleRedirect();
+//                         }}
+//                         color="primary"
+//                     >
+//                         הירשם עכשיו
+//                     </Button>
+//                 </DialogActions>
+//             </Dialog>
+//         </>
+//     );
+// }
+
+
+//הקוד בניסיונות עיצוב
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getAllCategoryList } from '../../slices/ArticleSlice';
+// import { useNavigate } from 'react-router-dom';
+// import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography, Card, CardContent, CardActions, Grid } from '@mui/material';
+
+// export default function CategoryArticle() {
+//     const listCategoryArticle = useSelector((state) => state.article.CategoryList); // רשימת הקטגוריות
+//     const isLoggedIn = useSelector((state) => state.user.auth.isLoggedIn); // נתון מתוך ה-Redux
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate(); // ניווט לדפים שונים
+
+//     const [openPopup, setOpenPopup] = useState(false); // מצב פתיחת הפופאפ
+//     const [redirectTo, setRedirectTo] = useState(''); // אם ההפנייה היא להרשמה או התחברות
+
+//     useEffect(() => {
+//         // טוען את רשימת הקטגוריות
+//         dispatch(getAllCategoryList());
+//     }, [dispatch]);
+
+//     // פונקציה להצגת המאמרים לפי קטגוריה
+//     function seeArticlesListByCategory(id) {
+//         navigate(`/Article/${id}`);
+//     }
+
+//     // פונקציה שבודקת אם המשתמש מחובר ומפנה לפופאפ אם לא
+//     function toAddArticle() {
+//         if (!isLoggedIn) {
+//             setOpenPopup(true); // אם לא מחובר, פתיחת הפופאפ
+//         } else {
+//             navigate('/RequestToAddAnArticle'); // אם מחובר, נווט לדף הוספת מאמר
+//         }
+//     }
+
+//     // סגירת הפופאפ
+//     function handleClosePopup() {
+//         setOpenPopup(false);
+//     }
+
+//     // ניווט לפי הכפתור בלחיצה
+//     function handleRedirect() {
+//         if (redirectTo === 'signup') {
+//             navigate('/signup'); // נווט להרשמה
+//         } else {
+//             navigate('/login', { state: { fromAddArticle: true } }); // הוסף state כדי לשלוח את המשתמש לדף הוספת מאמר לאחר ההתחברות
+//         }
+//         setOpenPopup(false); // סגור את הפופאפ לאחר לחיצה
+//     }
+
+//     return (
+//         <>
+//             <h2>CategoryArticle</h2>
+//             {/* כפתור הוספת מאמר */}
+//             <button onClick={() => toAddArticle()}>✨ הוסף מאמר - לחץ כאן ✨</button>
+            
+//             <Grid container spacing={2} style={{ marginTop: '20px' }}>
+//                 {/* הצגת כל הקטגוריות בתוך כרטיסים */}
+//                 {listCategoryArticle.map((category) => (
+//                     <Grid item xs={12} sm={6} md={4} key={category.id}>
+//                         <Card style={{ borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
+//                             <CardContent>
+//                                 <Typography variant="h6" component="div" align="center">
+//                                     {category.categoryName}
+//                                 </Typography>
+//                             </CardContent>
+//                             <CardActions style={{ justifyContent: 'center' }}>
+//                                 <Button onClick={() => seeArticlesListByCategory(category.id)} color="primary">
+//                                     לצפות במאמרים
+//                                 </Button>
+//                             </CardActions>
+//                         </Card>
+//                     </Grid>
+//                 ))}
+//             </Grid>
+
+//             {/* פופאפ לרשום/התחבר */}
+//             <Dialog open={openPopup} onClose={handleClosePopup}>
+//                 <DialogTitle>הצטרף לקהילת הייטקיסטים והוסף את המאמר שלך!</DialogTitle>
+//                 <DialogContent>
+//                     <Typography variant="body1">
+//                         על מנת להוסיף מאמר, עליך להירשם לאתר ולהיות חלק מהקהילה שלנו.
+//                         ההרשמה מאפשרת לך לא רק להוסיף מאמרים, אלא גם לגשת למיטאפים, לשתף רעיונות עם מקצוענים נוספים, ולהתעדכן בתכנים חשובים ביותר בעולם ההייטק!
+//                     </Typography>
+//                 </DialogContent>
+//                 <DialogActions>
+//                     <Button onClick={handleClosePopup} color="secondary">
+//                         לא עכשיו
+//                     </Button>
+//                     <Button
+//                         onClick={() => {
+//                             setRedirectTo('signup'); // הפנייה להרשמה
+//                             handleRedirect();
+//                         }}
+//                         color="primary"
+//                     >
+//                         הירשם עכשיו
+//                     </Button>
+//                 </DialogActions>
+//             </Dialog>
+//         </>
+//     );
+// }
+
+
+//הקוד עיצוב מספר 2
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategoryList } from '../../slices/ArticleSlice';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
+import './CategoryArticle.css'; // נוסיף את הקובץ CSS
 
 export default function CategoryArticle() {
     const listCategoryArticle = useSelector((state) => state.article.CategoryList); // רשימת הקטגוריות
@@ -449,14 +650,23 @@ export default function CategoryArticle() {
             {/* כפתור הוספת מאמר */}
             <button onClick={() => toAddArticle()}>✨ הוסף מאמר - לחץ כאן ✨</button>
             
-            <ul>
+            <div className="category-container">
+                {/* הצגת כל הקטגוריות בתוך כרטיסים */}
                 {listCategoryArticle.map((category) => (
-                    <li key={category.id}>
-                        {category.categoryName}
-                        <button onClick={() => seeArticlesListByCategory(category.id)}>לצפות במאמרים</button>
-                    </li>
+                    <div className="category-card" key={category.id}>
+                        <div className="card-content">
+                            <Typography variant="h6" component="div" align="center">
+                                {category.categoryName}
+                            </Typography>
+                        </div>
+                        <div className="card-actions">
+                            <Button onClick={() => seeArticlesListByCategory(category.id)} color="primary">
+                                לצפות במאמרים
+                            </Button>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
 
             {/* פופאפ לרשום/התחבר */}
             <Dialog open={openPopup} onClose={handleClosePopup}>
@@ -485,9 +695,6 @@ export default function CategoryArticle() {
         </>
     );
 }
-
-
-//
 
 
 

@@ -3,7 +3,7 @@ import axios from "axios";
 //all
 export const getAllArticle = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/api/Aritcles/getAllArticles');
+        const response = await axios.get('http://localhost:8080/api/Aritcles/getListArticles');
         return response.data;
     } catch (error) {
         console.error("Error fetching category articles:", error);
@@ -14,7 +14,7 @@ export const getAllArticle = async () => {
 //by id
 export const getArticleByID = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:8080/api/Aritcles/getArticlesById/${id}`);
+        const response = await axios.get(`http://localhost:8080/api/Aritcles/getArticleById/${id}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching category:', error);
@@ -52,9 +52,9 @@ export const addArticle = async (newArticle) => {
 
 //מחזירה מאמרים לפי קטגוריה מסוימת
 //מקבלת Id
-export const getAllArticleByCategoryId = async (id) => {
+export const getArticlesByCategoryId = async (categoryId) => {
     try {
-        const response = await axios.get(` http://localhost:8080/api/Aritcles/getArticlesByCategoryId/${id}`);
+        const response = await axios.get(` http://localhost:8080/api/Aritcles/getArticlesByCategoryId/${categoryId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching category articles:", error);

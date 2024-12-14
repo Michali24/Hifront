@@ -1,0 +1,232 @@
+/* .fileMeetupDetail {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.fileMeetup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-item {
+    margin-bottom: 20px;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-item {
+    max-width: 200px;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} */
+
+
+/* שהקבצים יוםיעו מימן לשמאל של הדף ---------------------*/
+/* .fileMeetupDetail {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    direction: rtl; */
+     /* הצגת התוכן מימין לשמאל */
+/* } */
+
+/* .fileMeetup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-item {
+    margin-bottom: 20px;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-item {
+    max-width: 200px;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} */
+
+
+/* ללא שוליים */
+/* ללא שוליים כלל לכל הדף */
+/* body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+} */
+
+/* שמירה על ההגדרות הקודמות */
+/* .fileMeetupDetail {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    direction: rtl; */
+     /* הצגת התוכן מימין לשמאל */
+/* } */
+
+/* .fileMeetup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-item {
+    margin-bottom: 20px;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-item {
+    max-width: 200px;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+} */
+
+
+/* שינוי העיצוב של התמונות */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* שמירה על ההגדרות הקודמות */
+.fileMeetupDetail {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    direction: rtl; /* הצגת התוכן מימין לשמאל */
+}
+
+.fileMeetup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.videos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-item {
+    margin-bottom: 20px;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-item {
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

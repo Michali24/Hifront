@@ -1,5 +1,4 @@
 .ImageMeetup{
-    /* background-image: url(/L.jpg); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -23,13 +22,11 @@
     left: 0;
 }
 
-/* רכיב רקע נוסף */
+
 .SecondaryBackground {
     background-image: url(/W3.jpg);
     background-size: cover;
     background-position: center;
-    /* jkeh */
-    /* position: absolute; */
     width: 100%;
     min-height: 70vh;
     background-repeat: no-repeat;
@@ -39,7 +36,7 @@
     flex-direction: column;
 }
 
-/* מיכל לתוכן הדף */
+
 .ContentContainer {
     z-index: 1;
     position: relative;

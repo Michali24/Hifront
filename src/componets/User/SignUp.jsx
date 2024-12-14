@@ -1421,7 +1421,7 @@ export default function SignUp() {
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(validationSchema),
-    mode: 'onBlur'
+    mode: 'all'
   });
 
   const onSubmit = async (data) => {

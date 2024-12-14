@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllArticle, getArticleByID,getAllArticleByCategoryId ,addArticle,deleteArticleByID,updateArticleByID,getrticleByID} from "../services/ArticleService";
+import { getAllArticle, getArticleByID,getArticlesByCategoryId ,addArticle,deleteArticleByID,updateArticleByID,getrticleByID} from "../services/ArticleService";
 import { getAllCategoryArticle ,getCategoryArticleId} from "../services/CategoryArticleService";
 
 
@@ -11,7 +11,7 @@ export const getAllArticleList = createAsyncThunk("ArticleList/getAllArticleList
 
 //ArticleListByCategoryId
 export const getArticleListByCategoryId = createAsyncThunk("ArticleList/getArticleListByCategoryId", async (categoryId) => {
-    const ArticlesByCategoryData = await getAllArticleByCategoryId(categoryId);
+    const ArticlesByCategoryData = await getArticlesByCategoryId(categoryId);
     return ArticlesByCategoryData;
 });
 

@@ -1,39 +1,90 @@
-import React , { useEffect }from 'react'
-import {useDispatch} from 'react-redux';
+// import React, { useEffect } from 'react'
+// import { useDispatch } from 'react-redux';
+// import { useNavigate, useParams } from "react-router-dom";
+// import { getArticleListByCategoryId } from '../../slices/ArticleSlice';
+// import { useSelector } from 'react-redux';
+
+// export default function Article() {
+
+//     const navigate = useNavigate();
+//     const { id } = useParams();
+
+//     const ArticleListByCategoryId = useSelector((state) => state.article.ArticleList);
+//     console.log("ArticleListByCategoryId: ", ArticleListByCategoryId)
+//     const dispatch = useDispatch();
+
+//     useEffect(() => {
+//         dispatch(getArticleListByCategoryId(id));
+//     }, [dispatch]);
+
+//     function seeArticlesDetailes(Id) {
+//         navigate(`/Detailes/${Id}`);
+//     }
+
+//     return (
+//         <>
+//             <div>Article</div>
+//             <ul>
+//                 {ArticleListByCategoryId.map((articleCategory) => (
+//                     <li key={articleCategory.id}>
+//                         <p>title:{articleCategory.title}</p>
+//                         <p>description: {articleCategory.description}</p>
+//                         <button onClick={() => seeArticlesDetailes(articleCategory.id)}>to see details'article</button>
+//                         <button onClick={() => navigate('/CateforyArticle')}>to return to CateforyArticle</button>
+//                     </li>
+//                 ))}
+//             </ul>
+//         </>
+//     )
+// }
+
+
+//הקוד בעיצוב כרטיסיות כל מאמר
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
-import {getArticleListByCategoryId} from '../../slices/ArticleSlice';
+import { getArticleListByCategoryId } from '../../slices/ArticleSlice';
 import { useSelector } from 'react-redux';
+import './Article.css';  // Import the CSS for styling
 
 export default function Article() {
 
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const ArticleListByCategoryId=useSelector((state)=>state.article.ArticleList);
-    console.log("ArticleListByCategoryId: ",ArticleListByCategoryId)
+    const ArticleListByCategoryId = useSelector((state) => state.article.ArticleList);
+    console.log("ArticleListByCategoryId: ", ArticleListByCategoryId);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getArticleListByCategoryId(id));
-    }, [dispatch]);
+    }, [dispatch, id]);
 
-    function seeArticlesDetailes(Id){
+    function seeArticlesDetailes(Id) {
         navigate(`/Detailes/${Id}`);
     }
 
     return (
-        <>
-            <div>Article</div>
-            <ul>
+        <div className="category-container">
+            <h1>Articles</h1>
+            <div className="category-list">
                 {ArticleListByCategoryId.map((articleCategory) => (
-                    <li key={articleCategory.id}>
-                        {articleCategory.title}
-                        {articleCategory.img_author_of_article}
-                        <button onClick={() => seeArticlesDetailes(articleCategory.id)}>to see details'article</button>
-                        <button onClick={() => navigate('/CateforyArticle')}>to return to CateforyArticle</button>
-                    </li>
+                    <div className="category-card" key={articleCategory.id}>
+                        <div className="card-content">
+                            <h2>{articleCategory.title}</h2>
+                            <p>{articleCategory.description}</p>
+                        </div>
+                        <div className="card-actions">
+                            <button onClick={() => seeArticlesDetailes(articleCategory.id)}>
+                                See Details
+                            </button>
+                            <button onClick={() => navigate('/CateforyArticle')}>
+                                Return to Category
+                            </button>
+                        </div>
+                    </div>
                 ))}
-            </ul>
-        </>
-    )
+            </div>
+        </div>
+    );
 }
