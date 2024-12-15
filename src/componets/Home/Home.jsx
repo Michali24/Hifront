@@ -786,16 +786,155 @@
 
 //12-12-24
 //צריך לסדר את העיצוב...
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getAllArticleList } from '../../slices/ArticleSlice';
+// import '@fontsource/dancing-script';
+// import { Box, Card, CardContent, Typography, Grid, Button, CardMedia } from '@mui/material';
+// import { getAllFileMeeetupList } from '../../slices/FileMeetupSlice';
+// // import M1 from '../../assets/images/M1.jpg';
+// //import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+// import './Home.css';
+
+
+// export default function Home() {
+//   const dispatch = useDispatch();
+//   const articleList = useSelector((state) => state.article.ArticleList);
+//   const fileMeetupList = useSelector((state) => state.fileMeetup.fileMeetupList);
+//   const [isAdmin, setIsAdmin] = useState(false);
+//   const [imageFiles, setImageFiles] = useState([]);
+//   const [videoFiles, setVideoFiles] = useState([]);
+
+//   useEffect(() => {
+//     // בודק אם המשתמש מחובר ואם הוא מנהל
+//     const adminStatus = localStorage.getItem('isAdmin');
+//     if (adminStatus === 'true') {
+//       setIsAdmin(true);
+//     }
+//     // שולף את הרשימות של המאמרים והקבצים
+//     dispatch(getAllArticleList());
+//     dispatch(getAllFileMeeetupList());
+//   }, [dispatch]);
+
+//   // פילטר של קבצים מסוג תמונה
+//   useEffect(() => {
+//     const images = fileMeetupList.filter((file) => file.typeFile === 'image');
+//     const videos = fileMeetupList.filter((file) => file.typeFile === 'video');
+//     setImageFiles(images);  // עדכון רשימת התמונות
+//     setVideoFiles(videos);  // עדכון רשימת הוידיאו
+//   }, [fileMeetupList]);
+
+
+//   return (
+//     <>
+//       <div className="BackgroundContainer" />
+//       <div className="ContentContainer">
+
+//         {/* <Grid container spacing={4} justifyContent="center" sx={{ marginTop: 3 }}>
+//           {videoFiles.length > 0 && videoFiles
+//             .slice(-5) // בחירת 5 הקבצים החדשים ביותר
+//             .map((file, index) => (
+//               <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+//                 <Card sx={{ height: 200, display: 'flex', flexDirection: 'column' }}>
+//                   <CardContent>
+//                     <Typography variant="h6" component="div">
+//                       Video {index + 1}
+//                     </Typography>
+//                     <Typography variant="body2" color="text.secondary">
+//                       {file.title}
+//                     </Typography>
+
+//                     <Button href={file.videoUrl} target="_blank" variant="contained" color="primary" sx={{ marginTop: 1 }}>
+//                       Watch Video
+//                     </Button>
+//                   </CardContent>
+//                 </Card>
+//               </Grid>
+//             ))}
+//         </Grid> */}
+//         <Grid container spacing={4} justifyContent="center">
+//           {imageFiles.length > 0 && imageFiles
+//             .sort(() => Math.random() - 0.5) // מיקסוס רנדומלי של התמונות
+//             .slice(0, 5) // הצגת 5 תמונות בלבד
+//             .map((file, index) => (
+//               <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+//                 <Card sx={{ height: 250, display: 'flex', flexDirection: 'column' }}>
+//                   <CardMedia
+//                     component="img"
+//                     height="100%"
+//                     image={`data:image/jpeg;base64,${file.fileData}`} // הצגת תמונה מבסיס64
+//                     alt={`Image ${index + 1}`}
+//                   />
+//                   <CardContent sx={{ textAlign: 'center' }}>
+//                     <Typography variant="h6" component="div">
+//                       תמונה {index + 1}
+//                     </Typography>
+//                   </CardContent>                    </Card>
+//               </Grid>
+//             ))}
+//         </Grid>
+
+//         <div style={{ fontSize: '16px', fontFamily: 'cursive', height: '30vh', padding: '300px 118px 170px 100px', position: 'absolute', bottom: '0', left: '-80px', width: '100%', textAlign: 'left', color: 'black', marginTop: '50px' }}>
+//           <p>"Welcome to our technology learning hub Hitechistim! </p>
+//           <p> Dive into a world of knowledge with our expertly crafted courses designed for beginners and professionals alike.</p>
+//           <p>Whether you're looking to master coding,explore data science, or understand the latest </p>
+//           <p>in cybersecurity, our comprehensive courses have you covered. </p>
+//           <p>Learn at your own pace, with hands-on projects and real-world  applications. </p>
+//           <p>Our experienced instructors are here to guide you every step of the way.</p>
+//           <p>Join our vibrant community of learners and stay ahead in the fast-evolving tech landscape.</p>
+//           <p>Your journey to tech mastery starts here!" </p>
+
+//         </div>
+//       </div>
+
+//       <hr style={{ borderTop: '2px solid purple', margin: '20px 0' }} />
+//       <div className="MainImage" > </div>
+//       <div className="SecondaryBackground">
+//         <Box sx={{ position: 'relative', zIndex: 1, padding: '20px', width: '100%', paddingBottom: 2 }}>
+//           <Typography variant="h4" component="div" gutterBottom sx={{ paddingBottom: 0, fontFamily: '"Great Vibes", cursive' }}>
+//             New Article on Hitechistim:
+//           </Typography>
+//           <Typography variant="body1" component="div" sx={{ paddingBottom: 7, fontFamily: '"Great Vibes", cursive' }}>
+//           </Typography>
+//           {/* הטוב ביותר */}
+//           <Grid container spacing={2} className="CourseList">
+//             {articleList.slice().reverse().slice(0, 5).map((article) => (
+//               <Grid item key={article.id} sx={{ paddingBottom: 6 }}>
+//                 <Card sx={{ maxWidth: 346 }}>
+//                   <CardContent>
+//                     <Typography variant="body2" color="text.secondary">
+//                     <span>
+//                         <strong style={{ color: '#007bff' }}>Article name:</strong>
+//                         <strong style={{ color: '#007bff' }}> {article.title}</strong>
+//                         <strong style={{ color: '#007bff' }}>{article.author}</strong>
+//                       </span>
+//                       <div>Description of the course :{article.description}bjhbhjublnk jnk njnkknklnl lkm</div>
+//                     </Typography>
+//                   </CardContent>
+
+//                 </Card>
+//               </Grid>
+//             ))}
+//           </Grid>
+//         </Box>
+//         {/* הוספת מרווח בין השוליים התחתונים */}
+//         <div style={{ marginBottom: '70px' }}></div>
+//       </div>
+//     </>
+//   );
+// }
+
+//חדש 
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllArticleList } from '../../slices/ArticleSlice';
 import '@fontsource/dancing-script';
 import { Box, Card, CardContent, Typography, Grid, Button, CardMedia } from '@mui/material';
 import { getAllFileMeeetupList } from '../../slices/FileMeetupSlice';
-// import M1 from '../../assets/images/M1.jpg';
-//import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import './Home.css';
-
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -816,74 +955,67 @@ export default function Home() {
     dispatch(getAllFileMeeetupList());
   }, [dispatch]);
 
-  // פילטר של קבצים מסוג תמונה
+  // פילטר של קבצים מסוג תמונה ווידאו
   useEffect(() => {
     const images = fileMeetupList.filter((file) => file.typeFile === 'image');
     const videos = fileMeetupList.filter((file) => file.typeFile === 'video');
-    setImageFiles(images);  // עדכון רשימת התמונות
-    setVideoFiles(videos);  // עדכון רשימת הוידיאו
+    setImageFiles(images.sort(() => Math.random() - 0.5)); // מיקסוס רנדומלי של התמונות
+    setVideoFiles(videos);
   }, [fileMeetupList]);
 
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true,
+    adaptiveHeight: true,
+  };
 
   return (
     <>
       <div className="BackgroundContainer" />
       <div className="ContentContainer">
 
-        {/* <Grid container spacing={4} justifyContent="center" sx={{ marginTop: 3 }}>
-          {videoFiles.length > 0 && videoFiles
-            .slice(-5) // בחירת 5 הקבצים החדשים ביותר
-            .map((file, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ height: 200, display: 'flex', flexDirection: 'column' }}>
-                  <CardContent>
-                    <Typography variant="h6" component="div">
-                      Video {index + 1}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {file.title}
-                    </Typography>
-                    
-                    <Button href={file.videoUrl} target="_blank" variant="contained" color="primary" sx={{ marginTop: 1 }}>
-                      Watch Video
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-        </Grid> */}
-        <Grid container spacing={4} justifyContent="center">
-          {imageFiles.length > 0 && imageFiles
-            .sort(() => Math.random() - 0.5) // מיקסוס רנדומלי של התמונות
-            .slice(0, 5) // הצגת 5 תמונות בלבד
-            .map((file, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ height: 250, display: 'flex', flexDirection: 'column' }}>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    image={`data:image/jpeg;base64,${file.fileData}`} // הצגת תמונה מבסיס64
-                    alt={`Image ${index + 1}`}
+        {/* קרוסלת תמונות */}
+        <Box sx={{ maxWidth: "800px", margin: "0 auto", padding: 3, marginTop: 7 }}>
+          {imageFiles.length > 0 ? (
+            <Slider {...sliderSettings}>
+              {imageFiles.map((file, index) => (
+                <Box key={index} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <img
+                    src={`data:image/jpeg;base64,${file.fileData}`}
+                    alt={`Slide ${index + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "400px",
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                    }}
                   />
-                  <CardContent sx={{ textAlign: 'center' }}>
-                    <Typography variant="h6" component="div">
-                      תמונה {index + 1}
-                    </Typography>
-                  </CardContent>                    </Card>
-              </Grid>
-            ))}
-        </Grid>
+                </Box>
+              ))}
+            </Slider>
+          ) : (
+            <Typography variant="body1" sx={{ textAlign: "center" }}>
+              No images available to display.
+            </Typography>
+          )}
+        </Box>
 
-        <div style={{ fontSize: '16px', fontFamily: 'cursive', height: '30vh', padding: '300px 118px 170px 100px', position: 'absolute', bottom: '0', left: '-80px', width: '100%', textAlign: 'left', color: 'black', marginTop: '50px' }}>
+        <div style={{ margin: '115px', fontSize: '16px', fontFamily: 'cursive', height: '30vh', padding: '300px 118px 170px 100px', position: 'absolute', bottom: '0', left: '-80px', textAlign: 'left', color: 'black', marginTop: '50px' }}>
           <p>"Welcome to our technology learning hub Hitechistim! </p>
           <p> Dive into a world of knowledge with our expertly crafted courses designed for beginners and professionals alike.</p>
-          <p>Whether you're looking to master coding,explore data science, or understand the latest </p>
+          <p>Whether you're looking to master coding, explore data science, or understand the latest </p>
           <p>in cybersecurity, our comprehensive courses have you covered. </p>
-          <p>Learn at your own pace, with hands-on projects and real-world  applications. </p>
+          <p>Learn at your own pace, with hands-on projects and real-world applications. </p>
           <p>Our experienced instructors are here to guide you every step of the way.</p>
           <p>Join our vibrant community of learners and stay ahead in the fast-evolving tech landscape.</p>
           <p>Your journey to tech mastery starts here!" </p>
-
         </div>
       </div>
 
@@ -896,36 +1028,144 @@ export default function Home() {
           </Typography>
           <Typography variant="body1" component="div" sx={{ paddingBottom: 7, fontFamily: '"Great Vibes", cursive' }}>
           </Typography>
-          {/* הטוב ביותר */}
+          {/* הצגת מאמרים */}
           <Grid container spacing={2} className="CourseList">
             {articleList.slice().reverse().slice(0, 5).map((article) => (
               <Grid item key={article.id} sx={{ paddingBottom: 6 }}>
                 <Card sx={{ maxWidth: 346 }}>
                   <CardContent>
                     <Typography variant="body2" color="text.secondary">
-                    <span>
+                      <span>
                         <strong style={{ color: '#007bff' }}>Article name:</strong>
                         <strong style={{ color: '#007bff' }}> {article.title}</strong>
                         <strong style={{ color: '#007bff' }}>{article.author}</strong>
                       </span>
-                      <div>Description of the course :{article.description}bjhbhjublnk jnk njnkknklnl lkm</div>
+                      <div>Description of the course: {article.description}</div>
                     </Typography>
                   </CardContent>
-
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Box>
-        {/* הוספת מרווח בין השוליים התחתונים */}
         <div style={{ marginBottom: '70px' }}></div>
+        {/* וידאו!!-להוסיף */}
+        {/* תוכן נוסף */}
+        {/* <Grid container spacing={4} justifyContent="center">
+          {videoFiles.length > 0 && videoFiles
+            .slice(0, 5) // הצגת 5 סרטונים בלבד
+            .map((file, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
+                <Card sx={{ height: 250, display: 'flex', flexDirection: 'column' }}>
+                  <CardMedia
+                    component="video"
+                    height="100%"
+                    controls
+                    src={file.videoUrl}
+                    alt={`Video ${index + 1}`}
+                  />
+                  <CardContent sx={{ textAlign: 'center' }}>
+                    <Typography variant="h6" component="div">
+                      סרטון {index + 1}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid> */}
       </div>
     </>
   );
 }
 
+
+
 //עיוצב נוסף
 //12-12-24
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { getAllArticleList } from '../../slices/ArticleSlice';
+// import { getAllFileMeeetupList } from '../../slices/FileMeetupSlice';
+// import Slider from "react-slick";
+// import { Box, Typography } from '@mui/material';
+// import "slick-carousel/slick/slick.css"; 
+// import "slick-carousel/slick/slick-theme.css";
+
+// export default function Home() {
+//   const dispatch = useDispatch();
+//   const fileMeetupList = useSelector((state) => state.fileMeetup.fileMeetupList);
+//   const [imageFiles, setImageFiles] = useState([]);
+
+//   useEffect(() => {
+//     // Fetch articles and file meetup lists
+//     dispatch(getAllArticleList());
+//     dispatch(getAllFileMeeetupList());
+//   }, [dispatch]);
+
+//   useEffect(() => {
+//     // Filter image files
+//     const images = fileMeetupList.filter((file) => file.typeFile === 'image');
+//     setImageFiles(images);
+//   }, [fileMeetupList]);
+
+//   const sliderSettings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1,
+//     autoplay: true,
+//     autoplaySpeed: 3000,
+//     arrows: true,
+//     adaptiveHeight: true,
+//   };
+
+//   return (
+//     <Box sx={{ maxWidth: "1200px", margin: "0 auto", padding: 3 }}>
+//       <Typography variant="h4" sx={{ textAlign: "center", mb: 4, fontFamily: '"Dancing Script", cursive' }}>
+//         Welcome to Hitechistim!
+//       </Typography>
+
+//       {/* Carousel */}
+//       {imageFiles.length > 0 ? (
+//         <Slider {...sliderSettings}>
+//           {imageFiles.map((file, index) => (
+//             <Box key={index} sx={{ position: "relative", width: "100%" }}>
+//               <img
+//                 src={`data:image/jpeg;base64,${file.fileData}`}
+//                 alt={`Slide ${index + 1}`}
+//                 style={{
+//                   width: "100%",
+//                   height: "400px",
+//                   objectFit: "cover",
+//                   borderRadius: "10px",
+//                 }}
+//               />
+//               <Typography
+//                 variant="subtitle1"
+//                 sx={{
+//                   position: "absolute",
+//                   bottom: "10px",
+//                   left: "10px",
+//                   color: "white",
+//                   background: "rgba(0, 0, 0, 0.5)",
+//                   padding: "5px 10px",
+//                   borderRadius: "5px",
+//                 }}
+//               >
+//                 {file.title || `Image ${index + 1}`}
+//               </Typography>
+//             </Box>
+//           ))}
+//         </Slider>
+//       ) : (
+//         <Typography variant="body1" sx={{ textAlign: "center" }}>
+//           No images available to display.
+//         </Typography>
+//       )}
+//     </Box>
+//   );
+// }
 
 
 

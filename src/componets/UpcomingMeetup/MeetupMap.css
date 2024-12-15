@@ -56,18 +56,17 @@
     width: 100%;
     height: calc((100vh - 64px - 72px) / 2);
 } */
-.background-container {
+/* .background-container {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     width: 100%;
     /* מאפשר פריסה לרוחב מלא */
-    height: 50vh;
+    /* height: 50vh; */
     /* גובה יחסי למסך */
-    margin-top: 30px;
+    /* margin-top: 30px;
     text-align: center;
-}
-
+} */ 
 
 /* כרטיסיית התוכן */
 /* .card-container {
@@ -125,6 +124,8 @@
 
 /* מפה */
 .map-container {
+    position: relative;
+    bottom: 4vh;
     height: 300px;
     border-radius: 10px;
     overflow: hidden;
