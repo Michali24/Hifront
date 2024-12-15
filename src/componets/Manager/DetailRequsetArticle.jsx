@@ -1,8 +1,87 @@
 //gpt2
+// import React, { useEffect } from 'react';
+// import { useParams, useNavigate } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getArticleById,putAricle } from '../../slices/ArticleSlice';
+
+// export default function DetailRequsetArticle() {
+//     const { articleId, categoryId } = useParams(); // שליפת מזהה הכתבה מתוך ה-URL
+//     const dispatch = useDispatch(); // כלי לשליחת פעולות ל-Redux
+//     const navigate = useNavigate(); // כלי לניווט בין דפי האפליקציה
+
+//     // שליפת פרטי הכתבה מתוך Redux
+//     const DetailArticleRequest = useSelector((state) => state.article.Article);
+
+//     // // קריאה ל-Redux להבאת פרטי הכתבה
+//     // useEffect(() => {
+//     //     if (id) {
+//     //         dispatch(getArticleById(id));
+//     //     }
+//     // }, [dispatch, articleId]); // תלות ב-id וב-dispatch להבטיח שהפונקציה תרוץ בעת שינוי ה-id
+
+//     useEffect(() => {
+//         if (articleId) {
+//             dispatch(getArticleById(articleId)); // שימוש ב-articleId ולא ב-id
+//         }
+//     }, [dispatch, articleId]);
+    
+    
+//     // פונקציה לאישור המאמר
+//     const approval = () => {
+//         console.log('aproval');
+//         if (!DetailArticleRequest) {
+//             console.error('Article details are not available.');
+//             return;
+//         }
+
+//         // יצירת אובייקט מאמר חדש עם הנתונים מה-Redux
+//         const newArticle = {
+//             id:articleId,
+//             title: DetailArticleRequest.title,
+//             author:DetailArticleRequest.author , // ניתן להחליף לשם משתמש דינמי
+//             content: DetailArticleRequest.content,
+//             description: DetailArticleRequest.description,
+//             status:false,
+//             categoryId:categoryId,
+//             pdfarticleFile:DetailArticleRequest.pdfarticleFile,
+//         };
+
+//         console.log(' new article :', newArticle);
+//         console.log('category id:',categoryId);
+        
+//         // שליחה ל-Redux לאישור המאמר
+//         dispatch(putAricle(newArticle));
+//         console.log('article correct and send ok!');
+
+//         // נווט חזרה לעמוד הבית או לכל עמוד אחר
+//         // navigate('/');
+//     };
+
+//     return (
+//         <>
+//             <div>פרטי הבקשה למאמר</div>
+//             {DetailArticleRequest ? (
+//                 <>
+//                     <p>כותרת: {DetailArticleRequest.title}</p>
+//                     <p>תוכן: {DetailArticleRequest.content}</p>
+//                     <p>תיאור: {DetailArticleRequest.description}</p>
+//                     <h1>לסרד את ההצגה של המאמר</h1>
+//                     <p>the article:{DetailArticleRequest.pdfarticleFile}</p>
+//                     <button onClick={approval}>אשר מאמר</button>
+//                 </>
+//             ) : (
+//                 <p>טוען נתונים...</p>
+//             )}
+//             <button onClick={() => navigate('/WhatsAppGroup')}>Backe</button>
+//        </>
+//     );
+// }
+
+//עיצוב נוסף שיחזור לדץף הקודם שממנו הגיע לאחר לחיצה איושר
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticleById,putAricle } from '../../slices/ArticleSlice';
+import { getArticleById, putAricle } from '../../slices/ArticleSlice';
 
 export default function DetailRequsetArticle() {
     const { articleId, categoryId } = useParams(); // שליפת מזהה הכתבה מתוך ה-URL
@@ -12,23 +91,14 @@ export default function DetailRequsetArticle() {
     // שליפת פרטי הכתבה מתוך Redux
     const DetailArticleRequest = useSelector((state) => state.article.Article);
 
-    // // קריאה ל-Redux להבאת פרטי הכתבה
-    // useEffect(() => {
-    //     if (id) {
-    //         dispatch(getArticleById(id));
-    //     }
-    // }, [dispatch, articleId]); // תלות ב-id וב-dispatch להבטיח שהפונקציה תרוץ בעת שינוי ה-id
-
     useEffect(() => {
         if (articleId) {
             dispatch(getArticleById(articleId)); // שימוש ב-articleId ולא ב-id
         }
     }, [dispatch, articleId]);
     
-    
     // פונקציה לאישור המאמר
     const approval = () => {
-        console.log('aproval');
         if (!DetailArticleRequest) {
             console.error('Article details are not available.');
             return;
@@ -36,25 +106,25 @@ export default function DetailRequsetArticle() {
 
         // יצירת אובייקט מאמר חדש עם הנתונים מה-Redux
         const newArticle = {
-            id:articleId,
+            id: articleId,
             title: DetailArticleRequest.title,
-            author:DetailArticleRequest.author , // ניתן להחליף לשם משתמש דינמי
+            author: DetailArticleRequest.author, // ניתן להחליף לשם משתמש דינמי
             content: DetailArticleRequest.content,
             description: DetailArticleRequest.description,
-            status:false,
-            categoryId:categoryId,
-            pdfarticleFile:DetailArticleRequest.pdfarticleFile,
+            status: false,
+            categoryId: categoryId,
+            pdfarticleFile: DetailArticleRequest.pdfarticleFile,
         };
 
-        console.log(' new article :', newArticle);
-        console.log('category id:',categoryId);
+        console.log('new article:', newArticle);
+        console.log('category id:', categoryId);
         
         // שליחה ל-Redux לאישור המאמר
         dispatch(putAricle(newArticle));
         console.log('article correct and send ok!');
 
-        // נווט חזרה לעמוד הבית או לכל עמוד אחר
-        // navigate('/');
+        // חזרה לדף הקודם בהיסטוריית הניווט
+        navigate(-1);
     };
 
     return (
@@ -66,15 +136,18 @@ export default function DetailRequsetArticle() {
                     <p>תוכן: {DetailArticleRequest.content}</p>
                     <p>תיאור: {DetailArticleRequest.description}</p>
                     <h1>לסרד את ההצגה של המאמר</h1>
-                    <p>the article:{DetailArticleRequest.pdfarticleFile}</p>
+                    <p>המאמר: {DetailArticleRequest.pdfarticleFile}</p>
                     <button onClick={approval}>אשר מאמר</button>
                 </>
             ) : (
                 <p>טוען נתונים...</p>
             )}
+            {/* כפתור חזרה לדף הקודם */}
+            <button onClick={() => navigate(-1)}>חזור לדף הקודם</button>
         </>
     );
 }
+
 //GPT1
 // import React, { useEffect } from 'react';
 // import { useParams, useNavigate } from 'react-router-dom';

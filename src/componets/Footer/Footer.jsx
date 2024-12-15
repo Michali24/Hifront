@@ -226,7 +226,7 @@ export default function Footer() {
                 </IconButton>
 
                 {/* Contact Link */}
-                <Link href="/contact" color="inherit" ml={2}>צור קשר</Link>
+                <Link href="/Concat" color="inherit" ml={2}>צור קשר</Link>
 
                 {/* File Upload Section */}
                 <Box ml={2} mt={{ xs: 1, sm: 0 }}>

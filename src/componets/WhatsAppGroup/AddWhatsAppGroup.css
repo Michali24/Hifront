@@ -1,0 +1,14 @@
+/* הוסף את הקוד הזה לקובץ ה-CSS שלך */
+.page-container {
+    background-image: url('/public/whatsapp.jpg'); /* כתובת התמונה */
+    background-size: cover; /* מכסה את כל הדף */
+    background-position: center; /* ממקם את התמונה במרכז */
+    background-repeat: no-repeat; /* מונע חזרה של התמונה */
+    height: 100vh; /* גובה הדף */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* רווח מסביב */
+  }
+  

@@ -112,7 +112,7 @@ export default function Article() {
     }, [dispatch, id]);
 
     // מסנן את המאמרים כך שיציגו רק את אלו ש-status שלהם הוא false
-    const filteredArticles = ArticleListByCategoryId.filter((article) => article.status === false);
+    const filteredArticles = ArticleListByCategoryId.filter((article) => article.status === true);
 
     // ניווט לדף הפרטים של מאמר
     function seeArticlesDetailes(Id) {

@@ -26,6 +26,9 @@ import AboutUs from './componets/Home/AboutUs';
 import NavBar from './componets/NavBar/NavBar';
 import Footer from './componets/Footer/Footer';
 
+import AddWhatsAppGroup from './componets/WhatsAppGroup/AddWhatsAppGroup';
+import Concat from './componets/Footer/Concat';
+
 function App() {
   return (
     <>
@@ -68,7 +71,8 @@ function App() {
         <Route path='AddFileMeetup/:id' element={<AddFileMeetup></AddFileMeetup>}></Route>
         {/* <Route path="FileMeetupDetail/AddFileMeetup/:id" element={<AddFileMeetup></AddFileMeetup>}></Route> */}
 
-       
+       <Route path='AddWhatsAppGroup' element={<AddWhatsAppGroup></AddWhatsAppGroup>}></Route>
+       <Route path='Concat' element={<Concat></Concat>}></Route>
 
       </Routes>
       <Footer />
