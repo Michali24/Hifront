@@ -932,6 +932,8 @@ export default function Home() {
         </Box>
         <div style={{ marginBottom: '70px' }}></div>
       </div>
+      <div className='TheradBackground'>
+      </div>
     </>
   );
 }

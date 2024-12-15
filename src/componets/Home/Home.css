@@ -24,7 +24,7 @@
 
 
 .SecondaryBackground {
-    background-image: url(/W3.jpg);
+    background-image: url(/public/images/W3.jpg);
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -42,4 +42,17 @@
     position: relative;
     padding: 20px;
     min-height: 100vh;
+}
+
+.TheradBackground {
+    background-image: url(/public/images/j.jpg);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 70vh;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

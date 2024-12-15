@@ -231,7 +231,7 @@ export default function DetailArticle() {
                 <h1>פרטי המאמר</h1>
                 <p>כותרת: {articleData?.title}</p>
                 <p>מחבר: {articleData?.author}</p>
-                <p>תוכן: {articleData?.content}</p>
+                {/* <p>תוכן: {articleData?.content}</p> */}
                 <p>תיאור: {articleData?.description}</p>
                 {/* לא מציגים את מערך הבייטים ישירות */}
                 <h2>אפשרויות להצגת והורדת המאמר</h2>

@@ -1122,7 +1122,7 @@ export default function RequestToAddAnArticle() {
     const [newArticle, setNewArticle] = useState({
         title: '',
         author: '',
-        content: '',
+        // content: '',
         description: '',
         status: false,
         categoryOfArticles: {
@@ -1249,7 +1249,7 @@ export default function RequestToAddAnArticle() {
                             </Grid>
 
                             {/* תוכן */}
-                            <Grid item xs={12}>
+                            {/* <Grid item xs={12}>
                                 <TextField
                                     name="content"
                                     label="Content"
@@ -1261,7 +1261,7 @@ export default function RequestToAddAnArticle() {
                                     multiline
                                     rows={4}
                                 />
-                            </Grid>
+                            </Grid> */}
 
                             {/* תיאור */}
                             <Grid item xs={12}>

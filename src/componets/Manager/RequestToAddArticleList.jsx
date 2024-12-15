@@ -920,39 +920,566 @@
 
 
 //עיצוב נוסף שיהיה רקע
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { deleteAricle, getarticleWithStatusFalse } from '../../slices/ArticleSlice';
+// import { useNavigate } from 'react-router-dom';
+// import { Card, CardContent, Typography, Button, Box, IconButton } from '@mui/material';
+// import DeleteIcon from '@mui/icons-material/Delete'; // ייבוא האייקון
+
+// export default function RequestToAddArticleList() {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+
+//     // שימוש במצב מקומי לאחסון רשימת המאמרים
+//     const [articleList, setArticleList] = useState([]);
+
+//     const RegisterArticleList = useSelector((state) => state.article.ArticleList);
+
+//     useEffect(() => {
+//         dispatch(getarticleWithStatusFalse());
+//     }, [dispatch]);
+
+//     useEffect(() => {
+//         // עדכון המצב המקומי בכל פעם שהמצב הגלובלי משתנה
+//         setArticleList(RegisterArticleList);
+//     }, [RegisterArticleList]);
+
+//     function deleteRequsetArticle(id) {
+//         dispatch(deleteAricle(id));
+
+//         // עדכון המצב המקומי להסרת המאמר שנמחק
+//         setArticleList((prevList) => prevList.filter((article) => article.id !== id));
+//     }
+
+//     // פונקציה לפתוח את המאמר בטאב חדש מתוך מערך הביטים
+//     const handleOpenInNewTab = (article) => {
+//         if (!article || !article.pdfarticleFile) {
+//             alert("לא ניתן לפתוח את המאמר כעת.");
+//             return;
+//         }
+
+//         let byteArray;
+
+//         // בדיקה אם הנתונים הם מחרוזת Base64
+//         if (typeof article.pdfarticleFile === 'string') {
+//             byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+//         } else {
+//             // מניחים שמדובר במערך בייטים
+//             byteArray = new Uint8Array(article.pdfarticleFile);
+//         }
+
+//         // יצירת Blob מתוך מערך הביטים
+//         const blob = new Blob([byteArray], { type: 'application/pdf' });
+//         const url = URL.createObjectURL(blob);
+
+//         const newTab = window.open();
+//         if (newTab) {
+//             newTab.document.write(`
+//                 <html>
+//                     <head><title>המאמר</title></head>
+//                     <body style="margin:0;">
+//                         <iframe src="${url}" style="border: none; width: 100%; height: 100vh;" allowfullscreen></iframe>
+//                     </body>
+//                 </html>
+//             `);
+//             newTab.document.close();
+//         } else {
+//             alert("לא ניתן לפתוח טאב חדש. אנא בדוק את הגדרות הדפדפן שלך.");
+//         }
+//     };
+
+//     // פונקציה להורדת המאמר
+//     const handleDownload = (article) => {
+//         if (!article || !article.pdfarticleFile) {
+//             alert("לא ניתן להוריד את המאמר כעת.");
+//             return;
+//         }
+
+//         let byteArray;
+
+//         // בדיקה אם הנתונים הם מחרוזת Base64
+//         if (typeof article.pdfarticleFile === 'string') {
+//             byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+//         } else {
+//             // מניחים שמדובר במערך בייטים
+//             byteArray = new Uint8Array(article.pdfarticleFile);
+//         }
+
+//         // יצירת Blob מתוך מערך הביטים להורדה
+//         const blob = new Blob([byteArray], { type: 'application/pdf' });
+//         const link = document.createElement('a');
+//         link.href = URL.createObjectURL(blob);
+//         link.download = `${article.title}.pdf`; // שם הקובץ להורדה, ניתן להתאים לפי הצורך
+
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+//     };
+
+//     return (
+//         <Box
+//             sx={{
+//                 padding: '20px',
+//                 display: 'flex',
+//                 flexDirection: 'column',
+//                 alignItems: 'flex-end',
+//                 // הוספת תמונת הרקע כאן
+//                 backgroundImage: `url(/images/artical1.jpg)`, // החלף את ה-URL לתמונת הרקע שלך
+//                 backgroundSize: 'cover', // מתאם את הגודל של הרקע
+//                 backgroundRepeat: 'no-repeat', // לא חוזר את התמונה
+//                 backgroundPosition: 'center', // ממרכז את התמונה
+//                 minHeight: '100vh', // מבטיח שהתמונה מכסה את כל הגובה
+//             }}
+//         >
+//             {/* אופציה להוספת שכבת חצי שקופה לשיפור הנראות */}
+//             <Box
+//                 sx={{
+//                     position: 'absolute',
+//                     top: 0,
+//                     left: 0,
+//                     width: '100%',
+//                     height: '100%',
+//                     backgroundColor: 'rgba(255, 255, 255, 0.8)', // ניתן לשנות את הצבע והשקיפות לפי הצורך
+//                     zIndex: -1, // מבטיח שהשכבה תהיה מאחורי התוכן
+//                 }}
+//             />
+
+//             <Typography variant="h4" gutterBottom sx={{ zIndex: 1, color: 'text.primary' }}>
+//                 בקשות להוספת מאמרים
+//             </Typography>
+
+//             {articleList && articleList.length === 0 ? (
+//                 <Typography variant="body1" color="text.secondary" sx={{ zIndex: 1 }}>
+//                     - אין בקשות להוספת מאמרים - 404 - אין נתונים להציג
+//                 </Typography>
+//             ) : (
+//                 <Box
+//                     sx={{
+//                         display: 'flex',
+//                         flexDirection: 'column', // עימוד עמודה
+//                         gap: '18px',
+//                         width: '100%', // להתאים לרוחב המיכל
+//                         alignItems: 'flex-start',
+//                         padding: 5, // יישור לימין
+//                         zIndex: 1, // מבטיח שהתוכן יהיה מעל השכבה
+//                     }}
+//                 >
+//                     {articleList
+//                         ?.filter((articleRegister) => articleRegister.status === false)
+//                         .map((articleRegister) => (
+//                             <Card
+//                                 key={articleRegister.id}
+//                                 sx={{
+//                                     width: '100%', // מלא רוחב המיכל
+//                                     maxWidth: '800px', // הגבלת רוחב מקסימלי לכרטיס
+//                                     display: 'flex',
+//                                     flexDirection: 'column',
+//                                     justifyContent: 'space-between',
+//                                     padding: '16px',
+//                                     minHeight: '250px', // גובה מינימלי מתאים
+//                                     overflow: 'hidden', // להסתיר תוכן שעולה על הגובה
+//                                     border: '1px solid #ccc', // הוספת מסגרת
+//                                     borderRadius: '8px', // עיגול פינות המסגרת
+//                                     boxShadow: '0 4px 8px rgba(228, 53, 199, 0.1)', // הוספת הצללה
+//                                     backgroundColor: '#fff', // צבע רקע לבן
+//                                 }}
+//                             >
+//                                 <CardContent>
+//                                     <Typography variant="h6" component="div">
+//                                         title: {articleRegister.title}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         author: {articleRegister.author}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         subject: {articleRegister.subject}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         description: {articleRegister.description}
+//                                     </Typography>
+//                                 </CardContent>
+//                                 <Box
+//                                     sx={{
+//                                         display: 'flex',
+//                                         justifyContent: 'space-between',
+//                                         marginTop: '16px',
+//                                     }}
+//                                 >
+//                                     {articleRegister?.pdfarticleFile ? (
+//                                         <>
+//                                             {/* כפתור לפתוח את ה-PDF בטאב חדש */}
+//                                             <Button
+//                                                 onClick={() => handleOpenInNewTab(articleRegister)}
+//                                                 variant="contained"
+//                                                 color="primary"
+//                                             >
+//                                                 פתח בטאב חדש
+//                                             </Button>
+
+//                                             {/* כפתור להורדת המאמר */}
+//                                             <Button
+//                                                 onClick={() => handleDownload(articleRegister)}
+//                                                 variant="contained"
+//                                                 color="secondary"
+//                                                 sx={{ marginLeft: '10px' }}
+//                                             >
+//                                                 הורד את המאמר
+//                                             </Button>
+//                                         </>
+//                                     ) : (
+//                                         <Typography variant="body2" color="text.secondary">
+//                                             לא נמצאו פרטי המאמר.
+//                                         </Typography>
+//                                     )}
+//                                 </Box>
+//                                 {/* כפתור למחיקת המאמר כאייקון */}
+//                                 <Box sx={{ marginTop: '16px', alignSelf: 'flex-end' }}>
+//                                     <IconButton
+//                                         onClick={() => deleteRequsetArticle(articleRegister.id)}
+//                                         color="error"
+//                                         aria-label="delete"
+//                                     >
+//                                         <DeleteIcon />
+//                                     </IconButton>
+//                                 </Box>
+//                             </Card>
+//                         ))}
+//                 </Box>
+//             )}
+//         </Box>
+//     );
+// }
+
+
+//
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { deleteAricle, getarticleWithStatusFalse,putAricle } from '../../slices/ArticleSlice';
+// import { useNavigate } from 'react-router-dom';
+// import { Card, CardContent, Typography, Button, Box, IconButton } from '@mui/material';
+// import DeleteIcon from '@mui/icons-material/Delete'; // ייבוא האייקון
+
+// export default function RequestToAddArticleList() {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+
+//     // שימוש במצב מקומי לאחסון רשימת המאמרים
+//     const [articleList, setArticleList] = useState([]);
+
+//     const RegisterArticleList = useSelector((state) => state.article.ArticleList);
+
+//     useEffect(() => {
+//         dispatch(getarticleWithStatusFalse());
+//     }, [dispatch]);
+
+//     useEffect(() => {
+//         // עדכון המצב המקומי בכל פעם שהמצב הגלובלי משתנה
+//         setArticleList(RegisterArticleList);
+//     }, [RegisterArticleList]);
+
+//     function deleteRequsetArticle(id) {
+//         dispatch(deleteAricle(id));
+
+//         // עדכון המצב המקומי להסרת המאמר שנמחק
+//         setArticleList((prevList) => prevList.filter((article) => article.id !== id));
+//     }
+
+//     // פונקציה לפתוח את המאמר בטאב חדש מתוך מערך הביטים
+//     const handleOpenInNewTab = (article) => {
+//         if (!article || !article.pdfarticleFile) {
+//             alert("לא ניתן לפתוח את המאמר כעת.");
+//             return;
+//         }
+
+//         let byteArray;
+
+//         // בדיקה אם הנתונים הם מחרוזת Base64
+//         if (typeof article.pdfarticleFile === 'string') {
+//             byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+//         } else {
+//             // מניחים שמדובר במערך בייטים
+//             byteArray = new Uint8Array(article.pdfarticleFile);
+//         }
+
+//         // יצירת Blob מתוך מערך הביטים
+//         const blob = new Blob([byteArray], { type: 'application/pdf' });
+//         const url = URL.createObjectURL(blob);
+
+//         const newTab = window.open();
+//         if (newTab) {
+//             newTab.document.write(`
+//                 <html>
+//                     <head><title>המאמר</title></head>
+//                     <body style="margin:0;">
+//                         <iframe src="${url}" style="border: none; width: 100%; height: 100vh;" allowfullscreen></iframe>
+//                     </body>
+//                 </html>
+//             `);
+//             newTab.document.close();
+//         } else {
+//             alert("לא ניתן לפתוח טאב חדש. אנא בדוק את הגדרות הדפדפן שלך.");
+//         }
+//     };
+
+//     // פונקציה להורדת המאמר
+//     const handleDownload = (article) => {
+//         if (!article || !article.pdfarticleFile) {
+//             alert("לא ניתן להוריד את המאמר כעת.");
+//             return;
+//         }
+
+//         let byteArray;
+
+//         // בדיקה אם הנתונים הם מחרוזת Base64
+//         if (typeof article.pdfarticleFile === 'string') {
+//             byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+//         } else {
+//             // מניחים שמדובר במערך בייטים
+//             byteArray = new Uint8Array(article.pdfarticleFile);
+//         }
+
+//         // יצירת Blob מתוך מערך הביטים להורדה
+//         const blob = new Blob([byteArray], { type: 'application/pdf' });
+//         const link = document.createElement('a');
+//         link.href = URL.createObjectURL(blob);
+//         link.download = `${article.title}.pdf`; // שם הקובץ להורדה, ניתן להתאים לפי הצורך
+
+//         document.body.appendChild(link);
+//         link.click();
+//         document.body.removeChild(link);
+//     };
+
+//     const approval = () => {
+//         if (!DetailArticleRequest) {
+//             console.error('Article details are not available.');
+//             return;
+//         }
+
+//         // יצירת אובייקט מאמר חדש עם הנתונים מה-Redux
+//         const newArticle = {
+//             id: articleId,
+//             title: DetailArticleRequest.title,
+//             author: DetailArticleRequest.author, // ניתן להחליף לשם משתמש דינמי
+//             content: DetailArticleRequest.content,
+//             description: DetailArticleRequest.description,
+//             status: false,
+//             categoryId: categoryId,
+//             pdfarticleFile: DetailArticleRequest.pdfarticleFile,
+//         };
+
+//         console.log('new article:', newArticle);
+//         console.log('category id:', categoryId);
+
+//         // שליחה ל-Redux לאישור המאמר
+//         dispatch(putAricle(newArticle));
+//         console.log('article correct and send ok!');
+
+//         // חזרה לדף הקודם בהיסטוריית הניווט
+//         navigate(-1);
+//     };
+
+//     return (
+//         <Box
+//             sx={{
+//                 padding: '20px',
+//                 display: 'flex',
+//                 flexDirection: 'column',
+//                 alignItems: 'flex-end',
+//                 // הוספת תמונת הרקע כאן
+//                 backgroundImage: `url(/images/artical1.jpg)`, // החלף את ה-URL לתמונת הרקע שלך
+//                 backgroundSize: 'cover', // מתאם את הגודל של הרקע
+//                 backgroundRepeat: 'no-repeat', // לא חוזר את התמונה
+//                 backgroundPosition: 'center', // ממרכז את התמונה
+//                 minHeight: '100vh', // מבטיח שהתמונה מכסה את כל הגובה
+//             }}
+//         >
+//             {/* אופציה להוספת שכבת חצי שקופה לשיפור הנראות */}
+//             <Box
+//                 sx={{
+//                     position: 'absolute',
+//                     top: 0,
+//                     left: 0,
+//                     width: '100%',
+//                     height: '100%',
+//                     backgroundColor: 'rgba(255, 255, 255, 0.8)', // ניתן לשנות את הצבע והשקיפות לפי הצורך
+//                     zIndex: -1, // מבטיח שהשכבה תהיה מאחורי התוכן
+//                 }}
+//             />
+
+//             <Typography variant="h4" gutterBottom sx={{ zIndex: 1, color: 'text.primary' }}>
+//                 בקשות להוספת מאמרים
+//             </Typography>
+
+//             {articleList && articleList.length === 0 ? (
+//                 <Typography variant="body1" color="text.secondary" sx={{ zIndex: 1 }}>
+//                     - אין בקשות להוספת מאמרים - 404 - אין נתונים להציג
+//                 </Typography>
+//             ) : (
+//                 <Box
+//                     sx={{
+//                         display: 'flex',
+//                         flexDirection: 'column', // עימוד עמודה
+//                         gap: '18px',
+//                         width: '100%', // להתאים לרוחב המיכל
+//                         alignItems: 'flex-start',
+//                         padding: 5, // יישור לימין
+//                         zIndex: 1, // מבטיח שהתוכן יהיה מעל השכבה
+//                     }}
+//                 >
+//                     {articleList
+//                         ?.filter((articleRegister) => articleRegister.status === false)
+//                         .map((articleRegister) => (
+//                             <Card
+//                                 key={articleRegister.id}
+//                                 sx={{
+//                                     width: '100%', // מלא רוחב המיכל
+//                                     maxWidth: '800px', // הגבלת רוחב מקסימלי לכרטיס
+//                                     display: 'flex',
+//                                     flexDirection: 'column',
+//                                     justifyContent: 'space-between',
+//                                     padding: '16px',
+//                                     minHeight: '250px', // גובה מינימלי מתאים
+//                                     overflow: 'hidden', // להסתיר תוכן שעולה על הגובה
+//                                     border: '1px solid #ccc', // הוספת מסגרת
+//                                     borderRadius: '8px', // עיגול פינות המסגרת
+//                                     boxShadow: '0 4px 8px rgba(228, 53, 199, 0.1)', // הוספת הצללה
+//                                     backgroundColor: '#fff', // צבע רקע לבן
+//                                 }}
+//                             >
+//                                 <CardContent>
+//                                     <Typography variant="h6" component="div">
+//                                         title: {articleRegister.title}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         author: {articleRegister.author}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         subject: {articleRegister.subject}
+//                                     </Typography>
+//                                     <Typography variant="body2" color="text.secondary" paragraph>
+//                                         description: {articleRegister.description}
+//                                     </Typography>
+//                                 </CardContent>
+//                                 <Box
+//                                     sx={{
+//                                         display: 'flex',
+//                                         justifyContent: 'space-between',
+//                                         marginTop: '16px',
+//                                     }}
+//                                 >
+//                                     {articleRegister?.pdfarticleFile ? (
+//                                         <>
+//                                             {/* כפתור לפתוח את ה-PDF בטאב חדש */}
+//                                             <Button
+//                                                 onClick={() => handleOpenInNewTab(articleRegister)}
+//                                                 variant="contained"
+//                                                 color="primary"
+//                                             >
+//                                                 פתח בטאב חדש
+//                                             </Button>
+
+//                                             {/* כפתור להורדת המאמר */}
+//                                             <Button
+//                                                 onClick={() => handleDownload(articleRegister)}
+//                                                 variant="contained"
+//                                                 color="secondary"
+//                                                 sx={{ marginLeft: '10px' }}
+//                                             >
+//                                                 הורד את המאמר
+//                                             </Button>
+//                                         </>
+//                                     ) : (
+//                                         <Typography variant="body2" color="text.secondary">
+//                                             לא נמצאו פרטי המאמר.
+//                                         </Typography>
+//                                     )}
+//                                 </Box>
+//                                 {/* כפתור למחיקת המאמר כאייקון */}
+//                                 <Box sx={{ marginTop: '16px', alignSelf: 'flex-end' }}>
+//                                     <IconButton
+//                                         onClick={() => deleteRequsetArticle(articleRegister.id)}
+//                                         color="error"
+//                                         aria-label="delete"
+//                                     >
+//                                         <DeleteIcon />
+//                                     </IconButton>
+//                                 </Box>
+//                                 <button onClick={approval}>אשר מאמר</button>
+//                             </Card>
+//                         ))}
+//                 </Box>
+//             )}
+//         </Box>
+//     );
+// }
+
+
+//
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteAricle, getarticleWithStatusFalse } from '../../slices/ArticleSlice';
+import { deleteAricle, getarticleWithStatusFalse, putAricle } from '../../slices/ArticleSlice';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Button, Box, IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete'; // ייבוא האייקון
+import DeleteIcon from '@mui/icons-material/Delete'; // Importing the Delete icon
 
 export default function RequestToAddArticleList() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // שימוש במצב מקומי לאחסון רשימת המאמרים
+    // Local state to hold the list of articles
     const [articleList, setArticleList] = useState([]);
 
-    const RegisterArticleList = useSelector((state) => state.article.ArticleList);
+    // Select the list of articles with status false from Redux store
+    const registerArticleList = useSelector((state) => state.article.ArticleList);
 
+    // Fetch articles with status false on component mount
     useEffect(() => {
         dispatch(getarticleWithStatusFalse());
     }, [dispatch]);
 
+    // Update local state whenever the global state changes
     useEffect(() => {
-        // עדכון המצב המקומי בכל פעם שהמצב הגלובלי משתנה
-        setArticleList(RegisterArticleList);
-    }, [RegisterArticleList]);
+        setArticleList(registerArticleList);
+    }, [registerArticleList]);
 
-    function deleteRequsetArticle(id) {
+    // Function to delete an article request
+    const deleteRequestArticle = (id) => {
         dispatch(deleteAricle(id));
 
-        // עדכון המצב המקומי להסרת המאמר שנמחק
+        // Update local state to remove the deleted article
         setArticleList((prevList) => prevList.filter((article) => article.id !== id));
-    }
+    };
 
-    // פונקציה לפתוח את המאמר בטאב חדש מתוך מערך הביטים
+    // Function to approve an article
+    const approveArticle = (article) => {
+        if (!article) {
+            console.error('Article details are not available.');
+            return;
+        }
+
+        // Create a new article object with updated status
+        const updatedArticle = {
+            ...article,
+            status: true, // Change status to approved
+        };
+
+        console.log('Updated article:', updatedArticle);
+        console.log('Category ID:', updatedArticle.categoryId);
+
+        // Dispatch the update to Redux
+        dispatch(putAricle(updatedArticle))
+            .then(() => {
+                console.log('Article approved and sent successfully!');
+                // Optionally, you can show a success message or toast here
+            })
+            .catch((error) => {
+                console.error('Error approving article:', error);
+                // Optionally, handle the error (e.g., show a notification)
+            });
+    };
+
+    // Function to open the article PDF in a new tab
     const handleOpenInNewTab = (article) => {
         if (!article || !article.pdfarticleFile) {
             alert("לא ניתן לפתוח את המאמר כעת.");
@@ -961,15 +1488,21 @@ export default function RequestToAddArticleList() {
 
         let byteArray;
 
-        // בדיקה אם הנתונים הם מחרוזת Base64
+        // Check if the data is a Base64 string
         if (typeof article.pdfarticleFile === 'string') {
-            byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+            try {
+                byteArray = Uint8Array.from(atob(article.pdfarticleFile), (c) => c.charCodeAt(0));
+            } catch (error) {
+                console.error('Invalid Base64 string:', error);
+                alert("נתוני ה-PDF לא תקינים.");
+                return;
+            }
         } else {
-            // מניחים שמדובר במערך בייטים
+            // Assume it's a byte array
             byteArray = new Uint8Array(article.pdfarticleFile);
         }
 
-        // יצירת Blob מתוך מערך הביטים
+        // Create a Blob from the byte array
         const blob = new Blob([byteArray], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
 
@@ -989,7 +1522,7 @@ export default function RequestToAddArticleList() {
         }
     };
 
-    // פונקציה להורדת המאמר
+    // Function to download the article PDF
     const handleDownload = (article) => {
         if (!article || !article.pdfarticleFile) {
             alert("לא ניתן להוריד את המאמר כעת.");
@@ -998,19 +1531,25 @@ export default function RequestToAddArticleList() {
 
         let byteArray;
 
-        // בדיקה אם הנתונים הם מחרוזת Base64
+        // Check if the data is a Base64 string
         if (typeof article.pdfarticleFile === 'string') {
-            byteArray = Uint8Array.from(atob(article.pdfarticleFile), c => c.charCodeAt(0));
+            try {
+                byteArray = Uint8Array.from(atob(article.pdfarticleFile), (c) => c.charCodeAt(0));
+            } catch (error) {
+                console.error('Invalid Base64 string:', error);
+                alert("נתוני ה-PDF לא תקינים.");
+                return;
+            }
         } else {
-            // מניחים שמדובר במערך בייטים
+            // Assume it's a byte array
             byteArray = new Uint8Array(article.pdfarticleFile);
         }
 
-        // יצירת Blob מתוך מערך הביטים להורדה
+        // Create a Blob from the byte array for download
         const blob = new Blob([byteArray], { type: 'application/pdf' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = `${article.title}.pdf`; // שם הקובץ להורדה, ניתן להתאים לפי הצורך
+        link.download = `${article.title}.pdf`; // File name for download
 
         document.body.appendChild(link);
         link.click();
@@ -1020,19 +1559,20 @@ export default function RequestToAddArticleList() {
     return (
         <Box
             sx={{
-                padding: '20px',
+                padding: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'flex-end',
-                // הוספת תמונת הרקע כאן
-                backgroundImage: `url(/images/artical1.jpg)`, // החלף את ה-URL לתמונת הרקע שלך
-                backgroundSize: 'cover', // מתאם את הגודל של הרקע
-                backgroundRepeat: 'no-repeat', // לא חוזר את התמונה
-                backgroundPosition: 'center', // ממרכז את התמונה
-                minHeight: '100vh', // מבטיח שהתמונה מכסה את כל הגובה
+                alignItems: 'flex-start', // יישור לשמאל
+                position: 'relative', // Added to position the overlay correctly
+                // Background image settings
+                backgroundImage: `url(/images/artical1.jpg)`, // Replace with your background image URL
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                minHeight: '100vh',
             }}
         >
-            {/* אופציה להוספת שכבת חצי שקופה לשיפור הנראות */}
+            {/* Optional: Add a semi-transparent overlay for better readability */}
             <Box
                 sx={{
                     position: 'absolute',
@@ -1040,113 +1580,138 @@ export default function RequestToAddArticleList() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'rgba(255, 255, 255, 0.8)', // ניתן לשנות את הצבע והשקיפות לפי הצורך
-                    zIndex: -1, // מבטיח שהשכבה תהיה מאחורי התוכן
+                    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Adjust color and opacity as needed
+                    zIndex: 0, // Ensure it's behind the content
                 }}
             />
 
-            <Typography variant="h4" gutterBottom sx={{ zIndex: 1, color: 'text.primary' }}>
-                בקשות להוספת מאמרים
-            </Typography>
-
-            {articleList && articleList.length === 0 ? (
-                <Typography variant="body1" color="text.secondary" sx={{ zIndex: 1 }}>
-                    - אין בקשות להוספת מאמרים - 404 - אין נתונים להציג
+            <Box
+                sx={{
+                    position: 'relative', // To ensure content is above the overlay
+                    zIndex: 1,
+                    width: '100%',
+                    maxWidth: '1200px', // Optional: limit the maximum width
+                }}
+            >
+                <Typography variant="h4" gutterBottom sx={{ color: 'text.primary', textAlign: 'center' }}>
+                    Requests to add articles
                 </Typography>
-            ) : (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column', // עימוד עמודה
-                        gap: '18px',
-                        width: '100%', // להתאים לרוחב המיכל
-                        alignItems: 'flex-start',
-                        padding: 5, // יישור לימין
-                        zIndex: 1, // מבטיח שהתוכן יהיה מעל השכבה
-                    }}
-                >
-                    {articleList
-                        ?.filter((articleRegister) => articleRegister.status === false)
-                        .map((articleRegister) => (
-                            <Card
-                                key={articleRegister.id}
-                                sx={{
-                                    width: '100%', // מלא רוחב המיכל
-                                    maxWidth: '800px', // הגבלת רוחב מקסימלי לכרטיס
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    justifyContent: 'space-between',
-                                    padding: '16px',
-                                    minHeight: '250px', // גובה מינימלי מתאים
-                                    overflow: 'hidden', // להסתיר תוכן שעולה על הגובה
-                                    border: '1px solid #ccc', // הוספת מסגרת
-                                    borderRadius: '8px', // עיגול פינות המסגרת
-                                    boxShadow: '0 4px 8px rgba(228, 53, 199, 0.1)', // הוספת הצללה
-                                    backgroundColor: '#fff', // צבע רקע לבן
-                                }}
-                            >
-                                <CardContent>
-                                    <Typography variant="h6" component="div">
-                                        title: {articleRegister.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" paragraph>
-                                        author: {articleRegister.author}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" paragraph>
-                                        subject: {articleRegister.subject}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary" paragraph>
-                                        description: {articleRegister.description}
-                                    </Typography>
-                                </CardContent>
-                                <Box
+
+                {articleList && articleList.length === 0 ? (
+                    <Typography variant="body1" color="text.secondary" sx={{ textAlign: 'center' }}>
+                        - אין בקשות להוספת מאמרים - 404 - אין נתונים להציג
+                    </Typography>
+                ) : (
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column', // Column layout
+                            gap: '18px',
+                            width: '100%', // Full width container
+                            alignItems: 'center', // Center the cards
+                            padding: 2, // Adjust padding as needed
+                        }}
+                    >
+                        {articleList
+                            ?.filter((articleRegister) => articleRegister.status === false)
+                            .map((articleRegister) => (
+                                <Card
+                                    key={articleRegister.id}
                                     sx={{
+                                        width: '100%', // Full width
+                                        maxWidth: '800px', // Maximum width
                                         display: 'flex',
+                                        flexDirection: 'column',
                                         justifyContent: 'space-between',
-                                        marginTop: '16px',
+                                        padding: '16px',
+                                        minHeight: '250px',
+                                        overflow: 'hidden',
+                                        border: '1px solid #ccc',
+                                        borderRadius: '8px',
+                                        boxShadow: '0 4px 8px rgba(228, 53, 199, 0.1)',
+                                        backgroundColor: '#fff',
+                                        position: 'relative',
                                     }}
                                 >
-                                    {articleRegister?.pdfarticleFile ? (
-                                        <>
-                                            {/* כפתור לפתוח את ה-PDF בטאב חדש */}
+                                    <CardContent>
+                                        <Typography variant="h6" component="div" gutterBottom>
+                                            <strong>Title:</strong> {articleRegister.title}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary" paragraph>
+                                            <strong>Author:</strong> {articleRegister.author}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary" paragraph>
+                                            <strong>Subject:</strong> {articleRegister.subject}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary" paragraph>
+                                            <strong>Description:</strong> {articleRegister.description}
+                                        </Typography>
+                                    </CardContent>
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            flexWrap: 'wrap',
+                                            gap: '10px',
+                                        }}
+                                    >
+                                        {articleRegister?.pdfarticleFile ? (
+                                            <>
+                                                {/* Button to open the PDF in a new tab */}
+                                                <Button
+                                                    onClick={() => handleOpenInNewTab(articleRegister)}
+                                                    variant="contained"
+                                                    color="primary"
+                                                >
+                                                    פתח בטאב חדש
+                                                </Button>
+
+                                                {/* Button to download the PDF */}
+                                                <Button
+                                                    onClick={() => handleDownload(articleRegister)}
+                                                    variant="contained"
+                                                    color="secondary"
+                                                >
+                                                    הורד את המאמר
+                                                </Button>
+                                            </>
+                                        ) : (
+                                            <Typography variant="body2" color="text.secondary">
+                                                לא נמצאו פרטי המאמר.
+                                            </Typography>
+                                        )}
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '10px',
+                                            }}
+                                        >
+                                            {/* Approve Article Button */}
                                             <Button
-                                                onClick={() => handleOpenInNewTab(articleRegister)}
+                                                onClick={() => approveArticle(articleRegister)}
                                                 variant="contained"
-                                                color="primary"
+                                                color="success"
                                             >
-                                                פתח בטאב חדש
+                                                אשר מאמר
                                             </Button>
 
-                                            {/* כפתור להורדת המאמר */}
-                                            <Button
-                                                onClick={() => handleDownload(articleRegister)}
-                                                variant="contained"
-                                                color="secondary"
-                                                sx={{ marginLeft: '10px' }}
+                                            {/* Delete Article IconButton */}
+                                            <IconButton
+                                                onClick={() => deleteRequestArticle(articleRegister.id)}
+                                                color="error"
+                                                aria-label="delete"
                                             >
-                                                הורד את המאמר
-                                            </Button>
-                                        </>
-                                    ) : (
-                                        <Typography variant="body2" color="text.secondary">
-                                            לא נמצאו פרטי המאמר.
-                                        </Typography>
-                                    )}
-                                </Box>
-                                {/* כפתור למחיקת המאמר כאייקון */}
-                                <Box sx={{ marginTop: '16px', alignSelf: 'flex-end' }}>
-                                    <IconButton
-                                        onClick={() => deleteRequsetArticle(articleRegister.id)}
-                                        color="error"
-                                        aria-label="delete"
-                                    >
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </Box>
-                            </Card>
-                        ))}
-                </Box>
-            )}
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </Box>
+                                    </Box>
+                                </Card>
+                            ))}
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
 }

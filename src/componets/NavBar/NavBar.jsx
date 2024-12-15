@@ -84,7 +84,7 @@ function NavBar() {
                 <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
                     <Typography variant="h6" component="div" sx={{ fontFamily: '"Great Vibes", cursive', display: 'flex', alignItems: 'center' }}>
                         {/* Hitechistim */}
-                        <img src="/icon1.jpeg" alt="Hitechistim" style={{ height: '40px', marginLeft: '1px'}} />
+                        <img src="/images/icon1.jpeg" alt="Hitechistim" style={{ height: '40px', marginLeft: '1px'}} />
 
                     </Typography>
                 </div>
