@@ -22,33 +22,23 @@ export const getArticleByID = async (id) => {
     }
 };
 
-//post
-// export const addArticle = async (newArticle) => {
-//     console.log('commeeee');
-//     try {
-//         const response = await axios.post('http://localhost:8080/api/Aritcles/addArticle', newArticle);
-//         console.log('data---');
-//         console.log('post article',response.data);
-//         return response.data;
-//     } catch (error) {
-//         console.error("Error fetching add articles:", error);
-//         throw error;
-//     }
-// };
-
-
-
+post
 export const addArticle = async (newArticle) => {
+    console.log('commeeee');
     try {
-        console.log('chance to add');
-        const response = await axios.post('http://localhost:8080/api/Aritcles/addArticle',newArticle);
-        console.log('add it!!!!');
+        const response = await axios.post('http://localhost:8080/api/Aritcles/addArticle', newArticle);
+        console.log('data---');
+        console.log('post article',response.data);
         return response.data;
     } catch (error) {
-        console.error('Error fetching category:', error);
+        console.error("Error fetching add articles:", error);
         throw error;
     }
 };
+
+
+
+
 
 //מחזירה מאמרים לפי קטגוריה מסוימת
 //מקבלת Id

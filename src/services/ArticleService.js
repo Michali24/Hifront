@@ -60,6 +60,9 @@ export const addArticle = async (newArticle) => {
 };
 
 
+
+
+
 //update article-to add it (the article that request-with status=false that now is turn to true!)
 export const updateArticleByID = async (id, putArticle) => {
     try {
@@ -70,7 +73,6 @@ export const updateArticleByID = async (id, putArticle) => {
         throw error;
     }
 };
-
 
 
 //delete aerticle by id

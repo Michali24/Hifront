@@ -121,13 +121,13 @@ export default function Article() {
 
     return (
         <div className="category-container">
-            <h1>Articles</h1>
             <div className="category-list">
                 {filteredArticles.map((articleCategory) => (
                     <div className="category-card" key={articleCategory.id}>
                         <div className="card-content">
                             <h2>{articleCategory.title}</h2>
                             <p>{articleCategory.description}</p>
+                           
                         </div>
                         <div className="card-actions">
                             <button onClick={() => seeArticlesDetailes(articleCategory.id)}>
