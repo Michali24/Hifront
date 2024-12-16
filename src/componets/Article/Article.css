@@ -1,24 +1,42 @@
+.articles-header {
+    text-align: center;
+    font-size: 3rem;
+    color: aliceblue;
+}
+
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* התאמה אוטומטית לרוחב האלמנט */
-    gap: 1rem; /* מרווח בין הכרטיסיות */
-    padding: 0 20px; /* ריווח פנימי משני הצדדים */
-    margin: 0 auto; /* מרכז את הרשת */
-    max-width: 1200px; /* מגביל את הרוחב המרבי של התוכן */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 3fr));
+    /* Reduced minimum width to allow more columns */
+    gap: 1rem;
+    /* מרווח בין הכרטיסיות */
+    padding: 0 20px;
+    /* ריווח פנימי משני הצדדים */
+    margin: 0 auto;
+    /* מרכז את הרשת */
+    max-width: 1600px;
+    /* Increased max-width */
+    /* מגביל את הרוחב המרבי של התוכן */
     padding-bottom: var(--content-block-padding);
     padding-top: var(--content-inline-padding);
 }
 
+
+
 .category-list {
     display: flex;
-    flex-wrap: wrap; /* מאפשר עימוד אוטומטי של כרטיסיות בשורות נוספות אם יש צורך */
-    gap: 20px; /* מרווח בין כל כרטיסייה */
+    flex-wrap: wrap;
+    justify-content: center;
+    /* מאפשר עימוד אוטומטי של כרטיסיות בשורות נוספות אם יש צורך */
+    gap: 20px;
+    /* מרווח בין כל כרטיסייה */
 }
 
-.category-card {
-    width:200px; /* רוחב קבוע לכרטיסייה */
-    height: 320px; /* גובה קבוע לכרטיסייה */
-    margin-bottom: 1rem; /* צמצום המרווח התחתון של הכרטיסיות */
+.category-card-list {
+    position: relative; /* Make the card a reference point for absolute positioning */
+    width: 35em;
+    height: 15em;
+    margin-bottom: 1rem;
     background-color: rgba(255, 255, 255, 0.7);
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -26,28 +44,39 @@
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-
-
-.category-card:hover {
-    background-color: rgba(255, 255, 255, 0.9); /* צבע לבן עם שקיפות של 90% בעת ריחוף */
-    transform: translateY(-5px); /* הזזה קטנה כלפי מעלה */
-    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* צל גדול יותר בריחוף */
-}
-
-.card-content {
-    flex: 1;
-}
-
-.card-actions {
     display: flex;
-    justify-content: space-between; /* מניח את הכפתורים בצדדים */
-    margin-top: 10px;
+    
+
 }
 
-.card-actions button {
-    padding: 8px 12px;
+.category-card-list:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-content-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-btn {
+    position: absolute; /* Position buttons at the bottom */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+    padding: 10px;
+    background-color: white; /* Optional: Add background color for buttons */
+    border-top: 1px solid #ddd; /* Optional: Adds a separator line */
+}
+
+.btn-actions {
+    padding: .3em .6em;
     border: none;
     border-radius: 4px;
     background-color: #007BFF;
@@ -55,27 +84,35 @@
     cursor: pointer;
 }
 
-.card-actions button:hover {
-    background-color: #0056b3; /* שינוי צבע כפתור בעת ריחוף */
+.btn-actions:hover {
+    background-color: #0056b3;
 }
 
-.articles-page-container {
+.articles-page-container-list {
     --content-block-padding: 6rem;
     --content-inline-padding: 6rem;
 
     min-height: 100%;
     background-image: url(/public/images/w9.jpg);
-    background-size: cover;  /* מותאם לגודל האלמנט */
-    background-position: center; /* מיקום התמונה במרכז */
-    background-repeat: no-repeat; /* תמונה לא תחזור על עצמה */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
+
 .articles-page-container h2 {
-    text-align: center; /* ממרכז את הטקסט */
-    margin-bottom: 2rem; /* מוסיף ריווח תחתון לכותרת כדי להפריד אותה מהכרטיסיות */
-    font-size: 2rem; /* גודל גופן */
-    color: #333; /* צבע גופן */
-    font-weight: bold; /* הופך את הטקסט למודגש */
-    text-transform: uppercase; /* הופך את הטקסט לאותיות גדולות */
-    letter-spacing: 2px; /* מוסיף מרווח בין האותיות */
+    text-align: center;
+    /* ממרכז את הטקסט */
+
+    /* מוסיף ריווח תחתון לכותרת כדי להפריד אותה מהכרטיסיות */
+    font-size: 1.5rem;
+    /* גודל גופן */
+    color: #333;
+    /* צבע גופן */
+    font-weight: bold;
+    /* הופך את הטקסט למודגש */
+    text-transform: uppercase;
+    /* הופך את הטקסט לאותיות גדולות */
+    letter-spacing: 2px;
+    /* מוסיף מרווח בין האותיות */
 }

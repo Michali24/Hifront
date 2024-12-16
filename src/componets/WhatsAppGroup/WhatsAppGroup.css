@@ -1,0 +1,152 @@
+/* Overall page styles */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #e9f7ef;
+  /* Light green background, inspired by WhatsApp */
+}
+
+/* WhatsApp Groups heading styles */
+.page-heading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #075e54;
+  /* WhatsApp dark green */
+  background: linear-gradient(90deg, #007bff, #75abe7);
+  /* WhatsApp gradient */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Grid container styles */
+.grid-container {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+  padding: 16px;
+}
+
+/* Card styles */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  height: 100%;
+  background-color: #ffffff;
+  /* Card background color */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Card content styles */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Typography inside cards */
+.card-title {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+.card-description {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #4a4a4a;
+  /* Neutral gray for descriptions */
+}
+
+/* Button styles */
+.card-button {
+  margin-top: auto;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: #007bff;
+  /* WhatsApp green */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #5678e9;
+  /* Darker WhatsApp green */
+}
+
+/* Admin Add Button */
+.add-group-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #1fa7e6;
+  /* WhatsApp dark green */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-group-button:hover {
+  background-color: #075e54;
+}
+
+/* הוספת עיצוב שביל האייקון */
+/* הוספתי לבד */
+/* ... הקוד הקודם שלך ... */
+
+/* הוספת סגנונות לאייקון ה-WhatsApp */
+.whatsapp-icon {
+  position: absolute;
+  top: 16px;
+  /* מרחק מהקצה העליון */
+  left: 16px;
+  /* מרחק מהקצה השמאלי */
+  font-size: 24px;
+  /* גודל האייקון */
+  color: #25D366;
+  /* צבע ירוק של WhatsApp */
+  z-index: 3;
+  /* מיקום מעל תוכן הכרטיסייה */
+}
+
+/* אם תרצה להוסיף קצת ריווח לתוכן הכרטיסייה */
+.card-content {
+  padding-top: 40px;
+  /* מותאם לגובה האייקון */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* ... המשך הקוד הקודם שלך ... */

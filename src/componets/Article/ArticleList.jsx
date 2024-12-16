@@ -145,6 +145,64 @@
 // }
 
 //נסיון עיצוב
+// import React, { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { useNavigate, useParams } from "react-router-dom";
+// import { getArticleListByCategoryId } from '../../slices/ArticleSlice';
+// import './Article.css';  // Import the CSS for styling
+
+// export default function Article() {
+//     const navigate = useNavigate();
+//     const { id } = useParams();
+//     console.log('id-----',id);
+
+//     const dispatch = useDispatch();
+
+//     // שליפת המאמרים לפי קטגוריה מה-Redux
+//     const ArticleListByCategoryId = useSelector((state) => state.article.ArticleList);
+
+//     // קריאה לפונקציה שמביאה את המאמרים לפי קטגוריה
+//     useEffect(() => {
+//         dispatch(getArticleListByCategoryId(id));
+//     }, [dispatch, id]);
+
+//     // מסנן את המאמרים כך שיציגו רק את אלו ש-status שלהם הוא true
+//     const filteredArticles = ArticleListByCategoryId.filter((article) => article.status === true);
+
+//     // ניווט לדף הפרטים של מאמר
+//     function seeArticlesDetailes(Id) {
+//         navigate(`/Detailes/${Id}`);
+//     }
+
+//     return (
+//         <div className='articles-page-container'>
+//             <h2 className="articles-header">Articles</h2>
+//             <div className="category-grid">
+//                 <div className="category-list">
+//                     {filteredArticles.map((articleCategory) => (
+//                         <div className="category-card" key={articleCategory.id}>
+//                             <div className="card-content">
+//                                 <h2>{articleCategory.title}</h2>
+//                                 <p>{articleCategory.description}</p>
+//                             </div>
+//                             <div className="card-actions">
+//                                 <button onClick={() => seeArticlesDetailes(articleCategory.id)}>
+//                                     See Details
+//                                 </button>
+//                                 <button onClick={() => navigate('/CateforyArticle')}>
+//                                     Return to Category
+//                                 </button>
+//                             </div>
+//                         </div>
+//                     ))}
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+
+//הקוד של ינון
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
@@ -154,8 +212,8 @@ import './Article.css';  // Import the CSS for styling
 export default function Article() {
     const navigate = useNavigate();
     const { id } = useParams();
-    console.log('id-----',id);
-    
+    console.log('id-----', id);
+
     const dispatch = useDispatch();
 
     // שליפת המאמרים לפי קטגוריה מה-Redux
@@ -175,21 +233,21 @@ export default function Article() {
     }
 
     return (
-        <div className='articles-page-container'>
+        <div className='articles-page-container-list'>
             <h2 className="articles-header">Articles</h2>
             <div className="category-grid">
                 <div className="category-list">
                     {filteredArticles.map((articleCategory) => (
-                        <div className="category-card" key={articleCategory.id}>
-                            <div className="card-content">
+                        <div className="category-card-list" key={articleCategory.id}>
+                            <div className="card-content-list">
                                 <h2>{articleCategory.title}</h2>
                                 <p>{articleCategory.description}</p>
                             </div>
-                            <div className="card-actions">
-                                <button onClick={() => seeArticlesDetailes(articleCategory.id)}>
+                            <div className="card-btn">
+                                <button className="btn-actions" onClick={() => seeArticlesDetailes(articleCategory.id)}>
                                     See Details
                                 </button>
-                                <button onClick={() => navigate('/CateforyArticle')}>
+                                <button className="btn-actions" onClick={() => navigate('/CateforyArticle')}>
                                     Return to Category
                                 </button>
                             </div>

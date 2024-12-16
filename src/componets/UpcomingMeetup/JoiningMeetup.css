@@ -171,33 +171,41 @@
 
 /* עיצוב נוסף */
 /* General container */
+/* עיצוב כללי עבור עמוד */
+body {
+  font-family: Arial, sans-serif;
+  /* background-image: url('/public/images/B15.jpg'); */
+  /* הכנס את הקישור לתמונה שברצונך להשתמש בה */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* עיצוב הקונטיינר של הטופס */
 .joining-meetup-container {
   font-family: Arial, sans-serif;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* רקע לבן חצי שקוף על מנת שהרקע ייראה מבעד */
   border-radius: 8px;
   max-width: 400px;
-  margin: 20px 0;
+  margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: absolute; /* מיקום מוחלט */
-  top: 50%; /* במרכז אנכי */
-  right: 20px; /* בצד ימין */
-  transform: translateY(-50%); /* כדי למרכז באופן מדויק */
-}
-
-/* כותרת */
-.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #333;
+  z-index: 10;
 }
 
-/* עיצוב הטופס */
-.form {
-  display: flex;
-  flex-direction: column;
+h2.header {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .form-group {
@@ -205,66 +213,51 @@
   position: relative;
 }
 
-.form-group input {
+input {
   width: 100%;
-  padding: 12px 15px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  outline: none;
   box-sizing: border-box;
 }
 
-.form-group input:focus {
-  border-color: #3f51b5;
-  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
-}
-
-.form-group input::placeholder {
-  color: #aaa;
-  font-size: 14px;
-}
-
 .error-message {
-  color: #f44336;
-  font-size: 12px;
-  margin-top: 5px;
+  color: #ff4d4d;
+  font-size: 0.875em;
+  position: absolute;
+  bottom: -20px;
+  left: 10px;
 }
 
-/* כפתור שליחה */
 .submit-button {
-  background-color: #1976d2;
+  background-color: #4CAF50;
   color: white;
-  padding: 12px 20px;
+  font-size: 1.2em;
   border: none;
+  padding: 10px 20px;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-align: center;
   width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-  background-color: #1565c0;
+  background-color: #45a049;
 }
 
-/* Footer */
 .footer {
-  margin-top: 30px;
-  text-align: center;
+  margin-top: 20px;
 }
 
 .footer-image {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  margin-top: 20px;
 }
 
 .footer-placeholder {
-  font-size: 14px;
-  color: #888;
+  color: #aaa;
+  font-size: 1em;
 }

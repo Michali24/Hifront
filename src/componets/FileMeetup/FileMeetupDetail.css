@@ -170,20 +170,21 @@ button:hover {
     background-color: #0056b3;
 } */
 
-
+/*  */
 /* שינוי העיצוב של התמונות */
-body {
+/* body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-}
+} */
 
 /* שמירה על ההגדרות הקודמות */
-.fileMeetupDetail {
+/* .fileMeetupDetail {
     padding: 20px;
     font-family: Arial, sans-serif;
-    direction: rtl; /* הצגת התוכן מימין לשמאל */
-}
+    direction: rtl;  */
+    /* הצגת התוכן מימין לשמאל */
+/* }
 
 .fileMeetup-content {
     display: flex;
@@ -229,4 +230,109 @@ button {
 
 button:hover {
     background-color: #0056b3;
+} */
+/* סגנונות עבור FileMeetupDetail */
+/* סגנונות עבור FileMeetupDetail */
+
+/* סגנונות עבור FileMeetupDetail */
+
+/* סגנונות עבור FileMeetupDetail */
+
+
+/* סגנונות עבור FileMeetupDetail */
+
+
+/* סגנונות עבור FileMeetupDetail */
+
+.fileMeetupDetail {
+    padding: 20px;
 }
+
+button {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.fileMeetup-content {
+    margin-top: 20px;
+}
+
+/* עימוד של הסרטונים */
+.videos {
+    margin-bottom: 20px;
+}
+
+/* עימוד של התמונות */
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-item {
+    flex: 0 1 350px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* חשוב כדי שנוכל להנפיש את התמונה בצורה נכונה */
+    overflow: hidden; /* הסתרה של חלקים החורגים מהתמונה בזמן הגדלה */
+}
+
+/* עיצוב התמונות */
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+/* הנפשה של התמונה בזמן ריחוף */
+.image-item:hover .image {
+    transform: scale(1.1); /* הגדלת התמונה בעדינות */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* הוספת צל עדין */
+    opacity: 0.9; /* שינוי עדין בשקיפות */
+}
+
+/* תמיכה במובייל */
+@media (max-width: 768px) {
+    .image-item {
+        flex: 0 1 calc(50% - 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .image-item {
+        flex: 0 1 100%;
+    }
+}
+
+.video-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 40px 0; /* מרווח למעלה ולמטה, עם יותר מרווח למטה */
+}
+
+.video-item iframe {
+    width: 560px;
+    height: 315px;
+}
+
+.images {
+    margin-top: 80px; /* הוספת מרווח בין התמונות לבין הסרטון */
+}
+
