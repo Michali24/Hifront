@@ -154,6 +154,8 @@ import './Article.css';  // Import the CSS for styling
 export default function Article() {
     const navigate = useNavigate();
     const { id } = useParams();
+    console.log('id-----',id);
+    
     const dispatch = useDispatch();
 
     // שליפת המאמרים לפי קטגוריה מה-Redux
@@ -178,7 +180,7 @@ export default function Article() {
             <div className="category-grid">
                 <div className="category-list">
                     {filteredArticles.map((articleCategory) => (
-                        <div className="article-card" key={articleCategory.id}>
+                        <div className="category-card" key={articleCategory.id}>
                             <div className="card-content">
                                 <h2>{articleCategory.title}</h2>
                                 <p>{articleCategory.description}</p>
