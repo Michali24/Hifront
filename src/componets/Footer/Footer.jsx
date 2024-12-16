@@ -23,10 +23,9 @@ const FooterStyle = styled(Box)(({ theme }) => ({
 
 export default function Footer() {
     return (
-        <>
-            <FooterStyle />
-            <Box display="flex" justifyContent="center" alignItems="center" position="fixed" bottom={0} left={0} width="100%" bgcolor="#1a1a2e" color="white" paddingTop={1} paddingBottom={1} zIndex={1100}>
-                <Box>© 2024 Pluralsight. All rights reserved.</Box>
+        <footer display="block">
+            <Box display="flex" justifyContent="center" alignItems="center" width="100%" bgcolor="#1a1a2e" color="white">
+                <Box>© 2024 Hitechistim. All rights reserved.</Box>
                 <IconButton component="a" href="mailto:example@example.com" color="inherit">
                     <EmailIcon />
                 </IconButton>
@@ -38,7 +37,7 @@ export default function Footer() {
                 </IconButton>
                 <Link href="/contact" color="inherit" ml={2}>צור קשר</Link>
             </Box>
-        </>
+        </footer>
     )
 }
 

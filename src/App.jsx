@@ -33,48 +33,50 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/Home' element={<Home></Home>}></Route>
-        <Route path='AboutUs' element={<AboutUs></AboutUs>}></Route>
-        <Route path='SignUp' element={<SignUp></SignUp>}></Route>
-        <Route path='Login' element={<Login></Login>}></Route>
-        {/* <Route path='/' element={<CategoryArticle></CategoryArticle>}></Route> */}
-        <Route path='CateforyArticle' element={<CategoryArticle></CategoryArticle>}></Route>
-        <Route path='Article/:id' element={<Article></Article>}></Route>
-        <Route path='Detailes/:id' element={<DetailArticle></DetailArticle>}></Route>
-        <Route path='RequestToAddAnArticle' element={<RequestToAddAnArticle></RequestToAddAnArticle>}></Route>
-        {/*⬇⬇Manager⬇⬇---*/}
-        <Route path='/RequestToAddArticleList' element={<RequestToAddArticleList></RequestToAddArticleList>}></Route>
-        {/*⬇⬇Manager⬇⬇----*/}
-        {/* <Route path="DetailRequsetArticle/:articleId/:categoryId" element={<DetailRequsetArticle />} /> */}
-        <Route path="/RequestToAddArticleList/DetailRequestArticle/:articleId/:categoryId" element={<DetailRequsetArticle />} />
-        {/* לא צריך את האופציה הזטו כי עשיתי שזה כבר ישלח 2 דברים ביחד במקום דבר אחד...⏬⏬ */}
-        {/* <Route path='DetailRequsetArticle/:id' element={<DetailRequsetArticle></DetailRequsetArticle>}></Route> */}
-        <Route path='NewMeetup' element={<NewMeetup></NewMeetup>}></Route>
-        <Route path='AddNewMeetup' element={<AddNewMeetup></AddNewMeetup>}></Route>
-        {/* <Route path='/WhatsAppGroup' element={<WhatsAppGroup></WhatsAppGroup>}></Route> */}
-        <Route path='WhatsAppGroup' element={<WhatsAppGroup></WhatsAppGroup>}></Route>
-        <Route path='SignUpForTheWhatsAppGroup/:id' element={<SignUpForTheWhatsAppGroup></SignUpForTheWhatsAppGroup>}></Route>
-        <Route path='JoiningMeetup' element={<JoiningMeetup></JoiningMeetup>}></Route>
-        <Route path='JoiningMeetup/:id' element={<JoiningMeetup></JoiningMeetup>}></Route>
-        <Route path='MeetupRegistrationRequests' element={<MeetupRegistrationRequests></MeetupRegistrationRequests>}></Route>
-        <Route path='GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route>
-        <Route path='FileMeetupDetail/:id' element={<FileMeetupDetail></FileMeetupDetail>}></Route>
-        <Route path="GalleryCategoryList/FileMeetupDetail/:id" element={<FileMeetupDetail></FileMeetupDetail>}></Route>
+      <div className='page-container'>
+        <Routes>
+          <Route path='/' element={<Home></Home>}></Route>
+          <Route path='/Home' element={<Home></Home>}></Route>
+          <Route path='AboutUs' element={<AboutUs></AboutUs>}></Route>
+          <Route path='SignUp' element={<SignUp></SignUp>}></Route>
+          <Route path='Login' element={<Login></Login>}></Route>
+          {/* <Route path='/' element={<CategoryArticle></CategoryArticle>}></Route> */}
+          <Route path='CateforyArticle' element={<CategoryArticle></CategoryArticle>}></Route>
+          <Route path='Article/:id' element={<Article></Article>}></Route>
+          <Route path='Detailes/:id' element={<DetailArticle></DetailArticle>}></Route>
+          <Route path='RequestToAddAnArticle' element={<RequestToAddAnArticle></RequestToAddAnArticle>}></Route>
+          {/*⬇⬇Manager⬇⬇---*/}
+          <Route path='/RequestToAddArticleList' element={<RequestToAddArticleList></RequestToAddArticleList>}></Route>
+          {/*⬇⬇Manager⬇⬇----*/}
+          {/* <Route path="DetailRequsetArticle/:articleId/:categoryId" element={<DetailRequsetArticle />} /> */}
+          <Route path="/RequestToAddArticleList/DetailRequestArticle/:articleId/:categoryId" element={<DetailRequsetArticle />} />
+          {/* לא צריך את האופציה הזטו כי עשיתי שזה כבר ישלח 2 דברים ביחד במקום דבר אחד...⏬⏬ */}
+          {/* <Route path='DetailRequsetArticle/:id' element={<DetailRequsetArticle></DetailRequsetArticle>}></Route> */}
+          <Route path='NewMeetup' element={<NewMeetup></NewMeetup>}></Route>
+          <Route path='AddNewMeetup' element={<AddNewMeetup></AddNewMeetup>}></Route>
+          {/* <Route path='/WhatsAppGroup' element={<WhatsAppGroup></WhatsAppGroup>}></Route> */}
+          <Route path='WhatsAppGroup' element={<WhatsAppGroup></WhatsAppGroup>}></Route>
+          <Route path='SignUpForTheWhatsAppGroup/:id' element={<SignUpForTheWhatsAppGroup></SignUpForTheWhatsAppGroup>}></Route>
+          <Route path='JoiningMeetup' element={<JoiningMeetup></JoiningMeetup>}></Route>
+          <Route path='JoiningMeetup/:id' element={<JoiningMeetup></JoiningMeetup>}></Route>
+          <Route path='MeetupRegistrationRequests' element={<MeetupRegistrationRequests></MeetupRegistrationRequests>}></Route>
+          <Route path='GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route>
+          <Route path='FileMeetupDetail/:id' element={<FileMeetupDetail></FileMeetupDetail>}></Route>
+          <Route path="GalleryCategoryList/FileMeetupDetail/:id" element={<FileMeetupDetail></FileMeetupDetail>}></Route>
 
-        {/* <Route path='/GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route> */}
-        {/*⬇⬇Manager⬇⬇----*/}
-        <Route path='AddGalleryCategory' element={<AddGalleryCategory></AddGalleryCategory>}></Route>
-        {/*⬇⬇Manager⬇⬇---*/}
-        <Route path='AddFileMeetup' element={<AddFileMeetup></AddFileMeetup>}></Route>
-        <Route path='AddFileMeetup/:id' element={<AddFileMeetup></AddFileMeetup>}></Route>
-        {/* <Route path="FileMeetupDetail/AddFileMeetup/:id" element={<AddFileMeetup></AddFileMeetup>}></Route> */}
+          {/* <Route path='/GalleryCategoryList' element={<GalleryCategoryList></GalleryCategoryList>}></Route> */}
+          {/*⬇⬇Manager⬇⬇----*/}
+          <Route path='AddGalleryCategory' element={<AddGalleryCategory></AddGalleryCategory>}></Route>
+          {/*⬇⬇Manager⬇⬇---*/}
+          <Route path='AddFileMeetup' element={<AddFileMeetup></AddFileMeetup>}></Route>
+          <Route path='AddFileMeetup/:id' element={<AddFileMeetup></AddFileMeetup>}></Route>
+          {/* <Route path="FileMeetupDetail/AddFileMeetup/:id" element={<AddFileMeetup></AddFileMeetup>}></Route> */}
 
-       <Route path='AddWhatsAppGroup' element={<AddWhatsAppGroup></AddWhatsAppGroup>}></Route>
-       <Route path='Concat' element={<Concat></Concat>}></Route>
+        <Route path='AddWhatsAppGroup' element={<AddWhatsAppGroup></AddWhatsAppGroup>}></Route>
+        <Route path='Concat' element={<Concat></Concat>}></Route>
 
-      </Routes>
+        </Routes>
+      </div>
       <Footer />
     </>
   )

@@ -49,7 +49,7 @@ export default function AddWhatsAppGroup() {
   };
 
   return (
-    <div className="page-container">
+    <div className="add-whatsapp-group-page-container">
       {/* הצגת הודעת הצלחה או כישלון בראש העמוד */}
       {alertMessage && (
         <Alert severity={alertSeverity} style={{ marginBottom: '20px' }}>

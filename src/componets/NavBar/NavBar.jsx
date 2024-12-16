@@ -79,7 +79,7 @@ function NavBar() {
     }, []);
 
     return (
-        <AppBar position="fixed" style={{ backgroundColor: '#1a1a2e' }}>
+        <AppBar style={{ backgroundColor: '#1a1a2e', position: 'static' }}>
             <Toolbar>
                 <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
                     <Typography variant="h6" component="div" sx={{ fontFamily: '"Great Vibes", cursive', display: 'flex', alignItems: 'center' }}>

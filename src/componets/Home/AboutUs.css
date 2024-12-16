@@ -1,0 +1,11 @@
+.about-us-page-container {
+    min-height: 100%;
+    background-image: url(/public/images/x12.jpg);
+}
+
+.text-aboutUs{
+    display: flex;
+    justify-content: center; /* למרכז אופקית */
+    align-items: center;/* למרכז אנכית */
+    height: 100vh;
+}

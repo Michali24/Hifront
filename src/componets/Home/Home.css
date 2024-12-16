@@ -1,3 +1,74 @@
+.ContentContainer {
+    height: 100%;
+    z-index: 1;
+    position: relative;
+
+    --content-block-padding: 4rem;
+    --content-inline-padding: 6rem;
+}
+
+.hero-image-container {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    background-image: url('/public/images/home-bg-1.jpg');
+    background-size: cover;
+    background-position-y: 50%;
+}
+
+.hero-image {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.welcome-info-conainer {
+    margin-block: var(--content-block-padding);
+    padding-inline: var(--content-inline-padding);
+    display: grid;
+    grid-template-columns: 1fr 150px 1fr;
+}
+
+.welcome-text {
+    grid-row: 1;
+    grid-column: 1 / 3;
+    font-size: 20px;
+    font-family: 'cursive';
+    line-height: 2;
+}
+
+.welcome-image {
+    width: 100%;
+    grid-row: 1;
+    grid-column: 2 / 4;
+}
+
+.carousel-container {
+   padding-inline: var(--content-inline-padding);
+   margin-bottom: var(--content-block-padding);
+}
+
+.slick-slider {
+    width: 62.5%;
+    min-width: 420px;
+}
+
+.articles-container {
+    padding-inline: var(--content-inline-padding);
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    padding-bottom: var(--content-block-padding);
+}
+
 .ImageMeetup{
     background-size: cover;
     background-repeat: no-repeat;
@@ -34,14 +105,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-
-.ContentContainer {
-    z-index: 1;
-    position: relative;
-    padding: 20px;
-    min-height: 100vh;
 }
 
 .TheradBackground {

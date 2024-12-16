@@ -1683,7 +1683,7 @@
 //                     <button onClick={() => navigate('/AddNewMeetup')}>➕ Add New Meetup</button>
 //                 )}
 
-            
+
 //                 <Box
 //                     sx={{
 //                         display: 'flex',
@@ -1825,19 +1825,19 @@ function MeetupMap() {
             >
                 {/* כפתור להוספת מיטאפ */}
                 {isAdmin && (
-        <Box
-            sx={{
-                width: '100%', // מאפשר יישור לשמאל
-                display: 'flex',
-                justifyContent: 'flex-start', // יישור לשמאל
-                paddingX: 2, // ריווח אופציונלי
-                marginBottom: 2, // רווח מתחת לכפתור
-            }}
-        >
-            <button onClick={() => navigate('/AddNewMeetup')}>➕ Add New Meetup</button>
-        </Box>
-    )}
-            
+                    <Box
+                        sx={{
+                            width: '100%', // מאפשר יישור לשמאל
+                            display: 'flex',
+                            justifyContent: 'flex-start', // יישור לשמאל
+                            paddingX: 2, // ריווח אופציונלי
+                            marginBottom: 2, // רווח מתחת לכפתור
+                        }}
+                    >
+                        <button onClick={() => navigate('/AddNewMeetup')}>➕ Add New Meetup</button>
+                    </Box>
+                )}
+
                 <Box
                     sx={{
                         display: 'flex',
@@ -1863,7 +1863,7 @@ function MeetupMap() {
 
 
             {/* כרטיסיית התוכן */}
-            <div className="card-container" style={{ width: '90%', maxWidth: '2400px',textAlign:"center" }}>
+            <div className="card-container" style={{ width: '90%', maxWidth: '2400px', textAlign: "center" }}>
                 <div className="meetup-details">
                     <h1>{LastMeetup?.meetupNmae || 'שם המיטאפ לא זמין'}</h1>
                     <p>נושא המיטאפ: {LastMeetup?.meetupDescription || 'לא זמין'}</p>
