@@ -55,6 +55,9 @@ function MeetupMap() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const LastMeetup = useSelector((state) => state.meetup.lastMeetup);
+
+    console.log(LastMeetup.id);
+
     const [isAdmin, setIsAdmin] = useState(false); // ברירת מחדל: לא מנהל
 
     // בדיקה אם המשתמש הוא מנהל
@@ -94,10 +97,13 @@ function MeetupMap() {
                             justifyContent: 'flex-start', // יישור לשמאל
                             paddingX: 2, // ריווח אופציונלי
                             marginBottom: 2, // רווח מתחת לכפתור
+                            gap: 4,
                         }}
                     >
                         <button onClick={() => navigate('/AddNewMeetup')}>➕ Add New Meetup</button>
+                        <button onClick={() => navigate(`/ViewMeetupRegistrant/${LastMeetup.id}`)}>View Meetup Registrant</button>
                     </Box>
+
                 )}
 
                 <Box
@@ -120,20 +126,19 @@ function MeetupMap() {
                         }}
                     />
                 </Box>
-
             </Box>
 
 
             {/* כרטיסיית התוכן */}
             <div className="card-container" style={{ width: '90%', maxWidth: '2400px', textAlign: "center" }}>
                 <div className="meetup-details">
-                    <h2><p>Meetup Name:{LastMeetup?.meetupNmae || 'שם המיטאפ לא זמין'}</p></h2>
-                    <p>נושא המיטאפ: {LastMeetup?.meetupDescription || 'לא זמין'}</p>
+                    {/* <h2><p>Meetup Name:{LastMeetup?.meetupNmae || 'שם המיטאפ לא זמין'}</p></h2> */}
+                    {/* <p>Meetup Subject: {LastMeetup?.meetupDescription}</p> */}
                     <p>Date:{LastMeetup?.localmeetupDate || 'לא זמין'}</p>
                     <p>Host Company:{LastMeetup?.nameOfTheHostCompany || 'לא זמין'}</p>
                     <p>Host Company Address: {LastMeetup?.addressHostCompany || 'לא זמין'}</p>
                     <p>Time: {LastMeetup?.timeOfTheMeetup || 'לא זמין'}</p>
-                    <p>Target Audience:{LastMeetup?.WhoIsthemeetupfor || 'לא זמין'}</p>
+                    {/* <p>Target Audience:{LastMeetup?.WhoIsthemeetupfor || 'לא זמין'}</p> */}
                     <button
                         className="join-button"
                         onClick={() => navigate(`/JoiningMeetup/${LastMeetup?.id}`)}

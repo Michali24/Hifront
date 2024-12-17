@@ -184,8 +184,16 @@ body {
   height: 100vh;
 }
 
-/* עיצוב הקונטיינר של הטופס */
 .joining-meetup-container {
+  height: 100%;
+  background-image: url('/public/images/B15.jpg');
+  background-size: cover;
+  background-position: center;
+
+}
+
+/* עיצוב הקונטיינר של הטופס */
+.joining-meetup-form-container {
   font-family: Arial, sans-serif;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);

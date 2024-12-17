@@ -21,6 +21,7 @@ export const getJoiningMeetupByMeetupScheduleId = async (id) => {
     }
 }
 
+
 export const postJoiningMeetup = async (newJoiningMeetup) => {
     try {
         const response = await axios.post('http://localhost:8080/api/JoiningMeetup/addJoiningMeetup', newJoiningMeetup);
@@ -41,5 +42,7 @@ export const getJoiningMeetupById = async (id) => {
         throw error;
     }
 }
+
+
 
 

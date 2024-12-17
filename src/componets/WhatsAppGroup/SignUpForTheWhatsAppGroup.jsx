@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getByIdlGroupWhatsApp } from '../../slices/WhatsAppGroupSlice';
+import './SignUpForTheWhatsAppGroup.css';
 
 export default function SignUpForTheWhatsAppGroup() {
     const { id } = useParams();
@@ -21,18 +22,18 @@ export default function SignUpForTheWhatsAppGroup() {
     }, [whatsAppGroup]);
 
     return (
-        <>
-            <div>SignUpForTheWhatsAppGroup</div>
+        <div className='signup-wg-container'>
+            <h1 className='signup-wg-title'>SignUp For The WhatsApp Group</h1>
             {whatsAppGroup && whatsAppGroup.url_joiningWhatsAppGroups && (
-                <div
-                // dangerouslySetInnerHTML. זה מאפשר לנו להציג HTML (כמו <iframe>) מתוך משתנה בצורה דינמית.
+                <div className='signup-wg-form'
+                    // dangerouslySetInnerHTML. זה מאפשר לנו להציג HTML (כמו <iframe>) מתוך משתנה בצורה דינמית.
                     dangerouslySetInnerHTML={{
                         __html: whatsAppGroup.url_joiningWhatsAppGroups
                     }}
                 />
             )}
-            <button onClick={() => navigate('/WhatsAppGroup')}>Return to all WhatsApp Groups</button>
-        </>
+            <button className='signup-wg-return-btn' onClick={() => navigate('/WhatsAppGroup')}>Return to all WhatsApp Groups</button>
+        </div>
     );
 }
 

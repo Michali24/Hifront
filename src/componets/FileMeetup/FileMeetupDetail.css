@@ -246,6 +246,15 @@ button:hover {
 
 .fileMeetupDetail {
     padding: 20px;
+    background-color: white;
+}
+
+.file-meetup-detail-title {
+    text-align: center;
+}
+
+.add-file-button {
+    margin-left: 1rem;
 }
 
 button {

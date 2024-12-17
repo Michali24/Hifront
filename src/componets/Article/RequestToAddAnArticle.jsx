@@ -7,7 +7,7 @@
 
 // export default function RequestToAddAnArticle() {
 //     const dispatch = useDispatch();
-//     const navigate=useNavigate();
+//     const navigate = useNavigate();
 
 //     // שליפת רשימת הקטגוריות
 //     useEffect(() => {
@@ -210,7 +210,7 @@
 //                             </Grid>
 //                         </Grid>
 //                     </form>
-//                     <button onClick={()=>navigate('/CateforyArticle')}>Back to Category Of Articles</button>
+//                     <button onClick={() => navigate('/CateforyArticle')}>Back to Category Of Articles</button>
 //                 </CardContent>
 //             </Card>
 //         </Box>
@@ -455,6 +455,245 @@
 
 
 //עדכון הקוד
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { postArticle, getAllCategoryList } from '../../slices/ArticleSlice';
+// import {
+//     TextField,
+//     Button,
+//     Select,
+//     MenuItem,
+//     Grid,
+//     InputLabel,
+//     FormControl,
+//     Box,
+//     Card,
+//     CardContent,
+//     Typography,
+//     FormHelperText,
+//     Alert,
+// } from '@mui/material';
+// import { useNavigate } from 'react-router-dom';
+// import { useForm, Controller } from 'react-hook-form';
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as Yup from 'yup';
+
+// const validationSchema = Yup.object().shape({
+//     PDFArticleFile: Yup.mixed()
+//         .required('דרוש קובץ PDF')
+//         .test(
+//             'fileFormat',
+//             'נדרש קובץ בפורמט PDF',
+//             value => value && value.type === 'application/pdf'
+//         ),
+//     title: Yup.string()
+//         .min(5, 'הכותרת חייבת להכיל לפחות 5 תווים')
+//         .max(100, 'הכותרת לא יכולה להכיל יותר מ-100 תווים')
+//         .required('הכותרת היא חובה'),
+//     author: Yup.string()
+//         .min(3, 'שם המחבר חייב להכיל לפחות 3 תווים')
+//         .max(50, 'שם המחבר לא יכול להכיל יותר מ-50 תווים')
+//         .required('שם המחבר הוא חובה'),
+//     description: Yup.string()
+//         .min(10, 'התיאור חייב להכיל לפחות 10 תווים')
+//         .max(500, 'התיאור לא יכול להכיל יותר מ-500 תווים')
+//         .required('התיאור הוא חובה'),
+//     categoryOfArticles: Yup.string()
+//         .required('בחירת קטגוריה היא חובה'),
+// });
+
+// export default function RequestToAddAnArticle() {
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [errorMessage, setErrorMessage] = useState('');
+//     const [successMessage, setSuccessMessage] = useState('');
+
+//     // שליפת רשימת הקטגוריות
+//     useEffect(() => {
+//         dispatch(getAllCategoryList());
+//     }, [dispatch]);
+
+//     const options = useSelector((state) => state.article.CategoryList);
+//     const useDeatail = useSelector((state) => state.user.cucurrentUser);
+
+//     console.log('useDeatail----', useDeatail);
+
+
+//     const { register, handleSubmit, control, reset, formState: { errors, isSubmitting } } = useForm({
+//         resolver: yupResolver(validationSchema),
+//         mode: 'onTouched',
+//     });
+
+//     const onSubmit = async (data) => {
+//         // יצירת FormData
+//         const formData = new FormData();
+//         formData.append(
+//             'fileARTICLE',
+//             new Blob([JSON.stringify({
+//                 title: data.title,
+//                 author: data.name,
+//                 description: data.description,
+//                 status: false,
+//                 categoryOfArticles: { id: data.categoryOfArticles },
+//             })], { type: 'application/json' })
+//         );
+//         formData.append('file', data.PDFArticleFile);
+
+//         try {
+//             const response = await dispatch(postArticle(formData));
+//             if (postArticle.fulfilled.match(response)) {
+//                 setSuccessMessage('המאמר נשלח בהצלחה!');
+//                 reset();
+//                 navigate('/CateforyArticle');
+//             } else {
+//                 setErrorMessage('השליחה של המאמר נכשלה.');
+//             }
+//         } catch (error) {
+//             setErrorMessage('השליחה של המאמר נכשלה.');
+//             console.error('שגיאה בשליחת המאמר:', error);
+//         }
+//     };
+
+//     return (
+//         <Box
+//             sx={{
+//                 display: 'flex',
+//                 justifyContent: 'center',
+//                 alignItems: 'center',
+//                 padding: '2em',
+//                 minHeight: '100vh',
+//                 backgroundColor: '#f5f5f5',
+//             }}
+//         >
+//             <Card sx={{ maxWidth: 600, width: '100%', padding: '2em' }}>
+//                 <CardContent>
+//                     <Typography variant="h5" component="div" gutterBottom>
+//                         בקשה להוספת מאמר
+//                     </Typography>
+
+//                     {errorMessage && <Alert severity="error" sx={{ mb: 2 }}>{errorMessage}</Alert>}
+//                     {successMessage && <Alert severity="success" sx={{ mb: 2 }}>{successMessage}</Alert>}
+
+//                     <form onSubmit={handleSubmit(onSubmit)}>
+
+//                         <Grid container spacing={2}>
+//                             {/* העלאת קובץ PDF */}
+//                             <Grid item xs={12}>
+//                                 <FormControl fullWidth error={!!errors.PDFArticleFile}>
+//                                     <InputLabel shrink htmlFor="PDFArticleFile">
+//                                         העלאת PDF
+//                                     </InputLabel>
+//                                     <input
+//                                         id="PDFArticleFile"
+//                                         type="file"
+//                                         accept="application/pdf"
+//                                         {...register('PDFArticleFile')}
+//                                         style={{ marginTop: '16px' }}
+//                                     />
+//                                     {errors.PDFArticleFile && (
+//                                         <FormHelperText>{errors.PDFArticleFile.message}</FormHelperText>
+//                                     )}
+//                                 </FormControl>
+//                             </Grid>
+
+//                             {/* כותרת */}
+//                             <Grid item xs={12}>
+//                                 <TextField
+//                                     fullWidth
+//                                     label="כותרת המאמר"
+//                                     variant="outlined"
+//                                     {...register('title')}
+//                                     error={!!errors.title}
+//                                     helperText={errors.title?.message}
+//                                 />
+//                             </Grid>
+
+//                             {/* מחבר */}
+//                             <Grid item xs={12}>
+//                                 <TextField
+//                                     fullWidth
+//                                     label="שם המחבר"
+//                                     variant="outlined"
+//                                     {...register('author')}
+//                                     error={!!errors.author}
+//                                     helperText={errors.author?.message}
+//                                 />
+//                             </Grid>
+
+//                             {/* תיאור */}
+//                             <Grid item xs={12}>
+//                                 <TextField
+//                                     fullWidth
+//                                     label="תיאור"
+//                                     variant="outlined"
+//                                     multiline
+//                                     rows={4}
+//                                     {...register('description')}
+//                                     error={!!errors.description}
+//                                     helperText={errors.description?.message}
+//                                 />
+//                             </Grid>
+
+//                             {/* קטגוריה */}
+//                             <Grid item xs={12}>
+//                                 <FormControl fullWidth error={!!errors.categoryOfArticles}>
+//                                     <InputLabel>קטגוריה</InputLabel>
+//                                     <Controller
+//                                         name="categoryOfArticles"
+//                                         control={control}
+//                                         defaultValue=""
+//                                         render={({ field }) => (
+//                                             <Select
+//                                                 {...field}
+//                                                 label="קטגוריה"
+//                                             >
+//                                                 <MenuItem value="" disabled>
+//                                                     בחר קטגוריה
+//                                                 </MenuItem>
+//                                                 {options && options.map((option) => (
+//                                                     <MenuItem key={option.id} value={option.id}>
+//                                                         {option.categoryName}
+//                                                     </MenuItem>
+//                                                 ))}
+//                                             </Select>
+//                                         )}
+//                                     />
+//                                     {errors.categoryOfArticles && (
+//                                         <FormHelperText>{errors.categoryOfArticles.message}</FormHelperText>
+//                                     )}
+//                                 </FormControl>
+//                             </Grid>
+
+//                             {/* כפתור שליחה */}
+//                             <Grid item xs={12}>
+//                                 <Button
+//                                     type="submit"
+//                                     variant="contained"
+//                                     color="primary"
+//                                     fullWidth
+//                                     disabled={isSubmitting}
+//                                 >
+//                                     {isSubmitting ? 'שולח...' : 'שלח מאמר'}
+//                                 </Button>
+//                             </Grid>
+//                         </Grid>
+//                     </form>
+
+//                     <Button
+//                         variant="text"
+//                         onClick={() => navigate('/CateforyArticle')}
+//                         sx={{ marginTop: '1em' }}
+//                     >
+//                         חזור לקטגוריות המאמרים
+//                     </Button>
+//                 </CardContent>
+//             </Card>
+//         </Box>
+//     );
+// }
+
+
+//נסיון תיקוןן הקוד ללא ולידציה על הוספת קובץ
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postArticle, getAllCategoryList } from '../../slices/ArticleSlice';
@@ -470,7 +709,6 @@ import {
     Card,
     CardContent,
     Typography,
-    FormHelperText,
     Alert,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -478,14 +716,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
+// Removed PDFArticleFile validation to make it optional
 const validationSchema = Yup.object().shape({
-    PDFArticleFile: Yup.mixed()
-        .required('דרוש קובץ PDF')
-        .test(
-            'fileFormat',
-            'נדרש קובץ בפורמט PDF',
-            value => value && value.type === 'application/pdf'
-        ),
     title: Yup.string()
         .min(5, 'הכותרת חייבת להכיל לפחות 5 תווים')
         .max(100, 'הכותרת לא יכולה להכיל יותר מ-100 תווים')
@@ -508,16 +740,12 @@ export default function RequestToAddAnArticle() {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    // שליפת רשימת הקטגוריות
+    // Fetching the list of categories
     useEffect(() => {
         dispatch(getAllCategoryList());
     }, [dispatch]);
 
     const options = useSelector((state) => state.article.CategoryList);
-    const useDeatail = useSelector((state) => state.user.cucurrentUser);
-
-    console.log('useDeatail----', useDeatail);
-
 
     const { register, handleSubmit, control, reset, formState: { errors, isSubmitting } } = useForm({
         resolver: yupResolver(validationSchema),
@@ -525,19 +753,23 @@ export default function RequestToAddAnArticle() {
     });
 
     const onSubmit = async (data) => {
-        // יצירת FormData
+        // Create FormData
         const formData = new FormData();
         formData.append(
             'fileARTICLE',
             new Blob([JSON.stringify({
                 title: data.title,
-                author: useDeatail.name,
+                author: data.author,
                 description: data.description,
                 status: false,
                 categoryOfArticles: { id: data.categoryOfArticles },
             })], { type: 'application/json' })
         );
-        formData.append('file', data.PDFArticleFile);
+
+        // Append the file only if it exists
+        if (data.PDFArticleFile && data.PDFArticleFile.length > 0) {
+            formData.append('file', data.PDFArticleFile[0]);
+        }
 
         try {
             const response = await dispatch(postArticle(formData));
@@ -577,11 +809,11 @@ export default function RequestToAddAnArticle() {
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <Grid container spacing={2}>
-                            {/* העלאת קובץ PDF */}
+                            {/* PDF Upload (Optional) */}
                             <Grid item xs={12}>
-                                <FormControl fullWidth error={!!errors.PDFArticleFile}>
+                                <FormControl fullWidth>
                                     <InputLabel shrink htmlFor="PDFArticleFile">
-                                        העלאת PDF
+                                        העלאת PDF (אופציונלי)
                                     </InputLabel>
                                     <input
                                         id="PDFArticleFile"
@@ -590,13 +822,10 @@ export default function RequestToAddAnArticle() {
                                         {...register('PDFArticleFile')}
                                         style={{ marginTop: '16px' }}
                                     />
-                                    {errors.PDFArticleFile && (
-                                        <FormHelperText>{errors.PDFArticleFile.message}</FormHelperText>
-                                    )}
                                 </FormControl>
                             </Grid>
 
-                            {/* כותרת */}
+                            {/* Title */}
                             <Grid item xs={12}>
                                 <TextField
                                     fullWidth
@@ -608,7 +837,7 @@ export default function RequestToAddAnArticle() {
                                 />
                             </Grid>
 
-                            {/* מחבר */}
+                            {/* Author */}
                             <Grid item xs={12}>
                                 <TextField
                                     fullWidth
@@ -620,7 +849,7 @@ export default function RequestToAddAnArticle() {
                                 />
                             </Grid>
 
-                            {/* תיאור */}
+                            {/* Description */}
                             <Grid item xs={12}>
                                 <TextField
                                     fullWidth
@@ -634,7 +863,7 @@ export default function RequestToAddAnArticle() {
                                 />
                             </Grid>
 
-                            {/* קטגוריה */}
+                            {/* Category */}
                             <Grid item xs={12}>
                                 <FormControl fullWidth error={!!errors.categoryOfArticles}>
                                     <InputLabel>קטגוריה</InputLabel>
@@ -659,12 +888,14 @@ export default function RequestToAddAnArticle() {
                                         )}
                                     />
                                     {errors.categoryOfArticles && (
-                                        <FormHelperText>{errors.categoryOfArticles.message}</FormHelperText>
+                                        <Typography variant="caption" color="error">
+                                            {errors.categoryOfArticles.message}
+                                        </Typography>
                                     )}
                                 </FormControl>
                             </Grid>
 
-                            {/* כפתור שליחה */}
+                            {/* Submit Button */}
                             <Grid item xs={12}>
                                 <Button
                                     type="submit"

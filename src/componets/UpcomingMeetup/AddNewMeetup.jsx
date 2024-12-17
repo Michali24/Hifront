@@ -14,6 +14,10 @@ import {
 
 export default function AddNewMeetup() {
   const dispatch = useDispatch();
+
+  const [successMessage, setSuccessMessage] = useState(null); // עבור הודעת הצלחה
+  const [errorMessage, setErrorMessage] = useState(null); // עבור הודעת שגיאה
+
   const [poster_img_meetup, setPoster_img_meetup] = useState(null);
   const [newMeetup, setNewMeetup] = useState({
     meetupNmae: '',
@@ -67,7 +71,26 @@ export default function AddNewMeetup() {
 
     console.log('FormData before dispatch:', formData);
 
-    dispatch(addMeetup(formData));
+    // dispatch(addMeetup(formData));
+
+    dispatch(addMeetup(formData))
+      .then(response => {
+        // אם הצלחה
+        setSuccessMessage(`meetup file added:`);
+        // ננקה את השדות
+        // setFileMeetup({
+        //     id: 0,
+        //     nameMeetup: '',
+        //     descriptionMeetup: '',
+        //     companyName: '',
+        //     img_meetup: '',
+        // });
+        // setImg_meetup(null);
+      })
+      .catch(error => {
+        // אם יש שגיאה
+        setErrorMessage('An error occurred while adding the file to the meetup.');
+      });
   }
 
   return (

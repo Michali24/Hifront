@@ -235,66 +235,68 @@ export default function JoiningMeetup() {
 
   return (
     <div className="joining-meetup-container">
-      <h2 className="header">הרשמה למיטאפ הקרוב</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="form">
-        <div className="form-group">
-          <input
-            type="text"
-            id="name"
-            placeholder="שם פרטי"
-            {...register('name')}
-          />
-          {errors.name && <p className="error-message">{errors.name.message}</p>}
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            id="familyName"
-            placeholder="שם משפחה"
-            {...register('familyName')}
-          />
-          {errors.familyName && <p className="error-message">{errors.familyName.message}</p>}
-        </div>
-        <div className="form-group">
-          <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            {...register('email')}
-          />
-          {errors.email && <p className="error-message">{errors.email.message}</p>}
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            id="phoneNumber"
-            placeholder="טלפון"
-            {...register('phoneNumber')}
-          />
-          {errors.phoneNumber && <p className="error-message">{errors.phoneNumber.message}</p>}
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            id="role"
-            placeholder="תפקיד בחברה"
-            {...register('role')}
-          />
-          {errors.role && <p className="error-message">{errors.role.message}</p>}
-        </div>
-        <button type="submit" className="submit-button">שלח</button>
-      </form>
-      <footer className="footer">
-        {lastMeetup && lastMeetup.poster_img_meetup ? (
-          <img
-            src={`data:image/jpeg;base64,${lastMeetup.poster_img_meetup}`}
-            alt="Footer Banner"
-            className="footer-image"
-          />
-        ) : (
-          <p className="footer-placeholder">לא נמצאה תמונה להצגה</p>
-        )}
-      </footer>
+      <div className="joining-meetup-form-container">
+        <h2 className="header">הרשמה למיטאפ הקרוב</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="form">
+          <div className="form-group">
+            <input
+              type="text"
+              id="name"
+              placeholder="שם פרטי"
+              {...register('name')}
+            />
+            {errors.name && <p className="error-message">{errors.name.message}</p>}
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="familyName"
+              placeholder="שם משפחה"
+              {...register('familyName')}
+            />
+            {errors.familyName && <p className="error-message">{errors.familyName.message}</p>}
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              {...register('email')}
+            />
+            {errors.email && <p className="error-message">{errors.email.message}</p>}
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="phoneNumber"
+              placeholder="טלפון"
+              {...register('phoneNumber')}
+            />
+            {errors.phoneNumber && <p className="error-message">{errors.phoneNumber.message}</p>}
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="role"
+              placeholder="תפקיד בחברה"
+              {...register('role')}
+            />
+            {errors.role && <p className="error-message">{errors.role.message}</p>}
+          </div>
+          <button type="submit" className="submit-button">שלח</button>
+        </form>
+        <footer className="footer">
+          {lastMeetup && lastMeetup.poster_img_meetup ? (
+            <img
+              src={`data:image/jpeg;base64,${lastMeetup.poster_img_meetup}`}
+              alt="Footer Banner"
+              className="footer-image"
+            />
+          ) : (
+            <p className="footer-placeholder">לא נמצאה תמונה להצגה</p>
+          )}
+        </footer>
+      </div>
     </div>
   );
 }

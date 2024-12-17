@@ -353,7 +353,7 @@
 // }
 
 
-//הקוד של ינון
+
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategoryList } from '../../slices/ArticleSlice';
@@ -380,11 +380,12 @@ const SignInPopup = ({ openPopup, setOpenPopup, redirectTo, setRedirectTo }) => 
 
     return (
         <Dialog open={openPopup} onClose={handleClosePopup}>
-            <DialogTitle>הצטרף לקהילת הייטקיסטים והוסף את המאמר שלך!</DialogTitle>
+            <DialogTitle>Join to HiTechistim community and add your article!</DialogTitle>
             <DialogContent>
                 <Typography variant="body1">
-                    על מנת להוסיף מאמר, עליך להירשם לאתר ולהיות חלק מהקהילה שלנו.
-                    ההרשמה מאפשרת לך לא רק להוסיף מאמרים, אלא גם לגשת למיטאפים, לשתף רעיונות עם מקצוענים נוספים, ולהתעדכן בתכנים חשובים ביותר בעולם ההייטק!
+                    To add an article, you need to sign up on our website and join our community.
+                    Signing up allows you not only to add articles but also to access meetups, share ideas with other professionals,
+                    and stay updated with the most important content in the tech world!
                 </Typography>
             </DialogContent>
             <DialogActions>
@@ -396,7 +397,7 @@ const SignInPopup = ({ openPopup, setOpenPopup, redirectTo, setRedirectTo }) => 
                     }}
                     color="primary"
                 >
-                    Sign Up
+                    LogIn
                 </Button>
             </DialogActions>
         </Dialog>
@@ -419,6 +420,7 @@ export default function CategoryArticle() {
 
     // פונקציה להצגת המאמרים לפי קטגוריה
     const seeArticlesListByCategory = (id) => {
+        console.log('id', id);
         navigate(`/Article/${id}`);
     };
 

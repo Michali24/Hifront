@@ -286,6 +286,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import './Login.css';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -362,89 +363,91 @@ export default function Login() {
   };
 
   return (
-    <Container component="main" maxWidth="xs" style={{ marginTop: 100 }}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h5" align="center" gutterBottom>
-          HiTechistim - Log In
-        </Typography>
-
+    <div className='login-container'>
+      <Container component="main" maxWidth="xs">
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'center',
-            marginTop: 2,
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Typography variant="body2">Don't have an account? </Typography>
-          <Link to="/SignUp" style={{ textDecoration: 'none', marginLeft: '5px' }}>
-            <Typography variant="body2" color="primary">
-              Create one now - Sign Up
-            </Typography>
-          </Link>
-        </Box>
+          <Typography variant="h5" align="center" gutterBottom>
+            HiTechistim - Log In
+          </Typography>
 
-        {errorMessage && <Alert severity="error" sx={{ mt: 2 }}>{errorMessage}</Alert>}
-
-        <form onSubmit={handleSubmit(handleLogin)} style={{ width: '100%', marginTop: 16 }}>
-          {/* שדה שם משתמש */}
-          <TextField
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            label="Username"
-            {...register('name')}
-            error={!!errors.name}
-            helperText={errors.name?.message}
-            autoComplete="username"
-          />
-
-          {/* שדה סיסמא עם אופציה להציג/להסתיר */}
-          <TextField
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            label="Password"
-            type={showPassword ? 'text' : 'password'} // החלפת סוג השדה בהתאם למצב
-            {...register('password')}
-            error={!!errors.password}
-            helperText={errors.password?.message}
-            autoComplete="current-password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: 2,
             }}
-          />
-
-          {/* כפתור התחברות */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-            sx={{ mt: 3, mb: 2 }}
           >
-            {isSubmitting ? 'Logging In...' : 'Log In'}
-          </Button>
-        </form>
-      </Box>
-    </Container>
+            <Typography variant="body2">Don't have an account? </Typography>
+            <Link to="/SignUp" style={{ textDecoration: 'none', marginLeft: '5px' }}>
+              <Typography variant="body2" color="primary">
+                Create one now - Sign Up
+              </Typography>
+            </Link>
+          </Box>
+
+          {errorMessage && <Alert severity="error" sx={{ mt: 2 }}>{errorMessage}</Alert>}
+
+          <form onSubmit={handleSubmit(handleLogin)} style={{ width: '100%', marginTop: 16 }}>
+            {/* שדה שם משתמש */}
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              label="Username"
+              {...register('name')}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+              autoComplete="username"
+            />
+
+            {/* שדה סיסמא עם אופציה להציג/להסתיר */}
+            <TextField
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              label="Password"
+              type={showPassword ? 'text' : 'password'} // החלפת סוג השדה בהתאם למצב
+              {...register('password')}
+              error={!!errors.password}
+              helperText={errors.password?.message}
+              autoComplete="current-password"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            {/* כפתור התחברות */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              {isSubmitting ? 'Logging In...' : 'Log In'}
+            </Button>
+          </form>
+        </Box>
+      </Container>
+    </div>
   );
 }
 

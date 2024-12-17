@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllJoiningMeetup, postJoiningMeetup, getJoiningMeetupById } from '../services/JoiningMeetupService';
+import { getAllJoiningMeetup, postJoiningMeetup, getJoiningMeetupById,getJoiningMeetupByMeetupScheduleId} from '../services/JoiningMeetupService';
 
 //get all
 export const getAllJoiningMeetupList = createAsyncThunk("joiningMeetupList/getAllJoiningMeetupList", async () => {
@@ -12,6 +12,8 @@ export const getJoiningMeetupByMeetupScheduleid = createAsyncThunk("joiningMeetu
     const joiningMeetupDataByMeetupScheduleId = await getJoiningMeetupByMeetupScheduleId(id);
     return joiningMeetupDataByMeetupScheduleId;
 });
+
+
 
 export const getJoiningMeetupByid = createAsyncThunk("joiningMeetup/getJoiningMeetupByid", async (id) => {
     const joiningMeetupById = await getJoiningMeetupById(id);

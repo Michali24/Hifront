@@ -235,6 +235,7 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
+import './SignUp.css';
 
 const validationSchema = Yup.object().shape({
   // Fields that must be at least 3 characters (except email & phone)
@@ -316,134 +317,136 @@ export default function SignUp() {
   };
 
   return (
-    <Paper elevation={3} sx={{ padding: 4, maxWidth: 500, margin: 'auto', mt: 5 }}>
-      <Typography variant="h4" align="center" gutterBottom>
-        HiTechistim - Sign Up
-      </Typography>
+    <div className='signup-container'>
+      <Paper elevation={3} sx={{ padding: 4, maxWidth: 500, margin: 'auto' }}>
+        <Typography variant="h4" align="center" gutterBottom>
+          HiTechistim - Sign Up
+        </Typography>
 
-      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
-        {/* First Name Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <TextField
-              fullWidth
-              label="First Name"
-              variant="outlined"
-              {...register('name')}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* First Name Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+              <TextField
+                fullWidth
+                label="First Name"
+                variant="outlined"
+                {...register('name')}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Last Name Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}>
-            <TextField
-              fullWidth
-              label="Last Name"
-              variant="outlined"
-              {...register('lastName')}
-              error={!!errors.lastName}
-              helperText={errors.lastName?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* Last Name Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}>
+              <TextField
+                fullWidth
+                label="Last Name"
+                variant="outlined"
+                {...register('lastName')}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Email Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}>
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              {...register('email')}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* Email Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}>
+              <TextField
+                fullWidth
+                label="Email"
+                variant="outlined"
+                {...register('email')}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Phone Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}>
-            <TextField
-              fullWidth
-              label="Phone"
-              variant="outlined"
-              {...register('phone')}
-              error={!!errors.phone}
-              helperText={errors.phone?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* Phone Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}>
+              <TextField
+                fullWidth
+                label="Phone"
+                variant="outlined"
+                {...register('phone')}
+                error={!!errors.phone}
+                helperText={errors.phone?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Company Name Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}>
-            <TextField
-              fullWidth
-              label="Company Name"
-              variant="outlined"
-              {...register('companyName')}
-              error={!!errors.companyName}
-              helperText={errors.companyName?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* Company Name Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}>
+              <TextField
+                fullWidth
+                label="Company Name"
+                variant="outlined"
+                {...register('companyName')}
+                error={!!errors.companyName}
+                helperText={errors.companyName?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Role in Society Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}>
-            <TextField
-              fullWidth
-              label="Role in Society"
-              variant="outlined"
-              {...register('roleInSociety')}
-              error={!!errors.roleInSociety}
-              helperText={errors.roleInSociety?.message}
-            />
-          </motion.div>
-        </Box>
+          {/* Role in Society Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}>
+              <TextField
+                fullWidth
+                label="Role in Society"
+                variant="outlined"
+                {...register('roleInSociety')}
+                error={!!errors.roleInSociety}
+                helperText={errors.roleInSociety?.message}
+              />
+            </motion.div>
+          </Box>
 
-        {/* Password Field */}
-        <Box sx={{ mb: 2 }}>
-          <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}>
-            <TextField
-              fullWidth
-              label="Password"
-              variant="outlined"
-              {...register('password')}
-              type={showPassword ? 'text' : 'password'}
-              error={!!errors.password}
-              helperText={errors.password?.message}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleClickShowPassword}>
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </motion.div>
-        </Box>
+          {/* Password Field */}
+          <Box sx={{ mb: 2 }}>
+            <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}>
+              <TextField
+                fullWidth
+                label="Password"
+                variant="outlined"
+                {...register('password')}
+                type={showPassword ? 'text' : 'password'}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClickShowPassword}>
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </motion.div>
+          </Box>
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Sign Up
-        </Button>
-      </form>
-    </Paper>
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Sign Up
+          </Button>
+        </form>
+      </Paper>
+    </div>
   );
 }
 

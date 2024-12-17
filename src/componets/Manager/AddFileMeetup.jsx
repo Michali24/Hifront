@@ -363,10 +363,14 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addFileMeeetup } from '../../slices/FileMeetupSlice';
 import { useParams } from 'react-router';
+import { Box, Typography } from '@mui/material';
+import './AddFileMeetup.css';
 
 export default function AddNewMeetup() {
     const dispatch = useDispatch();
     const { id } = useParams();
+    const [successMessage, setSuccessMessage] = useState(null); // עבור הודעת הצלחה
+    const [errorMessage, setErrorMessage] = useState(null); // עבור הודעת שגיאה
 
     console.log('galleryCategoryId:', id);
 
@@ -405,43 +409,71 @@ export default function AddNewMeetup() {
 
         console.log('FormData before dispatch:', formData);
 
-        dispatch(addFileMeeetup(formData));
+        dispatch(addFileMeeetup(formData)).then(response => {
+            // אם הצלחה
+            setSuccessMessage(`meetup file added: ${data.nameMeetup} - ${data.companyName}`);
+            // ננקה את השדות
+            // setFileMeetup({
+            //     id: 0,
+            //     nameMeetup: '',
+            //     descriptionMeetup: '',
+            //     companyName: '',
+            //     img_meetup: '',
+            // });
+            // setImg_meetup(null);
+        })
+        .catch(error => {
+            // אם יש שגיאה
+            setErrorMessage('An error occurred while adding the file to the meetup.');
+        });
 
     };
 
     return (
-        <div>
-            <h2>Add New Meetup File</h2>
-            <form onSubmit={handleSubmit}>
-                {/* העלאת קובץ */}
-                <input
-                    type="file"
-                    name="url_file"
-                    onChange={handleFileChange}
-                    required
-                />
-                {/* שם המיטאפ */}
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter file name"
-                    value={newMeetup.name}
-                    onChange={handleChange}
-                    required
-                />
+        <div className='add-meetup-file'>
+            <Box sx={{ maxWidth: 500, margin: '0 auto', padding: 3, bgcolor: '#f9f9f9', borderRadius: 2,
+                position: 'absolute', top: '50%', left: '50%',
+                transform: 'translate(-50%, -50%)'
+             }}>
+                <Typography variant="h5" gutterBottom>
+                    Add New Meetup File
+                </Typography>
 
-                {/* סוג הקובץ */}
-                <input
-                    type="text"
-                    name="typeFile"
-                    placeholder="Enter file type"
-                    value={newMeetup.typeFile}
-                    onChange={handleChange}
-                    required
-                />
+                {/* הצגת הודעת הצלחה או שגיאה */}
+                {successMessage && <Alert severity="success">{successMessage}</Alert>}
+                {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
-                <button type="submit">Submit</button>
-            </form>
+                <form onSubmit={handleSubmit}>
+                    {/* העלאת קובץ */}
+                    <input
+                        type="file"
+                        name="url_file"
+                        onChange={handleFileChange}
+                        required
+                    />
+                    {/* שם המיטאפ */}
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter file name"
+                        value={newMeetup.name}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    {/* סוג הקובץ */}
+                    <input
+                        type="text"
+                        name="typeFile"
+                        placeholder="Enter file type"
+                        value={newMeetup.typeFile}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <button type="submit">Submit</button>
+                </form>
+            </Box>
         </div>
     );
 }

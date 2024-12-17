@@ -1,0 +1,6 @@
+.signup-container {
+    height: 100%;
+    background: url(/public/images/6.jpg);
+    background-size: cover;
+    padding-top: 20px;
+}

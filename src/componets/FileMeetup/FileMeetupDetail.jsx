@@ -136,10 +136,17 @@ export default function FileMeetupDetail() {
 
     return (
         <div className="fileMeetupDetail">
-            <div>FileMeetupDetail</div>
+            <h1 className='file-meetup-detail-title'>FileMeetupDetail</h1>
+
             <button onClick={() => navigate('/GalleryCategoryList')}>
                 Back to the gallery
             </button>
+            {/* הצגת כפתור הוספת קובץ רק אם המשתמש הוא מנהל */}
+            {isAdmin && (
+                <button className='add-file-button' onClick={() => navigate(`/AddFileMeetup/${id}`)}>
+                    הוסף קובץ נוסף
+                </button>
+            )}
 
             <div className="fileMeetup-content">
                 {/* הצגת סרטונים */}
@@ -150,7 +157,6 @@ export default function FileMeetupDetail() {
                             const extractedVideoId = extractYouTubeId(fileMeetup.url_file);
                             return extractedVideoId ? (
                                 <div key={fileMeetup.id} className="video-item">
-                                    <strong>Video:</strong>
                                     <iframe
                                         width="560"
                                         height="315"
@@ -182,13 +188,6 @@ export default function FileMeetupDetail() {
                         ))}
                 </div>
             </div>
-
-            {/* הצגת כפתור הוספת קובץ רק אם המשתמש הוא מנהל */}
-            {isAdmin && (
-                <button onClick={() => navigate(`/AddFileMeetup/${id}`)}>
-                    הוסף קובץ נוסף
-                </button>
-            )}
         </div>
     );
 }

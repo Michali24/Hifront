@@ -325,14 +325,14 @@ export default function WhatsAppGroup() {
                     ))}
                 </div>
 
-                {isAdmin && (
+                {/* {isAdmin && (
                     <button
                         className="add-group-button"
                         onClick={() => navigate(`/AddWhatsAppGroup`)}
                     >
                         ➕ Add WhatsApp Group
                     </button>
-                )}
+                )} */}
             </div>
 
         </div>

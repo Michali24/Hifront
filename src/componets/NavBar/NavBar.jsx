@@ -65,10 +65,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
     const [isAdmin, setIsAdmin] = useState(false);
+    const logedInUser = useSelector((state)=>state.user.currentUser);
 
     useEffect(() => {
         // בדיקה אם המשתמש הוא מנהל
@@ -76,7 +78,7 @@ function NavBar() {
         if (adminStatus === 'true') {
             setIsAdmin(true);
         }
-    }, []);
+    }, [logedInUser]);
 
     return (
         <AppBar style={{ backgroundColor: '#1a1a2e', position: 'static' }}>
