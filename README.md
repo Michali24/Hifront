@@ -13,3 +13,16 @@ The system includes **role-based access control**, **user management**, **YouTub
 - Integrated YouTube video embedding and automatic WhatsApp group linking.  
 - Admin dashboard for community content moderation and analytics.  
 - Modern, responsive user interface focused on usability and accessibility.
+
+---
+## 🧩 Tech Stack
+
+### 🖥️ Backend
+- **Java Spring Boot**  
+- **H2 Database Console**
+
+### 💻 Frontend
+- **React**  
+- **Redux Toolkit**  
+- **Material UI (MUI)**
+
