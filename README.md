@@ -1,8 +1,15 @@
-# React + Vite
+# 🧠 Hitechistim
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web platform developed for Israel’s hi-tech community to connect professionals through WhatsApp groups, manage professional content, and publish articles and meetups.  
+The system includes **role-based access control**, **user management**, **YouTube and WhatsApp integration**, and a **well-designed user experience** for community engagement.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+
+- Connect professionals via secure WhatsApp group links.  
+- Manage and publish professional articles, posts, and meetups (including event dates, registration, and participants).  
+- Role-based access and permissions management system (**Admin / Editor / Member**).  
+- Integrated YouTube video embedding and automatic WhatsApp group linking.  
+- Admin dashboard for community content moderation and analytics.  
+- Modern, responsive user interface focused on usability and accessibility.
